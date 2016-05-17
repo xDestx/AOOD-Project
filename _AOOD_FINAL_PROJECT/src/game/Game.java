@@ -39,8 +39,6 @@ public class Game {
 		p = new Player(new Location(GFrame.WIDTH/2,GFrame.HEIGHT/2), 100);
 		this.addObject(p);
 		t.addObject(c);
-		t.addObject(new Wall(100, 200, new Location(100,100)));
-		t.addObject(new Wall(100,100,new Location(1900,500)));
 		gs = GameState.WORLD;
 		gf.addKeyListener(new CKeyListener(this));
 	}
