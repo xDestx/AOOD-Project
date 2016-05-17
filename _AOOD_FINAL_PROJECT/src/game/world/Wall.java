@@ -1,6 +1,9 @@
-package game;
+package game.world;
 
 import java.awt.Rectangle;
+
+import game.Location;
+
 import java.awt.Graphics;
 
 public class Wall extends WorldObject implements Collidable

@@ -4,6 +4,8 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
+import game.world.Wall;
+
 public class Game {
 
 	private boolean playing;

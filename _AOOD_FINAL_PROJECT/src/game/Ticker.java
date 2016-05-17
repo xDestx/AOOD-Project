@@ -50,16 +50,16 @@ public class Ticker {
 				Renderable r = (Renderable)go;
 				if(go.getBounds().intersects(c.getViewBounds()))
 				{
-					int x = ((int)( go.getLocation().getX() - c.getLocation().getX()));
-					int y = (int)( go.getLocation().getY() - c.getLocation().getY());
+					int x = ((int)(go.getLocation().getX() - c.getLocation().getX()));
+					int y = (int)(go.getLocation().getY() - c.getLocation().getY());
 					r.render(g,x,y);
 				}
 			}
 		}
 		for (Renderable r : rendrs)
 		{
-			int x = Math.abs((int)(c.getLocation().getX() - r.getLocation().getX()));
-			int y = Math.abs((int)(c.getLocation().getY() - r.getLocation().getY()));
+			int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
+			int y = (int)(r.getLocation().getY() - c.getLocation().getY());
 			r.render(g,x,y);
 		}
 	}
