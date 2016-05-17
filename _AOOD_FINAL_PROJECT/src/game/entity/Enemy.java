@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import game.Location;
 
-public class Enemy extends Entity{
+public abstract class Enemy extends Entity{
 
 	private Location l;
 	private int health, strength;
@@ -41,6 +41,12 @@ public class Enemy extends Entity{
 	
 	public void render(Graphics g, int xo, int yo)
     {
-    }  
+    }
+
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}  
 	
 }
