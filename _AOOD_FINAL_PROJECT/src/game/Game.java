@@ -33,13 +33,13 @@ public class Game {
 		gf.setVisible(true);
 		graphics = gf.getGraphics();
 		gf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		c = new Camera(new Location(0,0));
+		c = new Camera(new Location(0,0),this);
 		t = new Ticker(this);
 		t.addObject(c);
 		t.addObject(new Wall(100, 200, new Location(100,100)));
 		gs = GameState.WORLD;
 		gf.addKeyListener(new CKeyListener(this));
-		p = new Player(new Location(GFrame.WIDTH/2,Frame.HEIGHT/2), 100);
+		p = new Player(new Location(0,0), 100);
 	}
 	
 	public void addObject(GameObject o)
@@ -90,6 +90,11 @@ public class Game {
 		t.tick();
 	}
 
+	public Player getPlayer()
+	{
+		return p;
+	}
+	
 	private void renderScreen() {
 		t.render(graphics, c);
 		gf.repaint();

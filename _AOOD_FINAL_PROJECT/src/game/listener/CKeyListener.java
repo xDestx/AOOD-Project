@@ -29,9 +29,9 @@ public class CKeyListener extends KeyAdapter {
 	
 	private void keyPressedWorld(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_A)
+		if(e.getKeyCode() == KeyEvent.VK_D)
 		{
-			
+			g.getPlayer().getVelocity().setX(5);
 		}
 	}
 	

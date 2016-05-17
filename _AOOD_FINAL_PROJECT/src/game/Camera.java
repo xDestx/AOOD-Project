@@ -8,10 +8,13 @@ import game.world.WorldObject;
 
 public class Camera extends WorldObject
 {
+	
+	private Game g;
     
-    public Camera(Location l)
+    public Camera(Location l, Game g)
     {
         setLocation(l);
+        this.g = g;
         setBounds(new Rectangle((int)l.getX(),(int)l.getY(),GFrame.WIDTH , GFrame.HEIGHT));
     } 
     
@@ -28,12 +31,13 @@ public class Camera extends WorldObject
 
     private void move()
     {
-		getLocation().set
+		getLocation().set(g.getPlayer().getLocation());
+		getViewBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
     }
     
 	@Override
 	public void tick() {
-		getViewBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
+		move();
 	}
 	
 	

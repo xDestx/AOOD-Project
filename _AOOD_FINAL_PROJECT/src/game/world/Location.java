@@ -32,6 +32,12 @@ public class Location implements Serializable
     {
         this.y = y;
     }
+
+    public void set(Location l)
+    {
+    	this.x = l.getX();
+    	this.y = l.getY();
+    }
     
     @Override
     public String toString()

@@ -2,6 +2,7 @@ package game.entity;
 
 import java.awt.Graphics;
 
+import game.Game;
 import game.world.Location;
 import game.world.Vector;
 
@@ -88,8 +89,8 @@ public class Player extends Entity {
 		// Take Velocity --> Position
 		// movement();
 
-		moveX(velocity.getX());
-		moveY(velocity.getY());
+		moveX(velocity.getX() / Game.TICK);
+		moveY(velocity.getY() / Game.TICK);
 	}
 
 	@Override
