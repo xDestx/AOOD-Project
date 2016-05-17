@@ -2,11 +2,13 @@ package game;
 
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 import game.entity.Player;
 import game.listener.CKeyListener;
+import game.world.Collidable;
 import game.world.Level;
 import game.world.Location;
 import game.world.Wall;
@@ -50,7 +52,9 @@ public class Game {
 		this.addObject(p);
 		t.addObject(c);
 		gs = GameState.WORLD;
-		currentLevel = new Level(0);
+		ArrayList<Collidable> cc = new ArrayList<Collidable>();
+		cc.add(new Wall(500,100,new Location(900,400)));
+		currentLevel = new Level(0,cc);
 		gf.addKeyListener(new CKeyListener(this));
 	}
 	

@@ -43,6 +43,24 @@ public class Level implements Renderable {
         bi = b;
     }
     
+    public Level(int idNumber, ArrayList<Collidable> cs){
+        listOfCollidables = cs;
+        id = idNumber;
+        try
+        {
+        	bi = ImageIO.read(getClass().getResourceAsStream("/images/grass.png"));
+        } catch (Exception e)
+        {
+        	e.printStackTrace();
+        }
+    }
+    
+    public Level(int idNumber, BufferedImage b, ArrayList<Collidable> cs){
+        listOfCollidables = cs;
+        id = idNumber;
+        bi = b;
+    }
+    
     public int getId(){
         return id;
     }

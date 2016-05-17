@@ -69,6 +69,7 @@ public class Ticker {
 				}
 			}
 		}
+		
 		for (Renderable r : rendrs)
 		{
 			int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
