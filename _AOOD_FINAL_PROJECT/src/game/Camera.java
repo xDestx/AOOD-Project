@@ -26,9 +26,13 @@ public class Camera extends WorldObject
         return;
     }
 
+    private void move()
+    {
+		getLocation().set
+    }
+    
 	@Override
 	public void tick() {
-		getLocation().setX(getLocation().getX() + 1);
 		getViewBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
 	}
 	

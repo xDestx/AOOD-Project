@@ -1,9 +1,12 @@
 package game;
 
+import java.awt.Frame;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
+import game.entity.Player;
+import game.listener.CKeyListener;
 import game.world.Location;
 import game.world.Wall;
 
@@ -15,6 +18,8 @@ public class Game {
 	private Graphics graphics;
 	private Ticker t;
 	private Camera c;
+	private GameState gs;
+	private Player p;
 
 	public static void main(String[] args) {
 		Game g = new Game();
@@ -30,9 +35,11 @@ public class Game {
 		gf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		c = new Camera(new Location(0,0));
 		t = new Ticker(this);
-
 		t.addObject(c);
 		t.addObject(new Wall(100, 200, new Location(100,100)));
+		gs = GameState.WORLD;
+		gf.addKeyListener(new CKeyListener(this));
+		p = new Player(new Location(GFrame.WIDTH/2,Frame.HEIGHT/2), 100);
 	}
 	
 	public void addObject(GameObject o)
@@ -88,4 +95,9 @@ public class Game {
 		gf.repaint();
 	}
 
+	public GameState getState()
+	{
+		return this.gs;
+	}
+	
 }
