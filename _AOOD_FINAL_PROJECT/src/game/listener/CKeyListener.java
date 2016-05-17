@@ -25,13 +25,62 @@ public class CKeyListener extends KeyAdapter {
 		}
 	}
 	
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		if(g.getState() == GameState.WORLD)
+		{
+			keyReleasedWorld(e);
+		}
+	}
+	
 	
 	
 	private void keyPressedWorld(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_D)
+		if(e.getKeyCode() == KeyEvent.VK_D && !g.getPlayer().getHoriz())
 		{
 			g.getPlayer().getVelocity().setX(5);
+			g.getPlayer().setHoriz(true);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_A && !g.getPlayer().getHoriz())
+		{
+			g.getPlayer().getVelocity().setX(-5);
+			g.getPlayer().setHoriz(true);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W && !g.getPlayer().getVert())
+		{
+			g.getPlayer().getVelocity().setY(-5);
+			g.getPlayer().setVert(true);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_S && !g.getPlayer().getVert())
+		{
+			g.getPlayer().getVelocity().setY(5);
+			g.getPlayer().setVert(true);
+		}
+	}
+	
+	private void keyReleasedWorld(KeyEvent e)
+	{
+		if(e.getKeyCode() == KeyEvent.VK_D && g.getPlayer().getHoriz())
+		{
+			g.getPlayer().getVelocity().setX(0);
+			g.getPlayer().setHoriz(false);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_A && g.getPlayer().getHoriz())
+		{
+			g.getPlayer().getVelocity().setX(0);
+			g.getPlayer().setHoriz(false);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W && g.getPlayer().getVert())
+		{
+			g.getPlayer().getVelocity().setY(0);
+			g.getPlayer().setVert(false);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_S && g.getPlayer().getVert())
+		{
+			g.getPlayer().getVelocity().setY(0);
+			g.getPlayer().setVert(false);
 		}
 	}
 	

@@ -1,6 +1,8 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import game.world.Location;
@@ -26,12 +28,15 @@ public class Camera extends WorldObject
     @Deprecated
     public void render(Graphics g, int x, int y)
     {
-        return;
+    	g.setColor(Color.red);
+    	g.drawRect(x,y,GFrame.WIDTH,GFrame.HEIGHT);
+    	g.setColor(Color.black);
     }
 
     private void move()
     {
-		getLocation().set(g.getPlayer().getLocation());
+		getLocation().setX(g.getPlayer().getLocation().getX()-GFrame.WIDTH/2);
+		getLocation().setY(g.getPlayer().getLocation().getY()-GFrame.HEIGHT/2);
 		getViewBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
     }
     
