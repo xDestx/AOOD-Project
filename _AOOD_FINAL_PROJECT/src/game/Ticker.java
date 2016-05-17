@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 
 import game.entity.Player;
+import game.world.Collidable;
 
 public class Ticker {
 	
@@ -45,6 +46,16 @@ public class Ticker {
 	 */
 	public void render(Graphics g, Camera c)
 	{
+		this.g.getLevel().render(g, 0,0);
+		for (Collidable r : this.g.getLevel().getListOfCollidables())
+		{
+			if(r.getBounds().intersects(c.getViewBounds()))
+			{
+				int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
+				int y = (int)(r.getLocation().getY() - c.getLocation().getY());
+				r.render(g,x,y);
+			}
+		}
 		for (GameObject go : objs)
 		{
 			if (go instanceof Renderable)

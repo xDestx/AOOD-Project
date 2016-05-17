@@ -3,8 +3,11 @@ package game.entity;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import game.Game;
+import game.world.Collidable;
 import game.world.Location;
 import game.world.Vector;
 
@@ -109,16 +112,46 @@ public class Player extends Entity {
 	//Check for collisions, etc and then move
 	private void movement()
 	{
-		
+		ArrayList<Collidable> col = Game.getCurrentGame().getLevel().getListOfCollidables();
+
+		moveX(velocity.getX());
+		moveY(velocity.getY());
+		for (Collidable c : col)
+		{
+			if(c.collide(getBounds()))
+			{
+				int xdist = (int)c.getBounds().getCenterX() - (int)getBounds().getCenterX();
+				int ydist = (int)c.getBounds().getCenterY() - (int)getBounds().getCenterY();
+				if(Math.abs(xdist) > Math.abs(ydist))
+				{
+					if (ydist < 0)
+					{
+						moveY(c.getBounds().getMaxY() - getBounds().getCenterY());
+					} else
+					{
+						moveY(c.getBounds().getMinY() - getBounds().getCenterY() - getBounds().getHeight());
+					}
+				} else {
+					if (xdist < 0)
+					{
+						moveX(c.getBounds().getMaxX() - getBounds().getCenterX());
+					} else
+					{
+						moveX(c.getBounds().getMinX() - getBounds().getCenterX() - getBounds().getHeight());
+					}
+				}
+				
+			}
+		}
 	}
 	
 	@Override
 	public void tick() {
 		// Take Velocity --> Position
-		// movement();
+		movement();
 
-		moveX(velocity.getX());
-		moveY(velocity.getY());
+		//moveX(velocity.getX());
+		//moveY(velocity.getY());
 	}
 
 	@Override

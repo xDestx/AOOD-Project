@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import game.entity.Player;
 import game.listener.CKeyListener;
+import game.world.Level;
 import game.world.Location;
 import game.world.Wall;
 
@@ -20,10 +21,19 @@ public class Game {
 	private Camera c;
 	private GameState gs;
 	private Player p;
+	private Level currentLevel;
 
+	//
+	private static Game game;
+	
 	public static void main(String[] args) {
-		Game g = new Game();
-		g.play();
+		game = new Game();
+		game.play();
+	}
+	
+	public static Game getCurrentGame()
+	{
+		return game;
 	}
 	
 
@@ -40,12 +50,23 @@ public class Game {
 		this.addObject(p);
 		t.addObject(c);
 		gs = GameState.WORLD;
+		currentLevel = new Level(0);
 		gf.addKeyListener(new CKeyListener(this));
 	}
 	
 	public Camera getCamera()
 	{
 		return c;
+	}
+	
+	public void setLevel(Level l)
+	{
+		this.currentLevel = l;
+	}
+	
+	public Level getLevel()
+	{
+		return this.currentLevel;
 	}
 	
 	public void addObject(GameObject o)

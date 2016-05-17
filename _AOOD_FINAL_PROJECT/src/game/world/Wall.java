@@ -23,4 +23,11 @@ public class Wall extends WorldObject implements Collidable
 		
 	}
 
+	
+	@Override
+	public boolean collide(Rectangle bounds)
+	{
+		return (bounds.intersects(getBounds()));
+	}
+
 }
