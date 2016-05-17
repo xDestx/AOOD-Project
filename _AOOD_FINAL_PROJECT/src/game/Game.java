@@ -54,7 +54,7 @@ public class Game {
 		gs = GameState.WORLD;
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
 		cc.add(new Wall(500,100,new Location(900,400)));
-		currentLevel = new Level(0,cc);
+		currentLevel = new Level(0,null,cc);
 		gf.getCanvas().addKeyListener(new CKeyListener(this));
 	}
 	

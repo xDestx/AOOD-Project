@@ -22,6 +22,7 @@ public class Level implements Renderable {
     private ArrayList<Collidable> listOfCollidables;
     private int id;
     private BufferedImage bi;
+    private GroundPattern pattern;
     private Location l;
     
     public Level(int idNumber){
@@ -35,12 +36,14 @@ public class Level implements Renderable {
         {
         	e.printStackTrace();
         }
+        pattern = new GroundPattern();
     }
     
     public Level(int idNumber, BufferedImage b){
         listOfCollidables = new ArrayList<Collidable>();
         id = idNumber;
         bi = b;
+        pattern = new GroundPattern();
     }
     
     public Level(int idNumber, ArrayList<Collidable> cs){
@@ -53,12 +56,14 @@ public class Level implements Renderable {
         {
         	e.printStackTrace();
         }
+        pattern = new GroundPattern();
     }
     
     public Level(int idNumber, BufferedImage b, ArrayList<Collidable> cs){
         listOfCollidables = cs;
         id = idNumber;
         bi = b;
+        pattern = new GroundPattern();
     }
     
     public int getId(){
@@ -84,6 +89,27 @@ public class Level implements Renderable {
 				if(cX >= GFrame.WIDTH)
 				{
 					cY+=bi.getWidth();
+					if(cY >= GFrame.HEIGHT)
+					{
+						break;
+					} else
+					{
+						cX=startX;
+					}
+				}
+			}
+		} else {
+			int startX = 0-((int)Game.getCurrentGame().getCamera().getLocation().getX()%100)-100;
+			int startY = 0-((int)Game.getCurrentGame().getCamera().getLocation().getY()%100)-100;
+			int cX = startX;
+			int cY = startY;
+			while (cX < GFrame.WIDTH || cY < GFrame.HEIGHT)
+			{
+				pattern.render(g, cX, cY);
+				cX+=100;
+				if(cX >= GFrame.WIDTH)
+				{
+					cY+=100;
 					if(cY >= GFrame.HEIGHT)
 					{
 						break;
