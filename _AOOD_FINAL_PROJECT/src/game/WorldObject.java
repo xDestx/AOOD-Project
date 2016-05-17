@@ -21,6 +21,7 @@ public abstract class WorldObject extends GameObject implements Renderable
         return this.l;
     }
     
+    
     public abstract void render(Graphics g, int xo, int yo);
 
 }

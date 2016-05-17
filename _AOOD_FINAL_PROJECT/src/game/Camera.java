@@ -24,4 +24,10 @@ public class Camera extends WorldObject
     {
         return;
     }
+
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
 }
