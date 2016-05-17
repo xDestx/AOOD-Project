@@ -6,12 +6,10 @@ import java.awt.Rectangle;
 public class Camera extends WorldObject
 {
     
-    private Rectangle bounds;
-
     public Camera(Location l)
     {
         setLocation(l);
-        bounds = new Rectangle((int)l.getX(),(int)l.getY(),GFrame.WIDTH , GFrame.HEIGHT);
+        setBounds(new Rectangle((int)l.getX(),(int)l.getY(),GFrame.WIDTH , GFrame.HEIGHT));
     } 
     
     public Rectangle getViewBounds()
@@ -27,7 +25,9 @@ public class Camera extends WorldObject
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-		
+		getLocation().setX(getLocation().getX() + 1);
+		getViewBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
 	}
+	
+	
 }

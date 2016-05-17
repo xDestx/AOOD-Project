@@ -2,6 +2,8 @@ package game;
 
 import java.awt.Graphics;
 
+import javax.swing.JFrame;
+
 public class Game {
 
 	private boolean playing;
@@ -22,8 +24,12 @@ public class Game {
 		gf = new GFrame(this);
 		gf.setVisible(true);
 		graphics = gf.getGraphics();
+		gf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		c = new Camera(new Location(0,0));
 		t = new Ticker(this);
+
+		t.addObject(c);
+		t.addObject(new Wall(100, 200, new Location(100,100)));
 	}
 	
 	public void addObject(GameObject o)
@@ -76,6 +82,7 @@ public class Game {
 
 	private void renderScreen() {
 		t.render(graphics, c);
+		gf.repaint();
 	}
 
 }

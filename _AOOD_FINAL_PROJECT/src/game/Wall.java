@@ -6,11 +6,10 @@ import java.awt.Graphics;
 public class Wall extends WorldObject implements Collidable
 {
 
-    private Rectangle bounds;
-    
-    public Wall(int width, int height)
+    public Wall(int width, int height, Location l)
     {
-        bounds = new Rectangle((int)getLocation().getX(), (int)getLocation().getY(), width, height);
+    	setLocation(l);
+    	setBounds(new Rectangle((int)getLocation().getX(), (int)getLocation().getY(), width, height));
     }
     
     public void render(Graphics g, int x, int y)
