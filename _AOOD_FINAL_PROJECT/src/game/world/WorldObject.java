@@ -3,7 +3,6 @@ package game.world;
 import java.awt.Graphics;
 
 import game.GameObject;
-import game.Location;
 import game.Renderable;
 
 public abstract class WorldObject extends GameObject implements Renderable

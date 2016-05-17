@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
+import game.world.Location;
 import game.world.Wall;
 
 public class Game {

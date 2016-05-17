@@ -3,6 +3,8 @@ package game;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
+import game.world.Location;
+
 public abstract class GameObject implements Serializable
 {
 

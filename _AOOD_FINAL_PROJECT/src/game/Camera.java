@@ -3,6 +3,7 @@ package game;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import game.world.Location;
 import game.world.WorldObject;
 
 public class Camera extends WorldObject

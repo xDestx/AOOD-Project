@@ -1,4 +1,4 @@
-package game;
+package game.world;
 
 import java.io.Serializable;
 

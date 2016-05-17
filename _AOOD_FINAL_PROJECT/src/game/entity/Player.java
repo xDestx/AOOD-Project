@@ -2,7 +2,7 @@ package game.entity;
 
 import java.awt.Graphics;
 
-import game.Location;
+import game.world.Location;
 
 public class Player extends Entity
 {
