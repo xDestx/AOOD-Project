@@ -50,6 +50,11 @@ public class GFrame extends JFrame
     	
     }
     
+    public Canvas getCanvas()
+    {
+    	return canvas;
+    }
+    
     public void paintComponent(Graphics g)
     {
     	super.paintComponents(g);

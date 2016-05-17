@@ -55,7 +55,7 @@ public class Game {
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
 		cc.add(new Wall(500,100,new Location(900,400)));
 		currentLevel = new Level(0,cc);
-		gf.addKeyListener(new CKeyListener(this));
+		gf.getCanvas().addKeyListener(new CKeyListener(this));
 	}
 	
 	public Camera getCamera()
