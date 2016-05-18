@@ -123,6 +123,8 @@ public class Player extends Entity {
 		{
 			if(c.collide(getBounds()))
 			{
+				moveX(velocity.getX() * -1);
+				moveY(velocity.getY() * -1);
 				velocity.set(0);
 			}
 		}
