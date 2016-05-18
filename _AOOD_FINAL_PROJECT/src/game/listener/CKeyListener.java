@@ -58,6 +58,11 @@ public class CKeyListener extends KeyAdapter {
 			g.getPlayer().getVelocity().setY(5);
 			g.getPlayer().setVert(true);
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_L)
+		{
+			g.getCamera().setLocked(!g.getCamera().getLocked());
+		}
 	}
 	
 	private void keyReleasedWorld(KeyEvent e)

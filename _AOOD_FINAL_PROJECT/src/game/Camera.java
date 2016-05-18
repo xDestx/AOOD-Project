@@ -12,10 +12,12 @@ public class Camera extends WorldObject
 {
 	
 	private Game g;
+	private boolean locked;
     
     public Camera(Location l, Game g)
     {
         setLocation(l);
+        locked = true;
         this.g = g;
         setBounds(new Rectangle((int)l.getX(),(int)l.getY(),GFrame.WIDTH , GFrame.HEIGHT));
     } 
@@ -40,9 +42,20 @@ public class Camera extends WorldObject
 		getViewBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
     }
     
+    public void setLocked(boolean b)
+    {
+    	this.locked = b;
+    }
+    
+    public boolean getLocked()
+    {
+    	return this.locked;
+    }
+    
 	@Override
 	public void tick() {
-		move();
+		if(locked)
+			move();
 	}
 	
 	
