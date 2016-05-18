@@ -24,5 +24,11 @@ public class Vector {
 	public double getY() {
 		return this.y;
 	}
+	
+	public void set(double d)
+	{
+		this.x = d;
+		this.y = d;
+	}
 
 }

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import game.entity.Player;
 import game.world.Location;
 import game.world.WorldObject;
 
@@ -37,8 +38,8 @@ public class Camera extends WorldObject
 
     private void move()
     {
-		getLocation().setX(g.getPlayer().getLocation().getX()-GFrame.WIDTH/2);
-		getLocation().setY(g.getPlayer().getLocation().getY()-GFrame.HEIGHT/2);
+		getLocation().setX(g.getPlayer().getLocation().getX()+Player.WIDTH/2-GFrame.WIDTH/2);
+		getLocation().setY(g.getPlayer().getLocation().getY()+Player.HEIGHT/2-GFrame.HEIGHT/2);
 		getViewBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
     }
     

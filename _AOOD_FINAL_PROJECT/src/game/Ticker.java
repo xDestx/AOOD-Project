@@ -51,8 +51,8 @@ public class Ticker {
 		{
 			if(r.getBounds().intersects(c.getViewBounds()))
 			{
-				int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
-				int y = (int)(r.getLocation().getY() - c.getLocation().getY());
+				int x = ((int)(r.getBounds().getLocation().getX() - c.getLocation().getX()));
+				int y = (int)(r.getBounds().getLocation().getY() - c.getLocation().getY());
 				r.render(g,x,y);
 			}
 		}
@@ -76,6 +76,9 @@ public class Ticker {
 			int y = (int)(r.getLocation().getY() - c.getLocation().getY());
 			r.render(g,x,y);
 		}
+		int x = ((int)(0 - c.getLocation().getX()));
+		int y = (int)(0 - c.getLocation().getY());
+		g.drawLine(x, 0, x, 900);
 	}
 	
 	

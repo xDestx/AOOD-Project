@@ -16,6 +16,7 @@ public class Player extends Entity {
 	private Vector velocity;
 	private int health;
 	private boolean vertMod,horizMod;
+	public static final int WIDTH = 100, HEIGHT = 100;
 	//Check if horizontal / vertical keys are being held.
 	
 	
@@ -116,31 +117,13 @@ public class Player extends Entity {
 
 		moveX(velocity.getX());
 		moveY(velocity.getY());
+		if(getBounds().getX() < 0)
+			velocity.set(0);
 		for (Collidable c : col)
 		{
 			if(c.collide(getBounds()))
 			{
-				int xdist = (int)c.getBounds().getCenterX() - (int)getBounds().getCenterX();
-				int ydist = (int)c.getBounds().getCenterY() - (int)getBounds().getCenterY();
-				if(Math.abs(xdist) > Math.abs(ydist))
-				{
-					if (ydist < 0)
-					{
-						moveY(c.getBounds().getMaxY() - getBounds().getCenterY());
-					} else
-					{
-						moveY(c.getBounds().getMinY() - getBounds().getCenterY() - getBounds().getHeight());
-					}
-				} else {
-					if (xdist < 0)
-					{
-						moveX(c.getBounds().getMaxX() - getBounds().getCenterX());
-					} else
-					{
-						moveX(c.getBounds().getMinX() - getBounds().getCenterX() - getBounds().getHeight());
-					}
-				}
-				
+				velocity.set(0);
 			}
 		}
 	}
@@ -158,7 +141,7 @@ public class Player extends Entity {
 	public void render(Graphics g, int xo, int yo) {
 		Color c = g.getColor();
 		g.setColor(Color.red);
-		g.fillRect(xo-50, yo-50, 100, 100);
+		g.fillRect(xo, yo, WIDTH, HEIGHT);
 		g.setColor(c);
 	}
 
