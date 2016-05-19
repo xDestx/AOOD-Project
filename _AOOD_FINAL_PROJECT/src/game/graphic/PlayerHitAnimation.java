@@ -4,21 +4,22 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import game.entity.LivingEntity;
 import game.entity.Player;
 import game.world.Location;
 
 public class PlayerHitAnimation extends Animation {
 
-	private Player p;
+	private LivingEntity p;
 	private int x, y, r;
 	private double d;
 	/*
 	 * X / Y are the positions of the slice line
 	 */
-	public PlayerHitAnimation(Player p)
+	public PlayerHitAnimation(LivingEntity livingEntity)
 	{
 		super(50);
-		this.p = p;
+		this.p = livingEntity;
 		r = (int)( ((Player.HEIGHT + Player.WIDTH)/2)* 1.25 );
 	}
 	

@@ -14,18 +14,13 @@ public class Stick extends Enemy{
 		super(l,  health,  strength);
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
 	}
+
+	@Override
+	public void attack() {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	
-	public void render(Graphics g, int xo, int yo)
-    {
-		Color c = g.getColor();
-		if(!isDead())
-			g.setColor(Color.black);
-		else
-			g.setColor(Color.blue);
-		g.fillRect(xo, yo, WIDTH, HEIGHT);
-		g.setColor(c);
-    }
 
 
 

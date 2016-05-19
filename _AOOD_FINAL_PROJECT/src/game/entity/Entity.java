@@ -13,6 +13,11 @@ public abstract class Entity extends GameObject implements Renderable
 	protected Rectangle bounds;
 	protected Location l;
 
+	public Entity(Location l)
+	{
+		this.l = l;
+	}
+	
     public abstract void render(Graphics g, int xo, int yo);
     
     public Rectangle getBounds()
