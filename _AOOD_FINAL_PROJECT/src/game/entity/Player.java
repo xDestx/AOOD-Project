@@ -125,6 +125,7 @@ public class Player extends Entity {
 				 */
 				
 				//Check X
+				//Fixing Commit and Push option
 				double vx = velocity.getX();
 				double vy = velocity.getY();
 				if(c.getBounds().getMaxX() > getBounds().getMinX() || c.getBounds().getMinX() < getBounds().getMaxX())
