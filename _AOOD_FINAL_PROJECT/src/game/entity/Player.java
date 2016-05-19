@@ -125,6 +125,7 @@ public class Player extends Entity {
 				 */
 				
 				//Check X
+				//JUst wanna fix this
 				double vx = velocity.getX();
 				double vy = velocity.getY();
 				if(c.getBounds().getMaxX() > getBounds().getMinX() || c.getBounds().getMinX() < getBounds().getMaxX())
