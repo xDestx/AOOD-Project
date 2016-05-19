@@ -2,6 +2,7 @@ package game.graphic;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import game.entity.Player;
 import game.world.Location;
@@ -18,7 +19,7 @@ public class PlayerHitAnimation extends Animation {
 	{
 		super(50);
 		this.p = p;
-		r = (int)( ((Player.HEIGHT + Player.WIDTH)/2)* 1.25 );
+		r = (int)( ((Player.HEIGHT + Player.WIDTH)/2)* 1.5 );
 	}
 	
 	@Override
@@ -26,7 +27,8 @@ public class PlayerHitAnimation extends Animation {
 		Color last = g.getColor();
 		g.setColor(Color.RED);
 		//xo , yo = origin
-		g.drawLine(xo, yo, xo + x, yo + y);
+		for(int i = 0; i < 10; i++)
+			g.drawLine(xo + Player.WIDTH/2 + i, yo + Player.HEIGHT/2 + i, xo + x + Player.WIDTH/2 + i , yo + y + Player.HEIGHT/2 + i);
 		g.setColor(last);
 	}
 
@@ -37,10 +39,17 @@ public class PlayerHitAnimation extends Animation {
 
 	@Override
 	protected void changeFrame() {
-		d = Math.toRadians((double)(getFrame() / (double)getTotalFrames()) * 360);
+		d = Math.toRadians(((double)getFrame() / (double)getTotalFrames()) * 360);
 		x = (int) (Math.cos(d) * r);
-		y = (int)( Math.sin(d) * r);
-		System.out.println(d + "  " + x + "  " + y + "  " + r);
+		y = (int) (Math.sin(d) * r);
+		int xo = 800;
+		int yo = 450;
+		//System.out.println(d + "  " + x + "  " + y + "  " + r + " dist: " + (Math.sqrt(Math.pow((xo + Player.WIDTH/2) - (xo + x), 2) + Math.pow((yo + Player.HEIGHT/2) - (yo + y),2))));
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		return p.getAttackBounds();
 	}
 
 }

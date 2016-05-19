@@ -5,31 +5,9 @@ import java.io.Serializable;
 
 import game.world.Location;
 
-public abstract class GameObject implements Serializable
+public abstract class GameObject 
 {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5426752996704196830L;
-	protected Location l;
-	protected Rectangle bounds;
-	
-	public void setBounds(Rectangle r)
-	{
-		this.bounds = r;
-	}
-	
-	public Rectangle getBounds()
-	{
-		return bounds;
-	}
-	
-	public Location getLocation()
-	{
-		return this.l;
-	}
-	
 	public abstract void tick();
 
 }

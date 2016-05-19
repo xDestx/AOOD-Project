@@ -157,6 +157,12 @@ public class Level implements Renderable {
 		return l;
 	}
 
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
     
    

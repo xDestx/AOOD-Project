@@ -1,9 +1,11 @@
 package game;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import game.entity.Player;
+import game.util.Task;
 import game.world.Collidable;
 
 public class Ticker {
@@ -32,14 +34,27 @@ public class Ticker {
 	 */
 	public void tick()
 	{
+		ArrayList<Task> toRemove = new ArrayList<Task>();
 		for (GameObject go : objs)
 		{
 			go.tick();
+			if(go instanceof Task)
+			{
+				Task t = (Task)go;
+				if(t.done())
+					toRemove.add(t);
+			}
 		}
 		for(GameObject go : g.getLevel().getEnemies())
 		{
 			go.tick();
 		}
+		
+		for(Task t : toRemove)
+		{
+			objs.remove(t);
+		}
+		
 	}
 	
 	/*
@@ -65,10 +80,10 @@ public class Ticker {
 			if (go instanceof Renderable)
 			{
 				Renderable r = (Renderable)go;
-				if(go.getBounds().intersects(c.getViewBounds()))
+				if(r.getBounds().intersects(c.getViewBounds()))
 				{
-					int x = ((int)(go.getLocation().getX() - c.getLocation().getX()));
-					int y = (int)(go.getLocation().getY() - c.getLocation().getY());
+					int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
+					int y = (int)(r.getLocation().getY() - c.getLocation().getY());
 					r.render(g,x,y);
 				}
 			}
@@ -78,10 +93,10 @@ public class Ticker {
 			if (go instanceof Renderable)
 			{
 				Renderable r = (Renderable)go;
-				if(go.getBounds().intersects(c.getViewBounds()))
+				if(r.getBounds().intersects(c.getViewBounds()))
 				{
-					int x = ((int)(go.getLocation().getX() - c.getLocation().getX()));
-					int y = (int)(go.getLocation().getY() - c.getLocation().getY());
+					int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
+					int y = (int)(r.getLocation().getY() - c.getLocation().getY());
 					r.render(g,x,y);
 				}
 			}

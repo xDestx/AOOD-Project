@@ -9,13 +9,16 @@ import java.util.LinkedList;
 import game.Game;
 import game.graphic.Animation;
 import game.graphic.PlayerHitAnimation;
+import game.util.Task;
 import game.world.Collidable;
 import game.world.Location;
 import game.world.Vector;
 
 public class Player extends Entity {
 	private Location l;
-	private ArrayList<Animation> animations;
+	private Rectangle hitBounds;
+	private ArrayList<Animation> animations,toAnimations;
+	private boolean toAnimationsUsed;
 	private Vector velocity;
 	private int health;
 	private boolean vertMod,horizMod;
@@ -28,7 +31,10 @@ public class Player extends Entity {
 		this.health = health;
 		velocity = new Vector(0, 0);
 		animations = new ArrayList<Animation>();
-		setBounds(new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,100,100));
+		toAnimations = new ArrayList<Animation>();
+		toAnimationsUsed = false;
+		setBounds(new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,Player.WIDTH,Player.HEIGHT));
+		hitBounds = new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,(int)(Player.WIDTH*1.5),(int)(Player.HEIGHT*1.5));
 	}
 
 	public Location getLocation() {
@@ -49,17 +55,27 @@ public class Player extends Entity {
 
 	public void attack() {
 		for (Enemy e : Game.getCurrentGame().getEnemies()){
-			if (this.getBounds().intersects(e.getBounds())){
-				//Might increase this range
+			if (this.getAttackBounds().intersects(e.getBounds())){
 				e.wasHit();
 			}
 		}
 		addAnimation(new PlayerHitAnimation(this));
 	}
 
-	public void addAnimation(Animation a)
+	public void addAnimation(final Animation a)
 	{
-		this.animations.add(a);
+		if(!toAnimationsUsed)
+			this.toAnimations.add(a);
+		else {
+			Game.getCurrentGame().addObject(new Task(1)
+					{
+				@Override
+				public void run()
+				{
+					addAnimation(a);
+				}
+					});
+		}
 	}
 	
 	// 1 = up
@@ -107,11 +123,13 @@ public class Player extends Entity {
 	public void moveX(double amt) {
 		getLocation().setX(getLocation().getX() + amt);
 		getBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
+		getAttackBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
 	}
 
 	public void moveY(double amt) {
 		getLocation().setY(getLocation().getY() + amt);
 		getBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
+		getAttackBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
 	}
 
 	/*public boolean canMove(int direction) {
@@ -182,6 +200,13 @@ public class Player extends Entity {
 		{
 			animations.remove(a);
 		}
+		toAnimationsUsed = true;
+		for(Animation a : toAnimations)
+		{
+			animations.add(a);
+		}
+		toAnimations.clear();
+		toAnimationsUsed = false;
 	}
 	
 	@Override
@@ -199,6 +224,10 @@ public class Player extends Entity {
 		{
 			a.render(g, xo, yo);
 		}
+	}
+
+	public Rectangle getAttackBounds() {
+		return hitBounds;
 	}
 
 }
