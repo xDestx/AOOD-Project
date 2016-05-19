@@ -141,6 +141,11 @@ public class Level implements Renderable {
 		
 	}
 
+	public void removeEnemy(Enemy e)
+	{
+		enemies.remove(e);
+	}
+	
 
 	@Override
 	public Location getLocation() {
