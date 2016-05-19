@@ -26,12 +26,7 @@ public class Stick extends Enemy{
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
 		g.setColor(c);
     }
-	
-	@Override
-	public void tick()
-	{
-		
-	}
+
 
 
 }

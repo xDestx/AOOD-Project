@@ -78,16 +78,7 @@ public class Level implements Renderable {
     }
     
     public ArrayList<Collidable> getListOfCollidables(){
-    	ArrayList<Collidable> cs = new ArrayList<Collidable>();
-    	cs.addAll(listOfCollidables);
-    	for(Enemy e : enemies)
-    	{
-    		if(e instanceof Collidable)
-    		{
-    			cs.add(e);
-    		}
-    	}
-        return cs;
+        return listOfCollidables;
     }
     
     public ArrayList<Enemy> getEnemies(){

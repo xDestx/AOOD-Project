@@ -107,9 +107,6 @@ public class Ticker {
 			int y = (int)(r.getLocation().getY() - c.getLocation().getY());
 			r.render(g,x,y);
 		}
-		int x = ((int)(0 - c.getLocation().getX()));
-		int y = (int)(0 - c.getLocation().getY());
-		g.drawLine(x, 0, x, 900);
 	}
 	
 	
