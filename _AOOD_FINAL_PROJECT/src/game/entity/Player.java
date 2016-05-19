@@ -27,7 +27,6 @@ public class Player extends Entity {
 		setBounds(new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,100,100));
 	}
 
-	// To find hitbox of player
 	public Location getLocation() {
 		return l;
 	}
@@ -45,13 +44,14 @@ public class Player extends Entity {
 	}
 
 	public void attack() {
+		
 	}
 
 	// 1 = up
 	// 2 = left
 	// 3 = down
 	// 4 = right
-	public void move(int direction) {
+	/*public void move(int direction) {
 		if (this.canMove(direction)) {
 			if (direction == 1) {
 				Location newLoc = new Location(l.getX(), l.getY() - 10);
@@ -67,7 +67,7 @@ public class Player extends Entity {
 				this.l = newLoc;
 			}
 		}
-	}
+	}*/
 	
 	public void setVert(boolean b)
 	{
@@ -99,10 +99,10 @@ public class Player extends Entity {
 		getBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
 	}
 
-	public boolean canMove(int direction) {
+	/*public boolean canMove(int direction) {
 		// checks if any object is in its path
 		return true;
-	}
+	}*/
 
 	// When player gets hit
 	public void wasHit(int damage) {
