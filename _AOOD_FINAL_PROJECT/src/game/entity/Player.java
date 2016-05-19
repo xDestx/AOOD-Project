@@ -121,7 +121,7 @@ public class Player extends Entity {
 			if(c.collide(getBounds()))
 			{
 				/*
-				 * Check if colliding x / y then move
+				 * Check if colliding x / y then move!
 				 */
 				//Check x
 				double vx = velocity.getX();
