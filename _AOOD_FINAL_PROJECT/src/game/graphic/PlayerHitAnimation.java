@@ -19,7 +19,7 @@ public class PlayerHitAnimation extends Animation {
 	{
 		super(50);
 		this.p = p;
-		r = (int)( ((Player.HEIGHT + Player.WIDTH)/2)* 1.5 );
+		r = (int)( ((Player.HEIGHT + Player.WIDTH)/2)* 1.25 );
 	}
 	
 	@Override

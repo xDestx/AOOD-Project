@@ -2,6 +2,7 @@ package game.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -34,7 +35,7 @@ public class Player extends Entity {
 		toAnimations = new ArrayList<Animation>();
 		toAnimationsUsed = false;
 		setBounds(new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,Player.WIDTH,Player.HEIGHT));
-		hitBounds = new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,(int)(Player.WIDTH*1.5),(int)(Player.HEIGHT*1.5));
+		hitBounds = new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,(int)(Player.WIDTH*2),(int)(Player.HEIGHT*2));
 	}
 
 	public Location getLocation() {
@@ -129,7 +130,7 @@ public class Player extends Entity {
 	public void moveY(double amt) {
 		getLocation().setY(getLocation().getY() + amt);
 		getBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
-		getAttackBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
+		getAttackBounds().setLocation((int)getLocation().getX()-WIDTH/4, (int)getLocation().getY()-HEIGHT/4);
 	}
 
 	/*public boolean canMove(int direction) {
@@ -214,6 +215,7 @@ public class Player extends Entity {
 		Color c = g.getColor();
 		g.setColor(Color.red);
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
+		g.drawRect(xo-WIDTH/2, yo-HEIGHT/2,(int) getAttackBounds().getWidth(), (int)getAttackBounds().getHeight());
 		g.setColor(c);
 		renderAnimations(g,xo,yo);
 	}
