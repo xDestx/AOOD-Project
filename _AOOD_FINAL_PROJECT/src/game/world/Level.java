@@ -7,6 +7,7 @@ import game.GFrame;
 import game.Game;
 import game.GameObject;
 import game.Renderable;
+import game.entity.Enemy;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -20,6 +21,7 @@ public class Level implements Renderable {
 	//To implement serializable later
 	
     private ArrayList<Collidable> listOfCollidables;
+    private ArrayList<Enemy> enemies;
     private int id;
     private BufferedImage bi;
     private GroundPattern pattern;
@@ -29,6 +31,7 @@ public class Level implements Renderable {
         listOfCollidables = new ArrayList<Collidable>();
         id = idNumber;
         l = new Location(0,0);
+        enemies = new ArrayList<Enemy>();
         try
         {
         	bi = ImageIO.read(getClass().getResourceAsStream("/images/grass.png"));
@@ -41,6 +44,7 @@ public class Level implements Renderable {
     
     public Level(int idNumber, BufferedImage b){
         listOfCollidables = new ArrayList<Collidable>();
+        enemies = new ArrayList<Enemy>();
         id = idNumber;
         bi = b;
         pattern = new GroundPattern();
@@ -48,6 +52,7 @@ public class Level implements Renderable {
     
     public Level(int idNumber, ArrayList<Collidable> cs){
         listOfCollidables = cs;
+        enemies = new ArrayList<Enemy>();
         id = idNumber;
         try
         {
@@ -61,17 +66,37 @@ public class Level implements Renderable {
     
     public Level(int idNumber, BufferedImage b, ArrayList<Collidable> cs){
         listOfCollidables = cs;
+        enemies = new ArrayList<Enemy>();
         id = idNumber;
         bi = b;
         pattern = new GroundPattern();
     }
+    
     
     public int getId(){
         return id;
     }
     
     public ArrayList<Collidable> getListOfCollidables(){
-        return listOfCollidables;
+    	ArrayList<Collidable> cs = new ArrayList<Collidable>();
+    	cs.addAll(listOfCollidables);
+    	for(Enemy e : enemies)
+    	{
+    		if(e instanceof Collidable)
+    		{
+    			cs.add(e);
+    		}
+    	}
+        return cs;
+    }
+    
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
+    }
+    
+    public void addEnemy(Enemy e)
+    {
+    	enemies.add(e);
     }
 
 	@Override

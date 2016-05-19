@@ -3,12 +3,13 @@ package game.entity;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import game.world.Collidable;
 import game.world.Location;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public abstract class Enemy extends Entity{
+public abstract class Enemy extends Entity implements Collidable {
 
 	private Location l;
 	private int health, strength;
@@ -47,6 +48,11 @@ public abstract class Enemy extends Entity{
 		this.l = l;
 	}
 	
+	public boolean isDead()
+	{
+		return getHealth() <= 0;
+	}
+	
 	public void wasHit(){
 		health = health - 10;
 	}
@@ -59,6 +65,12 @@ public abstract class Enemy extends Entity{
 		g.setColor(c);
     }
 
+
+	@Override
+	public boolean collide(Rectangle r) {
+		return (r.intersects(getBounds()));
+	}
+	
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub

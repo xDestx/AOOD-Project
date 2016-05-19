@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import game.Game;
+import game.graphic.Animation;
+import game.graphic.PlayerHitAnimation;
 import game.world.Collidable;
 import game.world.Location;
 import game.world.Vector;
 
 public class Player extends Entity {
 	private Location l;
+	private ArrayList<Animation> animations;
 	private Vector velocity;
 	private int health;
 	private boolean vertMod,horizMod;
@@ -24,6 +27,7 @@ public class Player extends Entity {
 		this.l = l;
 		this.health = health;
 		velocity = new Vector(0, 0);
+		animations = new ArrayList<Animation>();
 		setBounds(new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,100,100));
 	}
 
@@ -46,11 +50,18 @@ public class Player extends Entity {
 	public void attack() {
 		for (Enemy e : Game.getCurrentGame().getEnemies()){
 			if (this.getBounds().intersects(e.getBounds())){
+				//Might increase this range
 				e.wasHit();
 			}
 		}
+		addAnimation(new PlayerHitAnimation(this));
 	}
 
+	public void addAnimation(Animation a)
+	{
+		this.animations.add(a);
+	}
+	
 	// 1 = up
 	// 2 = left
 	// 3 = down
@@ -154,19 +165,40 @@ public class Player extends Entity {
 	
 	@Override
 	public void tick() {
-		// Take Velocity --> Position
 		movement();
-
-		//moveX(velocity.getX());
-		//moveY(velocity.getY());
+		animationTick();
 	}
 
+	public void animationTick()
+	{
+		ArrayList<Animation> adios = new ArrayList<Animation>();
+		for (Animation a : animations)
+		{
+			a.tick();
+			if(a.done())
+				adios.add(a);
+		}
+		for(Animation a : adios)
+		{
+			animations.remove(a);
+		}
+	}
+	
 	@Override
 	public void render(Graphics g, int xo, int yo) {
 		Color c = g.getColor();
 		g.setColor(Color.red);
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
 		g.setColor(c);
+		renderAnimations(g,xo,yo);
+	}
+	
+	public void renderAnimations(Graphics g, int xo, int yo)
+	{
+		for (Animation a : animations)
+		{
+			a.render(g, xo, yo);
+		}
 	}
 
 }

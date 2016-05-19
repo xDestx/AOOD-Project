@@ -8,27 +8,30 @@ import game.world.Location;
 
 public class Stick extends Enemy{
 	
-	private Location l;
-	private int health, strength;
+	private int strength;
 	
 	public Stick(Location l, int health, int strength){
 		super(l,  health,  strength);
-		setBounds(new Rectangle((int)getLocation().getX() - 50,(int) getLocation().getY() - 50, 100, 100));
+		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
 	}
 	
-	public void wasHit()
-	{
-		health = health - 10;
-		if (health <= 0) {
-			System.out.println("Dead");
-		}
-	}
 	
 	public void render(Graphics g, int xo, int yo)
     {
 		Color c = g.getColor();
-		g.setColor(Color.black);
+		if(!isDead())
+			g.setColor(Color.black);
+		else
+			g.setColor(Color.blue);
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
 		g.setColor(c);
     }
+	
+	@Override
+	public void tick()
+	{
+		
+	}
+
+
 }

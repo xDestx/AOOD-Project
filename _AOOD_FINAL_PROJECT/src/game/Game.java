@@ -27,7 +27,6 @@ public class Game {
 	private Player p;
 	private Stick e;
 	private Level currentLevel;
-	private ArrayList<Enemy> enemies;
 
 	//aaaa
 	private static Game game;
@@ -55,11 +54,9 @@ public class Game {
 		p = new Player(new Location(GFrame.WIDTH/2,GFrame.HEIGHT/2), 100);
 		e = new Stick(new Location(GFrame.WIDTH - 100, GFrame.HEIGHT - 100), 100, 100);
 		this.addObject(p);
-		this.addObject(e);
+		
 		t.addObject(c);
-		enemies = new ArrayList<Enemy>();
 		//idk where to put this line ^, but prob not here
-		enemies.add(e);
 		gs = GameState.WORLD;
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
 		cc.add(new Wall(1600,10,new Location(0,0)));
@@ -68,6 +65,7 @@ public class Game {
 		cc.add(new Wall(10,900, new Location(1600,10)));
 		cc.add(new Wall(200,200, new Location(300,300)));
 		currentLevel = new Level(0,cc);
+		currentLevel.addEnemy(e);
 		gf.getCanvas().addKeyListener(new CKeyListener(this));
 	}
 	
@@ -140,13 +138,11 @@ public class Game {
 	}
 	
 	public ArrayList<Enemy> getEnemies(){
-		return enemies;
+		return getLevel().getEnemies();
 	}
 	
 	private void renderScreen() {
 		gf.render(t);
-		//t.render(graphics, c);
-		//gf.repaint();
 	}
 
 	public GameState getState()

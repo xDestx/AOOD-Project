@@ -36,6 +36,10 @@ public class Ticker {
 		{
 			go.tick();
 		}
+		for(GameObject go : g.getLevel().getEnemies())
+		{
+			go.tick();
+		}
 	}
 	
 	/*
@@ -69,7 +73,19 @@ public class Ticker {
 				}
 			}
 		}
-		
+		for (GameObject go : this.g.getLevel().getEnemies())
+		{
+			if (go instanceof Renderable)
+			{
+				Renderable r = (Renderable)go;
+				if(go.getBounds().intersects(c.getViewBounds()))
+				{
+					int x = ((int)(go.getLocation().getX() - c.getLocation().getX()));
+					int y = (int)(go.getLocation().getY() - c.getLocation().getY());
+					r.render(g,x,y);
+				}
+			}
+		}
 		for (Renderable r : rendrs)
 		{
 			int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
