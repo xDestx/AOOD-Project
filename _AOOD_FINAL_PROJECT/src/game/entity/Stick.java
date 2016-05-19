@@ -2,6 +2,7 @@ package game.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import game.world.Location;
 
@@ -12,6 +13,7 @@ public class Stick extends Enemy{
 	
 	public Stick(Location l, int health, int strength){
 		super(l,  health,  strength);
+		setBounds(new Rectangle((int)getLocation().getX() - 50,(int) getLocation().getY() - 50, 100, 100));
 	}
 	
 	public void wasHit()

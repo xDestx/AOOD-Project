@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import game.entity.Enemy;
 import game.entity.Player;
+import game.entity.Stick;
 import game.listener.CKeyListener;
 import game.world.Collidable;
 import game.world.Level;
@@ -23,6 +25,7 @@ public class Game {
 	private Camera c;
 	private GameState gs;
 	private Player p;
+	private Stick e;
 	private Level currentLevel;
 
 	//aaaa
@@ -49,7 +52,9 @@ public class Game {
 		c = new Camera(new Location(0,0),this);
 		t = new Ticker(this);
 		p = new Player(new Location(GFrame.WIDTH/2,GFrame.HEIGHT/2), 100);
+		e = new Stick(new Location(GFrame.WIDTH - 100, GFrame.HEIGHT - 100), 100, 100);
 		this.addObject(p);
+		this.addObject(e);
 		t.addObject(c);
 		gs = GameState.WORLD;
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
