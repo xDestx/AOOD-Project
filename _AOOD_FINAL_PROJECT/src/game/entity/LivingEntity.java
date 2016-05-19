@@ -40,7 +40,6 @@ public abstract class LivingEntity extends Entity {
 
 	@Override
 	public void render(Graphics g, int xo, int yo) {
-		g.fillRect(xo, yo, WIDTH, HEIGHT);
 		renderAnimations(g,xo,yo);
 		drawHealthBar(g,xo,yo);
 	}

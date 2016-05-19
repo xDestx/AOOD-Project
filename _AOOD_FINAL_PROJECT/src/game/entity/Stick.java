@@ -5,7 +5,9 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import game.Game;
+import game.graphic.Animation;
 import game.graphic.PlayerHitAnimation;
+import game.util.Task;
 import game.world.Location;
 
 public class Stick extends Enemy{
@@ -20,6 +22,22 @@ public class Stick extends Enemy{
 		cooldownTicksDefault = 100;
 		cooldownTicks = cooldownTicksDefault;
 	}
+	
+	public void addAnimation(final Animation a)
+	{
+		if(!toAnimationsUsed)
+			this.toAnimations.add(a);
+		else {
+			Game.getCurrentGame().addObject(new Task(1)
+					{
+				@Override
+				public void run()
+				{
+					addAnimation(a);
+				}
+					});
+		}
+	}
 
 	@Override
 	public void attack() {
@@ -28,10 +46,17 @@ public class Stick extends Enemy{
 			if(Game.getCurrentGame().getPlayer().getBounds().intersects(getAttackBounds()))
 			{
 				Game.getCurrentGame().getPlayer().wasHit(strength);
-				addAnimation(new PlayerHitAnimation(this));
 			}
+			addAnimation(new PlayerHitAnimation(this));
 			cooldownTicks = 0;
 		}
+	}
+	
+	public void renderAnimations(Graphics g, int xo, int yo)
+	{
+		super.renderAnimations(g, xo, yo);
+		if(animations.size() > 0)
+			System.out.println("Naisu");
 	}
 	
 	public void tick()

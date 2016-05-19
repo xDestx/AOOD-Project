@@ -50,7 +50,7 @@ public abstract class Enemy extends LivingEntity{
 		else
 			g.setColor(Color.blue);
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
-		drawHealthBar(g,xo,yo);
+		super.render(g, xo, yo);
 		g.setColor(c);
     }
 	
