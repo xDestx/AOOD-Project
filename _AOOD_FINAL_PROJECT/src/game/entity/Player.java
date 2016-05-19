@@ -114,18 +114,37 @@ public class Player extends Entity {
 	private void movement()
 	{
 		ArrayList<Collidable> col = Game.getCurrentGame().getLevel().getListOfCollidables();
-
 		moveX(velocity.getX());
 		moveY(velocity.getY());
-		if(getBounds().getX() < 0)
-			velocity.set(0);
 		for (Collidable c : col)
 		{
 			if(c.collide(getBounds()))
 			{
-				moveX(velocity.getX() * -1);
-				moveY(velocity.getY() * -1);
-				velocity.set(0);
+				/*
+				 * Check if colliding x / y then move
+				 */
+				
+				//Check X
+				double vx = velocity.getX();
+				double vy = velocity.getY();
+				if(c.getBounds().getMaxX() > getBounds().getMinX() || c.getBounds().getMinX() < getBounds().getMaxX())
+				{
+					moveX(vx * -1);
+					velocity.setX(0);
+				}
+				//Check y
+				if((c.getBounds().getMaxY() > getBounds().getMinY() || c.getBounds().getY() < getBounds().getMaxY()) && c.collide(getBounds()))
+				{
+					moveY(vy * -1);
+					velocity.setY(0);
+					moveX(vx);
+					if(c.collide(getBounds()))
+					{
+						moveX(vx * -1);
+					} else {
+						velocity.setX(vx);
+					}
+				}
 			}
 		}
 	}

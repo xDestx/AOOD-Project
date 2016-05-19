@@ -57,6 +57,7 @@ public class Game {
 		cc.add(new Wall(10,900, new Location(0,0)));
 		cc.add(new Wall(1600,10,new Location(0,900)));
 		cc.add(new Wall(10,900, new Location(1600,10)));
+		cc.add(new Wall(200,200, new Location(300,300)));
 		currentLevel = new Level(0,cc);
 		gf.getCanvas().addKeyListener(new CKeyListener(this));
 	}
