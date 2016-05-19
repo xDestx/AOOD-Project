@@ -53,7 +53,7 @@ public class Game {
 		c = new Camera(new Location(0,0),this);
 		t = new Ticker(this);
 		p = new Player(new Location(GFrame.WIDTH/2,GFrame.HEIGHT/2), 100);
-		e = new Stick(new Location(GFrame.WIDTH - 100, GFrame.HEIGHT - 100), 100, 100);
+		e = new Stick(new Location(GFrame.WIDTH - 100, GFrame.HEIGHT - 100), 100, 10);
 		this.addObject(p);
 		
 		t.addObject(c);

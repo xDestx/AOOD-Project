@@ -16,9 +16,9 @@ import java.util.LinkedList;
 
 public abstract class Enemy extends LivingEntity{
 
-	private Mind m;
-	private int health, strength, maxHealth;
-	private int enemyid;
+	protected Mind m;
+	protected int health, strength, maxHealth;
+	protected int enemyid;
 	
 	public Enemy(Location l, int health, int strength)
 	{

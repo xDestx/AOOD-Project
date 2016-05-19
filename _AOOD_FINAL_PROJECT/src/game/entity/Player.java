@@ -19,6 +19,7 @@ public class Player extends LivingEntity {
 		this.health = health;
 		this.maxHealth = health;
 	}
+	
 
 	// 1 = up
 	// 2 = left
@@ -85,7 +86,6 @@ public class Player extends LivingEntity {
 		Color c = g.getColor();
 		g.setColor(Color.red);
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
-		g.drawRect(xo-WIDTH/2, yo-HEIGHT/2,(int) getAttackBounds().getWidth(), (int)getAttackBounds().getHeight());
 		renderAnimations(g,xo,yo);
 		drawHealthBar(g,xo,yo);
 		g.setColor(c);

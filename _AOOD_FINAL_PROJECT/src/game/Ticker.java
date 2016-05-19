@@ -107,8 +107,17 @@ public class Ticker {
 			int y = (int)(r.getLocation().getY() - c.getLocation().getY());
 			r.render(g,x,y);
 		}
+		//drawPlayerAttackBound(g,c);
 	}
 	
+	
+	private void drawPlayerAttackBound(Graphics g, Camera c)
+	{
+
+		int x = ((int)(Game.getCurrentGame().getPlayer().getAttackBounds().getLocation().getX() - c.getLocation().getX()));
+		int y = (int)(Game.getCurrentGame().getPlayer().getAttackBounds().getLocation().getY() - c.getLocation().getY());
+		g.drawRect(x, y, Player.WIDTH*2, Player.HEIGHT*2);
+	}
 	
 	public void addObject(GameObject o)
 	{

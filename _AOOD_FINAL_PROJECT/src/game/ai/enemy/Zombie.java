@@ -48,7 +48,12 @@ public class Zombie implements Mind {
 	
 	private void attackingThought()
 	{
+		Player p = Game.getCurrentGame().getPlayer();
 		
+		if (p.getBounds().intersects(e.getAttackBounds()))
+		{
+			e.attack();
+		}
 	}
 
 	private void movementThought() {

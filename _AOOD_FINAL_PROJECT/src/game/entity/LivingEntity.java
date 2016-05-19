@@ -34,8 +34,8 @@ public abstract class LivingEntity extends Entity {
 		animations = new ArrayList<Animation>();
 		toAnimations = new ArrayList<Animation>();
 		toAnimationsUsed = false;
-		setBounds(new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,LivingEntity.WIDTH,LivingEntity.HEIGHT));
-		hitBounds = new Rectangle((int)getLocation().getX()-50, (int)getLocation().getY()-50,(int)(LivingEntity.WIDTH*2),(int)(LivingEntity.HEIGHT*2));
+		setBounds(new Rectangle((int)getLocation().getX(), (int)getLocation().getY(),LivingEntity.WIDTH,LivingEntity.HEIGHT));
+		hitBounds = new Rectangle((int)getLocation().getX()-(int)(LivingEntity.WIDTH/4), (int)getLocation().getY()-LivingEntity.HEIGHT/4,(int)(LivingEntity.WIDTH*2),(int)(LivingEntity.HEIGHT*2));
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public abstract class LivingEntity extends Entity {
 	public abstract void attack();
 	
 	public void wasHit(int damage) {
-		health = health - damage;
+		health-= damage;
 		if(health < 0)
 			health = 0;
 	}
@@ -196,13 +196,13 @@ public abstract class LivingEntity extends Entity {
 	public void moveX(double amt) {
 		getLocation().setX(getLocation().getX() + amt);
 		getBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
-		getAttackBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
+		getAttackBounds().setLocation((int)getLocation().getX()-Player.WIDTH/2, (int)getLocation().getY()-Player.HEIGHT/2);
 	}
 
 	public void moveY(double amt) {
 		getLocation().setY(getLocation().getY() + amt);
 		getBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
-		getAttackBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
+		getAttackBounds().setLocation((int)getLocation().getX()-Player.WIDTH/2, (int)getLocation().getY()-Player.HEIGHT/2);
 	}
 
 	public Rectangle getAttackBounds() {
