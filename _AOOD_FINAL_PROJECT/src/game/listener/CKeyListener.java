@@ -63,6 +63,11 @@ public class CKeyListener extends KeyAdapter {
 		{
 			g.getCamera().setLocked(!g.getCamera().getLocked());
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_E)
+		{
+			g.getPlayer().attack();
+		}
 	}
 	
 	private void keyReleasedWorld(KeyEvent e)
