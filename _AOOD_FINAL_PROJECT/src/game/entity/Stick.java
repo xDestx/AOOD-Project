@@ -19,6 +19,9 @@ public class Stick extends Enemy{
 	public void wasHit()
 	{
 		health = health - 10;
+		if (health <= 0) {
+			System.out.println("Dead");
+		}
 	}
 	
 	public void render(Graphics g, int xo, int yo)

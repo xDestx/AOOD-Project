@@ -27,6 +27,7 @@ public class Game {
 	private Player p;
 	private Stick e;
 	private Level currentLevel;
+	private ArrayList<Enemy> enemies;
 
 	//aaaa
 	private static Game game;
@@ -56,6 +57,9 @@ public class Game {
 		this.addObject(p);
 		this.addObject(e);
 		t.addObject(c);
+		enemies = new ArrayList<Enemy>();
+		//idk where to put this line ^, but prob not here
+		enemies.add(e);
 		gs = GameState.WORLD;
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
 		cc.add(new Wall(1600,10,new Location(0,0)));
@@ -133,6 +137,10 @@ public class Game {
 	public Player getPlayer()
 	{
 		return p;
+	}
+	
+	public ArrayList<Enemy> getEnemies(){
+		return enemies;
 	}
 	
 	private void renderScreen() {

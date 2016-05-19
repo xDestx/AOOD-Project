@@ -44,7 +44,11 @@ public class Player extends Entity {
 	}
 
 	public void attack() {
-		
+		for (Enemy e : Game.getCurrentGame().getEnemies()){
+			if (this.getBounds().intersects(e.getBounds())){
+				e.wasHit();
+			}
+		}
 	}
 
 	// 1 = up
