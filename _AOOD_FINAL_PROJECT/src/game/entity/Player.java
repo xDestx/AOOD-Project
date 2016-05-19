@@ -124,6 +124,7 @@ public class Player extends Entity {
 				 * Check if colliding x / y then move
 				 */
 				//Check x
+				//k
 				double vx = velocity.getX();
 				double vy = velocity.getY();
 				if(c.getBounds().getMaxX() > getBounds().getMinX() || c.getBounds().getMinX() < getBounds().getMaxX())
