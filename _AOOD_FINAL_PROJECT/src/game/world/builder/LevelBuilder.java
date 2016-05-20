@@ -14,6 +14,11 @@ public class LevelBuilder {
 	private static ArrayList<Level>levels;
 	
 	
+	public static void main(String[] args)
+	{
+		LevelBuilderGUI a = new LevelBuilderGUI();
+	}
+	
 	
 	public static void init()
 	{
@@ -27,13 +32,13 @@ public class LevelBuilder {
 	{
 
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
-		cc.add(new Wall(2500,500,new Location(0,-500)));
-		cc.add(new Wall(900,2000, new Location(2500,0)));
-		cc.add(new Wall(900,1400, new Location(-900,-500)));
-		cc.add(new Wall(1600,10,new Location(0,890)));
-		cc.add(new Wall(900,900, new Location(800,890)));
-		Level levelOne = new Level(0,cc);
-		levels.add(levelOne);
+		cc.add(new Wall(1599,232, new Location(0,26)));
+		cc.add(new Wall(185,619, new Location(1407,257)));
+		cc.add(new Wall(1073,75, new Location(0,560)));
+		cc.add(new Wall(1408,46, new Location(0,840)));
+		cc.add(new Wall(21,645, new Location(0,248)));
+		Level level = new Level( 0, cc);
+		levels.add(level);
 	}
 	
 	public static Level getLevel(int i)
