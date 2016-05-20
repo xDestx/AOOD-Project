@@ -12,23 +12,27 @@ public class PlayerHitAnimation extends Animation {
 	private LivingEntity p;
 	private int x, y, r;
 	private double d;
+
 	/*
 	 * X / Y are the positions of the slice line
 	 */
-	public PlayerHitAnimation(LivingEntity livingEntity)
-	{
+	public PlayerHitAnimation(LivingEntity livingEntity) {
 		super(50);
 		this.p = livingEntity;
-		r = (int)( ((LivingEntity.HEIGHT + LivingEntity.WIDTH)/2)* 1.25 );
+		r = (int) (((LivingEntity.HEIGHT + LivingEntity.WIDTH) / 2) * 1.25);
 	}
-	
+
 	@Override
 	public void render(Graphics g, int xo, int yo) {
 		Color last = g.getColor();
 		g.setColor(Color.RED);
-		//xo , yo = origin
-		for(int i = 0; i < 10; i++)
-			g.drawLine(xo + LivingEntity.WIDTH/2 + i, yo + LivingEntity.HEIGHT/2 + i, xo + x + LivingEntity.WIDTH/2 + i , yo + y + LivingEntity.HEIGHT/2 + i);
+		// xo , yo = origin
+		for (int i = 0; i < 10; i++) {
+			g.drawLine(xo + LivingEntity.WIDTH / 2 + i, yo + LivingEntity.HEIGHT / 2 + i,
+					xo + x + LivingEntity.WIDTH / 2 + i, yo + y + LivingEntity.HEIGHT / 2 + i);
+			g.drawLine(xo + LivingEntity.WIDTH / 2 + i, yo + LivingEntity.HEIGHT / 2 + i,
+					xo + x*-1 + LivingEntity.WIDTH / 2 + i, yo + y*-1 + LivingEntity.HEIGHT / 2 + i);
+		}
 		g.setColor(last);
 	}
 
@@ -39,10 +43,11 @@ public class PlayerHitAnimation extends Animation {
 
 	@Override
 	protected void changeFrame() {
-		d = Math.toRadians(((double)getFrame() / (double)getTotalFrames()) * 360);
-		x = (int) (Math.cos(d) * r);
-		y = (int) (Math.sin(d) * r);
-		//System.out.println(d + "  " + x + "  " + y + "  " + r + " dist: " + (Math.sqrt(Math.pow((xo + Player.WIDTH/2) - (xo + x), 2) + Math.pow((yo + Player.HEIGHT/2) - (yo + y),2))));
+		double per = ((double) getFrame() / (double) getTotalFrames());
+		double per1 = Math.sin(Math.toRadians(per * 180));
+		d = Math.toRadians(per * 360);
+		x = (int) (Math.cos(d) * r * per1 );
+		y = (int) (Math.sin(d) * r * per1 );
 	}
 
 	@Override
