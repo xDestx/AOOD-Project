@@ -48,7 +48,6 @@ public class Stick extends Enemy{
 				Game.getCurrentGame().getPlayer().wasHit(strength);
 			}
 			addAnimation(new PlayerHitAnimation(this));
-			System.out.println("MEMES");
 			cooldownTicks = 0;
 		}
 	}
