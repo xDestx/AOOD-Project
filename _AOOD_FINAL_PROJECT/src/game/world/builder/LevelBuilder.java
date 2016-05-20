@@ -2,6 +2,7 @@ package game.world.builder;
 
 import java.util.ArrayList;
 
+import game.entity.Stick;
 import game.world.Collidable;
 import game.world.Level;
 import game.world.Location;
@@ -43,6 +44,10 @@ public class LevelBuilder {
 		cc.add(new Wall(790,420, new Location(2250,1375)));
 		cc.add(new Wall(790,770, new Location(2250,-50)));
 		Level level = new Level(0, cc);
+		
+		level.addEnemy(new Stick(new Location(2100,1100), 100, 10));
+		level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
+		level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
 
 
 
