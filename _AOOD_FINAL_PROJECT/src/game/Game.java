@@ -53,7 +53,6 @@ public class Game {
 		p = new Player(new Location(GFrame.WIDTH/2,GFrame.HEIGHT/2), 100);
 		this.addObject(p);
 		t.addObject(c);
-		//idk where to put this line ^, but prob not here
 		gs = GameState.WORLD;
 		LevelBuilder.init();
 		currentLevel = LevelBuilder.getLevel(0);

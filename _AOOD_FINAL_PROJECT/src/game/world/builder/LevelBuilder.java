@@ -2,6 +2,10 @@ package game.world.builder;
 
 import java.util.ArrayList;
 
+import game.entity.Collectible;
+import game.entity.Enemy;
+import game.entity.HealthPack;
+import game.entity.Stick;
 import game.world.Collidable;
 import game.world.Level;
 import game.world.Location;
@@ -38,6 +42,10 @@ public class LevelBuilder {
 		cc.add(new Wall(1408,46, new Location(0,840)));
 		cc.add(new Wall(21,645, new Location(0,248)));
 		Level level = new Level( 0, cc);
+		//Enemy e = new Stick(new Location(100,300), 10, 10);
+		//level.addEnemy(e);
+		Collectible hp = new HealthPack(new Location(100,300), 50);
+		level.addCollectible(hp);
 		levels.add(level);
 	}
 	

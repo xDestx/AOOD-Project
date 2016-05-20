@@ -7,6 +7,7 @@ import game.GFrame;
 import game.Game;
 import game.GameObject;
 import game.Renderable;
+import game.entity.Collectible;
 import game.entity.Enemy;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Level implements Renderable {
 	
     private ArrayList<Collidable> listOfCollidables;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Collectible> allCollectibles;
     private int id;
     private BufferedImage bi;
     private GroundPattern pattern;
@@ -32,6 +34,7 @@ public class Level implements Renderable {
         id = idNumber;
         l = new Location(0,0);
         enemies = new ArrayList<Enemy>();
+        allCollectibles = new ArrayList<Collectible>();
         try
         {
         	bi = ImageIO.read(getClass().getResourceAsStream("/images/grass_cool.png"));
@@ -45,6 +48,7 @@ public class Level implements Renderable {
     public Level(int idNumber, BufferedImage b){
         listOfCollidables = new ArrayList<Collidable>();
         enemies = new ArrayList<Enemy>();
+        allCollectibles = new ArrayList<Collectible>();
         id = idNumber;
         bi = b;
         pattern = new GroundPattern();
@@ -53,6 +57,7 @@ public class Level implements Renderable {
     public Level(int idNumber, ArrayList<Collidable> cs){
         listOfCollidables = cs;
         enemies = new ArrayList<Enemy>();
+        allCollectibles = new ArrayList<Collectible>();
         id = idNumber;
         try
         {
@@ -67,6 +72,7 @@ public class Level implements Renderable {
     public Level(int idNumber, BufferedImage b, ArrayList<Collidable> cs){
         listOfCollidables = cs;
         enemies = new ArrayList<Enemy>();
+        allCollectibles = new ArrayList<Collectible>();
         id = idNumber;
         bi = b;
         pattern = new GroundPattern();
@@ -85,9 +91,18 @@ public class Level implements Renderable {
         return enemies;
     }
     
+    public ArrayList<Collectible> getAllCollectibles(){
+    	return allCollectibles;
+    }
+    
     public void addEnemy(Enemy e)
     {
     	enemies.add(e);
+    }
+    
+    public void addCollectible(Collectible c)
+    {
+    	allCollectibles.add(c);
     }
 
 	@Override
