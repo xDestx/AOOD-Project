@@ -92,10 +92,6 @@ public class Player extends LivingEntity {
 	}
 
 
-	public void renderAnimation(Graphics g, int xo, int yo)
-	{
-		super.render(g, xo, yo);
-	}
 
 
 

@@ -66,6 +66,7 @@ public abstract class Enemy extends LivingEntity{
 	
 	@Override
 	public void tick() {
+		super.tick();
 		m.think();
 		movement();
 	}  
