@@ -13,9 +13,9 @@ import game.listener.CKeyListener;
 import game.util.Task;
 import game.world.Collidable;
 import game.world.Level;
-import game.world.LevelBuilder;
 import game.world.Location;
 import game.world.Wall;
+import game.world.builder.LevelBuilder;
 
 public class Game {
 

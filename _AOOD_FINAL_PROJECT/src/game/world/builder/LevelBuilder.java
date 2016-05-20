@@ -1,12 +1,18 @@
-package game.world;
+package game.world.builder;
 
 import java.util.ArrayList;
+
+import game.world.Collidable;
+import game.world.Level;
+import game.world.Location;
+import game.world.Wall;
 
 public class LevelBuilder {
 
 	private static boolean init = false;
 	
 	private static ArrayList<Level>levels;
+	
 	
 	
 	public static void init()
