@@ -223,7 +223,6 @@ class RectangleMouse extends MouseAdapter {
 			a.setTemp(new Rectangle(x,y,w,h));
 			a.setMouseP(new Point(e.getX(), e.getY()-25));
 			a.repaint();
-		//	System.out.println("nice meme dude");
 		}
 	}
 	

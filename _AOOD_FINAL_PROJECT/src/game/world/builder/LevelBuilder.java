@@ -32,12 +32,13 @@ public class LevelBuilder {
 	{
 
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
-		cc.add(new Wall(1599,232, new Location(0,26)));
-		cc.add(new Wall(185,619, new Location(1407,257)));
-		cc.add(new Wall(1073,75, new Location(0,560)));
-		cc.add(new Wall(1408,46, new Location(0,840)));
-		cc.add(new Wall(21,645, new Location(0,248)));
-		Level level = new Level( 0, cc);
+		cc.add(new Wall(1599,300, new Location(0,-300)));
+		cc.add(new Wall(380,874, new Location(-380,-300)));
+		cc.add(new Wall(1545,93, new Location(-380,574)));
+		cc.add(new Wall(183,105, new Location(982,700)));
+		Level level = new Level(0, cc);
+
+
 		levels.add(level);
 	}
 	
