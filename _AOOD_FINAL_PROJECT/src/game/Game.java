@@ -48,7 +48,6 @@ public class Game {
 		gf = new GFrame(this);
 		gf.setVisible(true);
 		gf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		c = new Camera(new Location(0,0),this);
 		t = new Ticker(this);
 		p = new Player(new Location(GFrame.WIDTH/2,GFrame.HEIGHT/2), 100);
