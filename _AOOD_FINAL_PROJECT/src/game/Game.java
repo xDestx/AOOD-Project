@@ -20,7 +20,7 @@ import game.world.Wall;
 public class Game {
 
 	private boolean playing;
-	public static final int TICK = 100;
+	public static final int TICK = 60;
 	private GFrame gf;
 	private Ticker t;
 	private Camera c;

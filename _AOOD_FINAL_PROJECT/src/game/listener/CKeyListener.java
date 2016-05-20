@@ -40,22 +40,22 @@ public class CKeyListener extends KeyAdapter {
 	{
 		if(e.getKeyCode() == KeyEvent.VK_D && !g.getPlayer().getHoriz())
 		{
-			g.getPlayer().getVelocity().setX(5);
+			g.getPlayer().getVelocity().setX(10);
 			g.getPlayer().setHoriz(true);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_A && !g.getPlayer().getHoriz())
 		{
-			g.getPlayer().getVelocity().setX(-5);
+			g.getPlayer().getVelocity().setX(-10);
 			g.getPlayer().setHoriz(true);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_W && !g.getPlayer().getVert())
 		{
-			g.getPlayer().getVelocity().setY(-5);
+			g.getPlayer().getVelocity().setY(-10);
 			g.getPlayer().setVert(true);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_S && !g.getPlayer().getVert())
 		{
-			g.getPlayer().getVelocity().setY(5);
+			g.getPlayer().getVelocity().setY(10);
 			g.getPlayer().setVert(true);
 		}
 		
