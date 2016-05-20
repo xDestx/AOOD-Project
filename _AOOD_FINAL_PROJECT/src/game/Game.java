@@ -21,7 +21,6 @@ public class Game {
 	private boolean playing;
 	public static final int TICK = 100;
 	private GFrame gf;
-	private Graphics graphics;
 	private Ticker t;
 	private Camera c;
 	private GameState gs;
@@ -47,7 +46,6 @@ public class Game {
 		playing = false;
 		gf = new GFrame(this);
 		gf.setVisible(true);
-		graphics = gf.getGraphics();
 		gf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		c = new Camera(new Location(0,0),this);
