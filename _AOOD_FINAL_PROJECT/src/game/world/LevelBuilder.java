@@ -22,6 +22,7 @@ public class LevelBuilder {
 
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
 		cc.add(new Wall(2500,500,new Location(0,-500)));
+		cc.add(new Wall(900,2000, new Location(2500,0)));
 		cc.add(new Wall(900,1400, new Location(-900,-500)));
 		cc.add(new Wall(1600,10,new Location(0,890)));
 		cc.add(new Wall(900,900, new Location(800,890)));
