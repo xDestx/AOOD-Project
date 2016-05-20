@@ -13,6 +13,7 @@ import game.listener.CKeyListener;
 import game.util.Task;
 import game.world.Collidable;
 import game.world.Level;
+import game.world.LevelBuilder;
 import game.world.Location;
 import game.world.Wall;
 
@@ -51,20 +52,12 @@ public class Game {
 		c = new Camera(new Location(0,0),this);
 		t = new Ticker(this);
 		p = new Player(new Location(GFrame.WIDTH/2,GFrame.HEIGHT/2), 100);
-		e = new Stick(new Location(GFrame.WIDTH - 100, GFrame.HEIGHT - 100), 100, 10);
 		this.addObject(p);
-		
 		t.addObject(c);
 		//idk where to put this line ^, but prob not here
 		gs = GameState.WORLD;
-		ArrayList<Collidable> cc = new ArrayList<Collidable>();
-		cc.add(new Wall(1600,10,new Location(0,0)));
-		cc.add(new Wall(10,900, new Location(0,0)));
-		cc.add(new Wall(1600,10,new Location(0,900)));
-		cc.add(new Wall(10,900, new Location(1600,10)));
-		cc.add(new Wall(200,200, new Location(300,300)));
-		currentLevel = new Level(0,cc);
-		currentLevel.addEnemy(e);
+		LevelBuilder.init();
+		currentLevel = LevelBuilder.getLevel(0);
 		gf.getCanvas().addKeyListener(new CKeyListener(this));
 	}
 	

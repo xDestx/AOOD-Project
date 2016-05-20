@@ -34,7 +34,7 @@ public class Level implements Renderable {
         enemies = new ArrayList<Enemy>();
         try
         {
-        	bi = ImageIO.read(getClass().getResourceAsStream("/images/grass.png"));
+        	bi = ImageIO.read(getClass().getResourceAsStream("/images/grass_cool.png"));
         } catch (Exception e)
         {
         	e.printStackTrace();
@@ -56,7 +56,7 @@ public class Level implements Renderable {
         id = idNumber;
         try
         {
-        	bi = ImageIO.read(getClass().getResourceAsStream("/images/grass.png"));
+        	bi = ImageIO.read(getClass().getResourceAsStream("/images/grass_cool.png"));
         } catch (Exception e)
         {
         	e.printStackTrace();

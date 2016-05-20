@@ -31,9 +31,6 @@ public class Camera extends WorldObject
     @Deprecated
     public void render(Graphics g, int x, int y)
     {
-    	g.setColor(Color.red);
-    	g.drawRect(x,y,GFrame.WIDTH,GFrame.HEIGHT);
-    	g.setColor(Color.black);
     }
 
     private void move()
