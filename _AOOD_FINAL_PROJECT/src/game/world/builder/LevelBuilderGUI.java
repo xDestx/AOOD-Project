@@ -208,7 +208,7 @@ class RectangleMouse extends MouseAdapter {
 	{
 		if (p2 != null)
 			p2 = null;
-		p1 = new Point(e.getX(), e.getY()-25);
+		p1 = new Point(e.getX(), e.getY());
 	}
 	
 	@Override
