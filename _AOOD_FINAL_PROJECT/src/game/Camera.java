@@ -57,4 +57,12 @@ public class Camera extends WorldObject
 	}
 	
 	
+	public static int[] calculateOffset(Location l)
+	{
+		int[] xy = new int[2];
+		xy[0] = ((int) (l.getX() - Game.getCurrentGame().getCamera().getLocation().getX()));
+		xy[1] = (int) (l.getY() - Game.getCurrentGame().getCamera().getLocation().getY());
+		return xy;
+	}
+	
 }

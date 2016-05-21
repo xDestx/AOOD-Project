@@ -45,14 +45,7 @@ public class Ticker {
 					toRemove.add(t);
 			}
 		}
-		for(GameObject go : g.getLevel().getEnemies())
-		{
-			go.tick();
-		}
-		for(GameObject go : g.getLevel().getAllCollectibles())
-		{
-			go.tick();
-		}
+		Game.getCurrentGame().getLevel().tick();
 		for(Task t : toRemove)
 		{
 			objs.remove(t);
@@ -68,16 +61,7 @@ public class Ticker {
 	 */
 	public void render(Graphics g, Camera c)
 	{
-		this.g.getLevel().render(g, 0,0);
-		for (Collidable r : this.g.getLevel().getListOfCollidables())
-		{
-			if(r.getBounds().intersects(c.getViewBounds()))
-			{
-				int x = ((int)(r.getBounds().getLocation().getX() - c.getLocation().getX()));
-				int y = (int)(r.getBounds().getLocation().getY() - c.getLocation().getY());
-				r.render(g,x,y);
-			}
-		}
+		this.g.getLevel().render(g,0,0);
 		for (GameObject go : objs)
 		{
 			if (go instanceof Renderable)
@@ -85,43 +69,15 @@ public class Ticker {
 				Renderable r = (Renderable)go;
 				if(r.getBounds().intersects(c.getViewBounds()))
 				{
-					int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
-					int y = (int)(r.getLocation().getY() - c.getLocation().getY());
-					r.render(g,x,y);
-				}
-			}
-		}
-		for (GameObject go : this.g.getLevel().getEnemies())
-		{
-			if (go instanceof Renderable)
-			{
-				Renderable r = (Renderable)go;
-				if(r.getBounds().intersects(c.getViewBounds()))
-				{
-					int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
-					int y = (int)(r.getLocation().getY() - c.getLocation().getY());
-					r.render(g,x,y);
-				}
-			}
-		}
-		for (GameObject go : this.g.getLevel().getAllCollectibles())
-		{
-			if (go instanceof Renderable)
-			{
-				Renderable r = (Renderable)go;
-				if(r.getBounds().intersects(c.getViewBounds()))
-				{
-					int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
-					int y = (int)(r.getLocation().getY() - c.getLocation().getY());
-					r.render(g,x,y);
+					int[] xy = Camera.calculateOffset(r.getLocation());
+					r.render(g, xy[0], xy[1]);
 				}
 			}
 		}
 		for (Renderable r : rendrs)
 		{
-			int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
-			int y = (int)(r.getLocation().getY() - c.getLocation().getY());
-			r.render(g,x,y);
+			int[] xy = Camera.calculateOffset(r.getLocation());
+			r.render(g, xy[0], xy[1]);
 		}
 		//drawPlayerAttackBound(g,c);
 	}
