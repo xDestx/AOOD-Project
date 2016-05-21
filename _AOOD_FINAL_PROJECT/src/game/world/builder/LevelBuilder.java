@@ -2,6 +2,9 @@ package game.world.builder;
 
 import java.util.ArrayList;
 
+import game.entity.Collectible;
+import game.entity.Enemy;
+import game.entity.HealthPack;
 import game.entity.Stick;
 import game.world.Collidable;
 import game.world.Level;

@@ -68,6 +68,7 @@ public class CKeyListener extends KeyAdapter {
 		{
 			g.getPlayer().attack();
 		}
+		
 	}
 	
 	private void keyReleasedWorld(KeyEvent e)

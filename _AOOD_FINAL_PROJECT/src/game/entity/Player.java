@@ -20,29 +20,6 @@ public class Player extends LivingEntity {
 		this.maxHealth = health;
 	}
 	
-
-	// 1 = up
-	// 2 = left
-	// 3 = down
-	// 4 = right
-	/*public void move(int direction) {
-		if (this.canMove(direction)) {
-			if (direction == 1) {
-				Location newLoc = new Location(l.getX(), l.getY() - 10);
-				this.l = newLoc;
-			} else if (direction == 2) {
-				Location newLoc = new Location(l.getX() - 10, l.getY());
-				this.l = newLoc;
-			} else if (direction == 3) {
-				Location newLoc = new Location(l.getX(), l.getY() + 10);
-				this.l = newLoc;
-			} else if (direction == 4) {
-				Location newLoc = new Location(l.getX() + 10, l.getY());
-				this.l = newLoc;
-			}
-		}
-	}*/
-	
 	public void setVert(boolean b)
 	{
 		this.vertMod = b;
