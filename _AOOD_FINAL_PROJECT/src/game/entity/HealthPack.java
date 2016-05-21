@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Game;
+import game.util.Task;
 import game.world.Location;
 
 public class HealthPack extends Collectible{
@@ -30,6 +31,18 @@ public class HealthPack extends Collectible{
 	}
 	
 	public void tick(){
-		//nothing yet
+		if(Game.getCurrentGame().getPlayer().getBounds().intersects(getBounds()))
+		{
+			effect();
+			final Collectible c = this;
+			Task t = new Task(1) {
+			@Override
+			public void run()
+			{
+				Game.getCurrentGame().getLevel().removeCollectible(c);
+			}
+			};
+			Game.getCurrentGame().addTask(t);
+		}
 	}
 }

@@ -49,7 +49,10 @@ public class Ticker {
 		{
 			go.tick();
 		}
-		
+		for(GameObject go : g.getLevel().getAllCollectibles())
+		{
+			go.tick();
+		}
 		for(Task t : toRemove)
 		{
 			objs.remove(t);

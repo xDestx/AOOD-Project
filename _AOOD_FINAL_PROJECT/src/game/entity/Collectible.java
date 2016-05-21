@@ -16,7 +16,4 @@ public abstract class Collectible extends Entity{
 	public abstract void effect();
 	
 	
-	public void tick()
-	{
-	}
 }
