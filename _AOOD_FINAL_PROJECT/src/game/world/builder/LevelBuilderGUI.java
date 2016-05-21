@@ -14,6 +14,9 @@ import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import game.Camera;
+import game.world.Location;
+
 public class LevelBuilderGUI extends JFrame {
 
 	/**
@@ -24,11 +27,13 @@ public class LevelBuilderGUI extends JFrame {
 	private JPanel p;
 	private Rectangle tempR;
 	private Point mouseP;
+	private Camera c;
 	
 	//I'm gonna try to use this to build everything
 	//It will *not* pick textures (lazy)
 	public LevelBuilderGUI() {
 		super("Level Builder GUI");
+		c = new Camera(new Location(0,0), null);
 		this.setSize(1600,900);
 		this.setResizable(false);
 		RectangleKeys rk = new RectangleKeys(this);
@@ -50,7 +55,13 @@ public class LevelBuilderGUI extends JFrame {
 				Graphics2D g2 = (Graphics2D)g;
 				for (Rectangle r : history)
 				{
-					g2.fill(r);
+					if(r.getBounds().intersects(c.getViewBounds()))
+					{
+						int x = ((int)(r.getBounds().getLocation().getX() - c.getLocation().getX()));
+						int y = (int)(r.getBounds().getLocation().getY() - c.getLocation().getY());
+						g2.fillRect(x,y,(int)r.getWidth(),(int)r.getHeight());
+					}
+					
 				}
 				if (tempR != null)
 					g2.draw(tempR);
@@ -58,6 +69,7 @@ public class LevelBuilderGUI extends JFrame {
 				{
 					g2.setColor(Color.red);
 					g2.fillRect((int)mouseP.getX(), (int)mouseP.getY(), 8, 8);
+					g2.drawString((mouseP.getX() + c.getLocation().getX())+ ", " + (mouseP.getY() + c.getLocation().getY()), (int)mouseP.getX(), (int)mouseP.getY());
 				}
 			}
 			
@@ -67,6 +79,11 @@ public class LevelBuilderGUI extends JFrame {
 		history = new Stack<Rectangle>();
 	}
 
+	public Camera getCamera()
+	{
+		return c;
+	}
+	
 	public JPanel getJPanel()
 	{
 		return p;
@@ -148,6 +165,28 @@ class RectangleKeys extends KeyAdapter {
 		} else if (e.getKeyCode() == KeyEvent.VK_Z && e.isControlDown())
 		{
 			a.undo();
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			a.getCamera().getLocation().setX(a.getCamera().getLocation().getX()+5);
+			a.getCamera().getBounds().setLocation(a.getCamera().getLocation().toPoint());
+			a.repaint();
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			a.getCamera().getLocation().setX(a.getCamera().getLocation().getX()-5);
+			a.getCamera().getBounds().setLocation(a.getCamera().getLocation().toPoint());
+			a.repaint();
+		} else if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			a.getCamera().getLocation().setY(a.getCamera().getLocation().getY()-5);
+
+			a.getCamera().getBounds().setLocation(a.getCamera().getLocation().toPoint());
+			a.repaint();
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			a.getCamera().getLocation().setY(a.getCamera().getLocation().getY()+5);
+
+			a.getCamera().getBounds().setLocation(a.getCamera().getLocation().toPoint());
+			a.repaint();
 		}
 	}
 	
@@ -169,7 +208,7 @@ class RectangleMouse extends MouseAdapter {
 	{
 		if (p2 != null)
 			p2 = null;
-		p1 = e.getPoint();
+		p1 = new Point(e.getX(), e.getY());
 	}
 	
 	@Override
@@ -180,17 +219,17 @@ class RectangleMouse extends MouseAdapter {
 			int w = (int)Math.abs(e.getPoint().getX() - p1.getX());
 			int h = (int)Math.abs(e.getPoint().getY() - p1.getY());
 			int x = (p1.getX() < e.getPoint().getX()) ? (int)p1.getX():(int)e.getPoint().getX();
-			int y = (p1.getY() < e.getPoint().getY()) ? (int)p1.getY():(int)e.getPoint().getY();
+			int y = (p1.getY()-25 < e.getPoint().getY()-25) ? (int)p1.getY()-25:(int)e.getPoint().getY()-25;
 			a.setTemp(new Rectangle(x,y,w,h));
+			a.setMouseP(new Point(e.getX(), e.getY()-25));
 			a.repaint();
-		//	System.out.println("nice meme dude");
 		}
 	}
 	
 	@Override
 	public void mouseMoved(MouseEvent e)
 	{
-		a.setMouseP(e.getPoint());
+		a.setMouseP(new Point(e.getX(), e.getY()-25));
 		a.repaint();
 	}
 	
@@ -204,8 +243,8 @@ class RectangleMouse extends MouseAdapter {
 		{
 			int w = (int)Math.abs(p2.getX() - p1.getX());
 			int h = (int)Math.abs(p2.getY() - p1.getY());
-			int x = (p1.getX() < p2.getX()) ? (int)p1.getX():(int)p2.getX();
-			int y = (p1.getY() < p2.getY()) ? (int)p1.getY():(int)p2.getY();
+			int x = (p1.getX() < p2.getX()) ? (int)p1.getX()+(int)a.getCamera().getLocation().getX():(int)p2.getX()+(int)a.getCamera().getLocation().getX();
+			int y = (p1.getY()-25 < p2.getY()-25) ? (int)p1.getY()+(int)a.getCamera().getLocation().getY()-25:(int)p2.getY()+(int)a.getCamera().getLocation().getY()-25;
 			if (w == 0 || h == 0)
 			{
 				p1 = null;

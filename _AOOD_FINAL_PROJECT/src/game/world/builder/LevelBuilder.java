@@ -36,16 +36,24 @@ public class LevelBuilder {
 	{
 
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
-		cc.add(new Wall(1599,232, new Location(0,26)));
-		cc.add(new Wall(185,619, new Location(1407,257)));
-		cc.add(new Wall(1073,75, new Location(0,560)));
-		cc.add(new Wall(1408,46, new Location(0,840)));
-		cc.add(new Wall(21,645, new Location(0,248)));
-		Level level = new Level( 0, cc);
-		//Enemy e = new Stick(new Location(100,300), 10, 10);
-		//level.addEnemy(e);
-		Collectible hp = new HealthPack(new Location(100,300), 50);
-		level.addCollectible(hp);
+		cc.add(new Wall(1600,300, new Location(0,-300)));
+		cc.add(new Wall(800,800, new Location(-800,-300)));
+		cc.add(new Wall(1600,300, new Location(-800,500)));
+		cc.add(new Wall(900,600, new Location(-90,800)));
+		cc.add(new Wall(650,1020, new Location(1600,-300)));
+		cc.add(new Wall(1900,400, new Location(-90,1400)));
+		cc.add(new Wall(470,360, new Location(1800,1400)));
+		cc.add(new Wall(800,660, new Location(2250,720)));
+		cc.add(new Wall(790,420, new Location(2250,1375)));
+		cc.add(new Wall(790,770, new Location(2250,-50)));
+		Level level = new Level(0, cc);
+		
+		level.addEnemy(new Stick(new Location(2100,1100), 100, 10));
+		level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
+		level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
+
+
+
 		levels.add(level);
 	}
 	

@@ -1,5 +1,6 @@
 package game.world;
 
+import java.awt.Point;
 import java.io.Serializable;
 
 public class Location implements Serializable
@@ -37,6 +38,11 @@ public class Location implements Serializable
     {
     	this.x = l.getX();
     	this.y = l.getY();
+    }
+    
+    public Point toPoint()
+    {
+    	return new Point((int)x,(int)y);
     }
     
     @Override
