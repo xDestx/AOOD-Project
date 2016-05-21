@@ -101,6 +101,19 @@ public class Ticker {
 				}
 			}
 		}
+		for (GameObject go : this.g.getLevel().getAllCollectibles())
+		{
+			if (go instanceof Renderable)
+			{
+				Renderable r = (Renderable)go;
+				if(r.getBounds().intersects(c.getViewBounds()))
+				{
+					int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));
+					int y = (int)(r.getLocation().getY() - c.getLocation().getY());
+					r.render(g,x,y);
+				}
+			}
+		}
 		for (Renderable r : rendrs)
 		{
 			int x = ((int)(r.getLocation().getX() - c.getLocation().getX()));

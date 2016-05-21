@@ -16,6 +16,7 @@ public abstract class Entity extends GameObject implements Renderable
 	public Entity(Location l)
 	{
 		this.l = l;
+		bounds = new Rectangle((int)l.getX(),(int)l.getY(),10,10);
 	}
 	
     public abstract void render(Graphics g, int xo, int yo);

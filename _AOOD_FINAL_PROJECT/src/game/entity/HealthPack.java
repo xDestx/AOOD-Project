@@ -24,7 +24,7 @@ public class HealthPack extends Collectible{
 	public void render(Graphics g, int xo, int yo)
 	{
 		Color block = g.getColor();
-		g.setColor(Color.GRAY);
+		g.setColor(Color.GREEN);
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
 		g.setColor(block);
 	}

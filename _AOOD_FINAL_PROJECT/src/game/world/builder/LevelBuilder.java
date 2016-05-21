@@ -51,7 +51,7 @@ public class LevelBuilder {
 		level.addEnemy(new Stick(new Location(2100,1100), 100, 10));
 		level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
 		level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
-
+		level.addCollectible(new HealthPack(new Location(1800,1300), 10));
 
 
 		levels.add(level);
