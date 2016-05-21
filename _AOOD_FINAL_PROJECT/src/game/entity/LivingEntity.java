@@ -139,6 +139,8 @@ public abstract class LivingEntity extends Entity {
 			{
 				/*
 				 * Check if colliding x / y then move!
+				 * 
+				 * I want to make it so you are placed against the object somehow ??
 				 */
 				//Check x
 				double vx = velocity.getX();
@@ -154,6 +156,7 @@ public abstract class LivingEntity extends Entity {
 					moveY(vy * -1);
 					velocity.setY(0);
 					moveX(vx);
+					//Recheck x
 					if(c.collide(getBounds()))
 					{
 						moveX(vx * -1);

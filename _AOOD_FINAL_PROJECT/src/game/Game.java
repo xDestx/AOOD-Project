@@ -26,7 +26,6 @@ public class Game {
 	private Camera c;
 	private GameState gs;
 	private Player p;
-	private Stick e;
 	private Level currentLevel;
 
 	//aaaa
