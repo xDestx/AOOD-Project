@@ -1,9 +1,42 @@
 package game.world.builder;
 
+import java.util.ArrayList;
+
 import game.world.Level;
+import game.world.dungeon.Dungeon;
 
 public class LevelGenerator {
 
+	public static void main(String[] args)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			int seed = LevelGenerator.generateSeed();
+			while(seed == 0)
+				seed = LevelGenerator.generateSeed();
+			double num = (seed%(seed/256));
+			num/=(seed*.000001);
+			int MIN = (int) (Math.pow(1800, 2));
+			int MAX = (int) (Math.pow(1800*4, 2));
+			num = (MAX-MIN) * num;
+			num+=MIN;
+			System.out.println("Area: " + num/10);
+			num = Math.sqrt(num);
+			System.out.println(num + "   " + seed);
+		}
+	}
+	
+	public static int generateSeed()
+	{
+		int x = 0;
+		String s = "";
+		for (int i = 0; i < 9; i++)
+		{
+			s+=(int)(Math.random() * 9)+1;
+		}
+		x = Integer.parseInt(s);
+		return x;
+	}
 	
 	public static Level generateLevel(int seed)
 	{
@@ -31,8 +64,50 @@ public class LevelGenerator {
 	
 	private static void generateDungeons(Level l, int seed)
 	{
+		int numOfDungeons = (seed%(int)(seed/(10000000)))/2;
+		if (numOfDungeons < 5)
+		{
+			numOfDungeons = 5;
+		} else if (numOfDungeons > 25)
+		{
+			numOfDungeons = 25;
+		}
+		final int MIN_SIZE = 1800;
+		final int MAX_SIZE = 1800*4;
+		int remainingArea = (int) (Level.HEIGHT * Level.WIDTH * 0.5);
+		//Half of the remaining area is dedicated to everything else
+		//50% of the total area is dedicated to dungeons, but dungeons may not use all of this area
+		ArrayList<Dungeon> dungeons = new ArrayList<Dungeon>();
+		
+		for (int i = 0; i < numOfDungeons; i++)
+		{
+			Dungeon d = generateDungeon(seed,remainingArea,MAX_SIZE,MIN_SIZE);
+			if (d != null)
+			{
+				dungeons.add(d);
+				remainingArea-=d.getArea();
+			}
+		}
 		
 	}
+	
+	
+	private static Dungeon generateDungeon(int seed, int remainingArea, int MAX_SIZE, int MIN_SIZE)
+	{
+		int x_location;
+		int y_location;
+	//	int size = ();
+		//Dungeon d = new Dungeon(new Location(x,y), );		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
 	
 	private static void generateNature(Level l, int seed)
 	{
