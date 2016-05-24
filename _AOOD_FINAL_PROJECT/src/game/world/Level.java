@@ -20,8 +20,13 @@ import java.awt.image.BufferedImage;
 
 public class Level extends GameObject implements Renderable {
 
-	// To implement serializable later
-
+	public static int HEIGHT = 13500, WIDTH = 24000;
+	
+	/*
+	 * Idea: Procedural Generation to generate worlds using a seed
+	 */
+	
+	
 	private ArrayList<Collidable> listOfCollidables;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectible> allCollectibles;
