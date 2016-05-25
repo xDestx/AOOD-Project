@@ -3,6 +3,7 @@ package game.world.builder;
 import java.util.ArrayList;
 
 import game.world.Level;
+import game.world.Location;
 import game.world.dungeon.Dungeon;
 
 public class LevelGenerator {
@@ -20,7 +21,7 @@ public class LevelGenerator {
 			int MAX = (int) (Math.pow(1800*4, 2));
 			num = (MAX-MIN) * num;
 			num+=MIN;
-			System.out.println("Area: " + num/10);
+			System.out.println("Area: " + (int)(num/10));
 			num = Math.sqrt(num);
 			System.out.println(num + "   " + seed);
 		}
@@ -87,6 +88,8 @@ public class LevelGenerator {
 				dungeons.add(d);
 				remainingArea-=d.getArea();
 			}
+			if (remainingArea < (Math.pow(MIN_SIZE, 2)))
+				break;
 		}
 		
 	}
@@ -96,13 +99,18 @@ public class LevelGenerator {
 	{
 		int x_location;
 		int y_location;
-	//	int size = ();
-		//Dungeon d = new Dungeon(new Location(x,y), );		
+		double length = (seed%(seed/256));
+		length/=(seed*.000001);
+		length = (remainingArea - MIN_SIZE) * length;
+		length+=MIN_SIZE;
+		length = Math.sqrt(length);
+//		x__location = 
+		//Dungeon d = new Dungeon(new Location(x,y), (int)length,(int)length);		
 		
 		
 		return null;
 	}
-	
+
 	
 	
 	
