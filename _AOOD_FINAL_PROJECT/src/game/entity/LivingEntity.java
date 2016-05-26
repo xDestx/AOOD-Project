@@ -210,6 +210,10 @@ public abstract class LivingEntity extends Entity {
 	public Rectangle getAttackBounds() {
 		return hitBounds;
 	}
+	
+	public void setAttackBounds(Rectangle hitBounds){
+		this.hitBounds = hitBounds;
+	}
 
 	
 }

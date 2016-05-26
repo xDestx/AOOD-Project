@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import game.Game;
 import game.ai.Mind;
+import game.ai.enemy.Shooter;
 import game.ai.enemy.Zombie;
 import game.world.Collidable;
 import game.world.Location;
@@ -16,7 +17,6 @@ import java.util.LinkedList;
 
 public abstract class Enemy extends LivingEntity{
 
-	protected Mind m;
 	protected int health, strength, maxHealth;
 	protected int enemyid;
 	
@@ -26,7 +26,7 @@ public abstract class Enemy extends LivingEntity{
 		this.health = health;
 		this.maxHealth = health;
 		this.strength = strength;
-		m = new Zombie(this);
+		this.setAttackBounds(new Rectangle((int)getLocation().getX() - 100,(int) getLocation().getY() - 100, 200, 200));
 		velocity = new Vector(0,0);
 	}
 
@@ -67,7 +67,6 @@ public abstract class Enemy extends LivingEntity{
 	@Override
 	public void tick() {
 		super.tick();
-		m.think();
 		movement();
 	}  
 	

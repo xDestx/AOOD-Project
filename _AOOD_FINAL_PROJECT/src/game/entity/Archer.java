@@ -1,48 +1,31 @@
 package game.entity;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import game.Game;
 import game.ai.Mind;
-import game.ai.enemy.Zombie;
-import game.graphic.Animation;
+import game.ai.enemy.Shooter;
 import game.graphic.PlayerHitAnimation;
-import game.util.Task;
 import game.world.Location;
 
-public class Stick extends Enemy{
-
+public class Archer extends Enemy{
+	
 	protected Mind m;
 	private int cooldownTicks;
 	//for attacking
 	private int cooldownTicksDefault;
 	
-	public Stick(Location l, int health, int strength){
-		super(l,  health,  strength);
+	public Archer(Location l, int health, int strength)
+	{
+		super(l, health, strength);
+		m = new Shooter(this);
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
-		m = new Zombie(this);
+		//only increases down and to the left, can't get more up + right
+		setAttackBounds(new Rectangle(((int)getLocation().getX() + 1000), ((int)getLocation().getY() - 1000), -1000, -1000));
 		cooldownTicksDefault = 100;
 		cooldownTicks = cooldownTicksDefault;
 	}
 	
-	public void addAnimation(final Animation a)
-	{
-		if(!toAnimationsUsed)
-			this.toAnimations.add(a);
-		else {
-			Game.getCurrentGame().addObject(new Task(1)
-					{
-				@Override
-				public void run()
-				{
-					addAnimation(a);
-				}
-					});
-		}
-	}
-
 	@Override
 	public void attack() {
 		if(cooldownTicks >= cooldownTicksDefault)
@@ -56,16 +39,11 @@ public class Stick extends Enemy{
 		}
 	}
 	
-
-	
 	public void tick()
 	{
 		super.tick();
 		m.think();
 		cooldownTicks++;
 	}
-	
-
-
 
 }
