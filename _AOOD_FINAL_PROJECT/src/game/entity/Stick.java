@@ -27,6 +27,14 @@ public class Stick extends Enemy{
 		cooldownTicks = cooldownTicksDefault;
 	}
 	
+	public Stick()
+	{
+		super(new Location(0,0),100,100);
+		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
+		cooldownTicksDefault = 100;
+		cooldownTicks = cooldownTicksDefault;
+	}
+	
 	public void addAnimation(final Animation a)
 	{
 		if(!toAnimationsUsed)

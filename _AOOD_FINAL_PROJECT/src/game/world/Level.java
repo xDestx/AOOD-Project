@@ -30,6 +30,7 @@ public class Level extends GameObject implements Renderable {
 	private ArrayList<Collidable> listOfCollidables;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectible> allCollectibles;
+	private ArrayList<WorldObject> worldObjects;
 	private int id;
 	private BufferedImage bi;
 	private GroundPattern pattern;
@@ -47,6 +48,7 @@ public class Level extends GameObject implements Renderable {
 			e.printStackTrace();
 		}
 		pattern = new GroundPattern();
+		worldObjects = new ArrayList<WorldObject>();
 	}
 
 	public Level(int idNumber, BufferedImage b) {
@@ -56,6 +58,7 @@ public class Level extends GameObject implements Renderable {
 		id = idNumber;
 		bi = b;
 		pattern = new GroundPattern();
+		worldObjects = new ArrayList<WorldObject>();
 	}
 
 	public Level(int idNumber, ArrayList<Collidable> cs) {
@@ -69,6 +72,7 @@ public class Level extends GameObject implements Renderable {
 			e.printStackTrace();
 		}
 		pattern = new GroundPattern();
+		worldObjects = new ArrayList<WorldObject>();
 	}
 
 	public Level(int idNumber, BufferedImage b, ArrayList<Collidable> cs) {
@@ -77,6 +81,7 @@ public class Level extends GameObject implements Renderable {
 		allCollectibles = new ArrayList<Collectible>();
 		id = idNumber;
 		bi = b;
+		worldObjects = new ArrayList<WorldObject>();
 		pattern = new GroundPattern();
 	}
 
@@ -85,11 +90,43 @@ public class Level extends GameObject implements Renderable {
 	}
 
 	public ArrayList<Collidable> getListOfCollidables() {
-		return listOfCollidables;
+		ArrayList<Collidable> newList = new ArrayList<Collidable>();
+		newList.addAll(listOfCollidables);
+		for(Enemy e : enemies)
+		{
+			if (e instanceof Collidable)
+			{
+				newList.add((Collidable)e);
+			}
+		}
+		
+		for(Collectible e : allCollectibles)
+		{
+			if (e instanceof Collidable)
+			{
+				newList.add((Collidable)e);
+			}
+		}
+		
+		for(WorldObject e : worldObjects)
+		{
+			if (e instanceof Collidable)
+			{
+				newList.add((Collidable)e);
+			}
+		}
+		return newList;
 	}
 
 	public ArrayList<Enemy> getEnemies() {
 		return enemies;
+	}
+	
+	
+	
+	public ArrayList<WorldObject> getWorldObjects()
+	{
+		return worldObjects;
 	}
 
 	public ArrayList<Collectible> getAllCollectibles() {
@@ -98,6 +135,11 @@ public class Level extends GameObject implements Renderable {
 
 	public void addEnemy(Enemy e) {
 		enemies.add(e);
+	}
+	
+	public void addWorldObject(WorldObject o)
+	{
+		this.worldObjects.add(o);
 	}
 
 	public void addCollectible(Collectible c) {
@@ -147,12 +189,23 @@ public class Level extends GameObject implements Renderable {
 		// Draw WorldObjects
 		renderCollides(g, x, y);
 		renderEnemies(g, x, y);
+		renderWorldObjects(g,x,y);
 		renderCollectibles(g, x, y);
 	}
 
 	private void renderCollectibles(Graphics g, int xo, int yo) {
 		Camera c = Game.getCurrentGame().getCamera();
 		for (Collectible r : getAllCollectibles()) {
+			if (r.getBounds().intersects(c.getViewBounds())) {
+				int[] xy = Camera.calculateOffset(r.getLocation());
+				r.render(g, xy[0], xy[1]);
+			}
+		}
+	}
+	
+	private void renderWorldObjects(Graphics g, int xo, int yo) {
+		Camera c = Game.getCurrentGame().getCamera();
+		for (WorldObject r : getWorldObjects()) {
 			if (r.getBounds().intersects(c.getViewBounds())) {
 				int[] xy = Camera.calculateOffset(r.getLocation());
 				r.render(g, xy[0], xy[1]);
@@ -184,6 +237,10 @@ public class Level extends GameObject implements Renderable {
 	public void removeEnemy(Enemy e) {
 		enemies.remove(e);
 	}
+	
+	public void removeWorldObject(WorldObject e) {
+		worldObjects.remove(e);
+	}
 
 	public void removeCollectible(Collectible e) {
 		allCollectibles.remove(e);
@@ -204,12 +261,19 @@ public class Level extends GameObject implements Renderable {
 	@Override
 	public void tick() {
 		tickEnemies();
+		tickWObjs();
 		// tickCollides();
 		tickCollects();
 	}
 
 	private void tickEnemies() {
 		for (Enemy go : getEnemies()) {
+			go.tick();
+		}
+	}
+	
+	private void tickWObjs() {
+		for (WorldObject go : getWorldObjects()) {
 			go.tick();
 		}
 	}

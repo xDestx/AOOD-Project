@@ -3,13 +3,16 @@ package game.world.builder;
 import java.util.ArrayList;
 
 import game.entity.Archer;
+import game.Game;
 import game.entity.Collectible;
 import game.entity.Enemy;
 import game.entity.HealthPack;
+import game.entity.EnemyType;
 import game.entity.Stick;
 import game.world.Collidable;
 import game.world.Level;
 import game.world.Location;
+import game.world.EnemySpawn;
 import game.world.Wall;
 
 public class LevelBuilder {
@@ -53,7 +56,7 @@ public class LevelBuilder {
 		//level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
 		//level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
 		level.addCollectible(new HealthPack(new Location(1800,1300), 10));
-
+level.addWorldObject(new EnemySpawn(new Location(1500,1100), 5*Game.TICK, EnemyType.STICK));
 
 		levels.add(level);
 	}

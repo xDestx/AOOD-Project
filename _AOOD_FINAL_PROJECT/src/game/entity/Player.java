@@ -11,13 +11,45 @@ public class Player extends LivingEntity {
 	
 	
 	private boolean vertMod,horizMod;
+	private int xp;
 	//Check if horizontal / vertical keys are being held.
-	
+	public static int getMaxLevel()
+	{
+		return 20;
+	}
 	
 	public Player(Location l, int health) {
 		super(l);
 		this.health = health;
 		this.maxHealth = health;
+		xp = 0;
+	}
+	
+	public int getXP()
+	{
+		return this.xp;
+	}
+	
+	public void setXP(int xp)
+	{
+		this.xp=xp;
+	}
+	
+	public void addXP(int xp)
+	{
+		this.xp+=xp;
+	}
+	
+	public int getLevel()
+	{
+		for (int i = Player.getMaxLevel(); i >= 1; i--)
+		{
+			if(getXP() / (i*100 + ((i-1) * 10)) >= 1)
+			{
+				return i+1;
+			}
+		}
+		return 1;
 	}
 	
 	public void setVert(boolean b)
