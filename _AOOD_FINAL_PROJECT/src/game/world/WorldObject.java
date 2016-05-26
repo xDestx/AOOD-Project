@@ -8,7 +8,7 @@ import game.Renderable;
 
 public abstract class WorldObject extends GameObject implements Renderable
 {
-    private Location l;
+    protected Location l;
     protected Rectangle bounds;
 
     public WorldObject()

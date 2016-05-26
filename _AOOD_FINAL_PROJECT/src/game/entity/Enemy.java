@@ -19,6 +19,7 @@ public abstract class Enemy extends LivingEntity{
 	protected Mind m;
 	protected int health, strength, maxHealth;
 	protected int enemyid;
+	public static final int MAX_HP = 4500, MAX_STRENGTH = 750;
 	
 	public Enemy(Location l, int health, int strength)
 	{
@@ -54,6 +55,11 @@ public abstract class Enemy extends LivingEntity{
 		g.setColor(c);
     }
 	
+	public void setStrength(int s)
+	{
+		this.strength=s;
+	}
+	
 
 
 /*
@@ -69,6 +75,15 @@ public abstract class Enemy extends LivingEntity{
 		super.tick();
 		m.think();
 		movement();
+	}
+
+
+	public static Enemy create(EnemyType e) {
+		if(e == EnemyType.STICK)
+		{
+			return new Stick();
+		}
+		return null;
 	}  
 	
 }
