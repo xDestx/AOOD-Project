@@ -33,6 +33,7 @@ public class Stick extends Enemy{
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
 		cooldownTicksDefault = 100;
 		cooldownTicks = cooldownTicksDefault;
+		m = new Zombie(this);
 	}
 	
 	public void addAnimation(final Animation a)
