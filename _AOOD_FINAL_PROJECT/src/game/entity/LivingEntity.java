@@ -195,16 +195,21 @@ public abstract class LivingEntity extends Entity {
 		}
 	}
 	
+	public void setAttackBoundsL(int x, int y)
+	{
+		getAttackBounds().setLocation(x,y);
+	}
+	
 	public void moveX(double amt) {
 		getLocation().setX(getLocation().getX() + amt);
 		getBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
-		getAttackBounds().setLocation((int)getLocation().getX()-Player.WIDTH/2, (int)getLocation().getY()-Player.HEIGHT/2);
+		setAttackBoundsL((int)getLocation().getX()-Player.WIDTH/2, (int)getLocation().getY()-Player.HEIGHT/2);
 	}
 
 	public void moveY(double amt) {
 		getLocation().setY(getLocation().getY() + amt);
 		getBounds().setLocation((int)getLocation().getX(), (int)getLocation().getY());
-		getAttackBounds().setLocation((int)getLocation().getX()-Player.WIDTH/2, (int)getLocation().getY()-Player.HEIGHT/2);
+		setAttackBoundsL((int)getLocation().getX()-Player.WIDTH/2, (int)getLocation().getY()-Player.HEIGHT/2);
 	}
 
 	public Rectangle getAttackBounds() {

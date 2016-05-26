@@ -20,8 +20,7 @@ public class Archer extends Enemy{
 		super(l, health, strength);
 		m = new Shooter(this);
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
-		//only increases down and to the left, can't get more up + right
-		setAttackBounds(new Rectangle(((int)getLocation().getX() + 1000), ((int)getLocation().getY() - 1000), -1000, -1000));
+		setAttackBounds(new Rectangle((int)(getLocation().getX() - (LivingEntity.WIDTH * 2.5)), ((int)(getLocation().getY() - (LivingEntity.HEIGHT * 2.5))), (int)LivingEntity.WIDTH * 4, (int)LivingEntity.HEIGHT * 4));
 		cooldownTicksDefault = 100;
 		cooldownTicks = cooldownTicksDefault;
 	}
@@ -42,6 +41,7 @@ public class Archer extends Enemy{
 	public void tick()
 	{
 		super.tick();
+		setAttackBoundsL((int)(getLocation().getX() - (LivingEntity.WIDTH * 2.5)), ((int)(getLocation().getY() - (LivingEntity.HEIGHT * 2.5))));
 		m.think();
 		cooldownTicks++;
 	}
