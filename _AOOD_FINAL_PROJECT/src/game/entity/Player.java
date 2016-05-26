@@ -88,6 +88,9 @@ public class Player extends LivingEntity {
 	public void tick() {
 		super.tick();
 		movement();
+		if (this.isDead()){
+			System.exit(0);
+		}
 	}
 
 	@Override

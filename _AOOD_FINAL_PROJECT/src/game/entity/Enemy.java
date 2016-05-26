@@ -19,7 +19,7 @@ public abstract class Enemy extends LivingEntity{
 
 	protected int health, strength, maxHealth;
 	protected int enemyid;
-	public static final int MAX_HP = 4500, MAX_STRENGTH = 750;
+	public static final int MAX_HP = 4000, MAX_STRENGTH = 500;
 	
 	public Enemy(Location l, int health, int strength)
 	{
@@ -81,6 +81,9 @@ public abstract class Enemy extends LivingEntity{
 		if(e == EnemyType.STICK)
 		{
 			return new Stick();
+		} else if (e == EnemyType.ARCHER)
+		{
+			return new Archer();
 		}
 		return null;
 	}  

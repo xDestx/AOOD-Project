@@ -56,7 +56,7 @@ public class LevelBuilder {
 		//level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
 		//level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
 		level.addCollectible(new HealthPack(new Location(1800,1300), 10));
-level.addWorldObject(new EnemySpawn(new Location(1500,1100), 5*Game.TICK, EnemyType.STICK));
+level.addWorldObject(new EnemySpawn(new Location(1500,1100), 5*Game.TICK, EnemyType.ARCHER));
 
 		levels.add(level);
 	}

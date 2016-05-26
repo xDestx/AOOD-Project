@@ -25,6 +25,16 @@ public class Archer extends Enemy{
 		cooldownTicks = cooldownTicksDefault;
 	}
 	
+	public Archer()
+	{
+		super(new Location(0,0), 100, 10);
+		m = new Shooter(this);
+		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
+		setAttackBounds(new Rectangle((int)(getLocation().getX() - (LivingEntity.WIDTH * 2.5)), ((int)(getLocation().getY() - (LivingEntity.HEIGHT * 2.5))), (int)LivingEntity.WIDTH * 4, (int)LivingEntity.HEIGHT * 4));
+		cooldownTicksDefault = 100;
+		cooldownTicks = cooldownTicksDefault;
+	}
+	
 	@Override
 	public void attack() {
 		if(cooldownTicks >= cooldownTicksDefault)
