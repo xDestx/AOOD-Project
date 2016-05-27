@@ -41,7 +41,7 @@ public class CircleAnimation extends Animation {
 		for (int i = 0; i < points.length; i++) {
 			g.fillOval((int)points[i].getX()+xo+xoff2-(cSize/2),  (int)points[i].getY()+yo+yoff2-(cSize/2), 8, 8);
 		}
-		g.drawOval(xo-xoff2-(int)(r/4), yo-yoff2-(int)(r/4), (int)(e.getBounds().getWidth()*2)+(int)(r/2)+(int)(cSize), (int)(e.getBounds().getHeight()*2)+(int)(r/2)+(int)(cSize));
+		g.drawOval(xo-xoff2-(int)(r), yo-yoff2-(int)(r), (int)(r*2)-(int)(cSize/2), (int)(r*2)-(int)(cSize/2));
 		g.setColor(last);
 	}
 
