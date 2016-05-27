@@ -39,6 +39,8 @@ public abstract class Animation implements Renderable {
 	
 	public boolean done()
 	{
+		if(maxFrames == -1)
+			return false;
 		return maxFrames - frame <= 0;
 	}
 	

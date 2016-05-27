@@ -10,6 +10,7 @@ import game.Renderable;
 import game.entity.Enemy;
 import game.entity.EnemyType;
 import game.entity.Player;
+import game.graphic.CircleAnimation;
 
 public class EnemySpawn extends WorldObject implements Spawner, Renderable, Collidable {
 
@@ -27,6 +28,7 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 		this.e = e;
 		this.interval = interval;
 		currentTick = 0;
+		this.addAnimation(new CircleAnimation(-1, this, (int)this.getBounds().getWidth()+20, 3));
 	}
 	
 	public EnemyType getEnemyType()
@@ -41,6 +43,7 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 	
 	@Override
 	public void render(Graphics g, int xo, int yo) {
+		super.render(g, xo, yo);
 		Color lastColor = g.getColor();
 		g.setColor(Color.GRAY);
 		g.fillRect(xo,yo, (int)getBounds().getWidth(), (int)getBounds().getHeight());
@@ -75,6 +78,7 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 
 	@Override
 	public void tick() {
+		super.tick();
 		currentTick++;
 		if(currentTick>=interval)
 		{

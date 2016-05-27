@@ -49,12 +49,6 @@ public class Wall extends WorldObject implements Collidable
     	}
     }
 
-	@Override
-	public void tick() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 	@Override
 	public boolean collide(Rectangle bounds)
