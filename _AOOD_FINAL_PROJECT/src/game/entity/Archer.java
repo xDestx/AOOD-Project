@@ -1,14 +1,16 @@
 package game.entity;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import game.Game;
 import game.ai.Mind;
 import game.ai.enemy.Shooter;
 import game.graphic.PlayerHitAnimation;
 import game.world.Location;
+import game.world.Vector;
 
-public class Archer extends Enemy{
+public class Archer extends Enemy {
 	
 	protected Mind m;
 	private int cooldownTicks;
@@ -41,12 +43,28 @@ public class Archer extends Enemy{
 		{
 			if(Game.getCurrentGame().getPlayer().getBounds().intersects(getAttackBounds()))
 			{
-				Game.getCurrentGame().getPlayer().wasHit(strength);
+				//Game.getCurrentGame().getPlayer().wasHit(strength);
+				Location l = Game.getCurrentGame().getPlayer().getLocation();
+				double lx = l.getX()-getLocation().getX();
+				double ly = l.getY()-getLocation().getY();
+				double hypo = Math.sqrt(Math.pow(lx, 2)+Math.pow(ly, 2));
+			//	double d = Math.acos(Math.abs(l.getX()-getLocation().getX())/hypo);
+				double xp = lx/hypo;
+				double yp = ly/hypo;
+				/*
+				 * Proportional
+				 */
+				double xv = xp * 10;
+				double yv = yp * 10;
+				//Total V (Hypotenuse) = 10
+				Vector v = new Vector(xv,yv);
+				Game.getCurrentGame().getLevel().addProjectile(new Projectile(new Location(getLocation()), v, this, strength));//Total speed of 10 p/t (pixels/tick)
 			}
-			addAnimation(new PlayerHitAnimation(this));
+			//addAnimation(new PlayerHitAnimation(this));
 			cooldownTicks = 0;
 		}
 	}
+	
 	
 	public void tick()
 	{

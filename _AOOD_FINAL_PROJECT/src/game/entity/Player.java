@@ -5,12 +5,13 @@ import java.awt.Graphics;
 
 import game.Game;
 import game.graphic.PlayerHitAnimation;
+import game.util.Task;
 import game.world.Location;
 
 public class Player extends LivingEntity {
 	
 	
-	private boolean vertMod,horizMod;
+	private boolean vertMod,horizMod,deathSchedule;
 	private int xp;
 	//Check if horizontal / vertical keys are being held.
 	public static int getMaxLevel()
@@ -21,6 +22,7 @@ public class Player extends LivingEntity {
 	public Player(Location l, int health) {
 		super(l);
 		this.health = health;
+		deathSchedule = false;
 		this.maxHealth = health;
 		xp = 0;
 	}
@@ -88,8 +90,29 @@ public class Player extends LivingEntity {
 	public void tick() {
 		super.tick();
 		movement();
-		if (this.isDead()){
-			System.exit(0);
+		if (this.isDead() && !deathSchedule){
+			deathSchedule=true;
+			Game.getCurrentGame().addTask(new Task(120) {
+				@Override
+				public void run()
+				{
+					if(isDead())
+					{
+						try {
+							Thread.sleep(1000);
+							System.exit(0);
+						} catch (Exception e)
+						{
+						
+						}
+					} else
+					{
+						System.out.println("this lucky ass");
+						//Lucky ass
+						deathSchedule=false;
+					}
+				}
+			});
 		}
 	}
 

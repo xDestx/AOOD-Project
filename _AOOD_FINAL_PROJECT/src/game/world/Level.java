@@ -10,6 +10,7 @@ import game.GameObject;
 import game.Renderable;
 import game.entity.Collectible;
 import game.entity.Enemy;
+import game.entity.Projectile;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -30,6 +31,7 @@ public class Level extends GameObject implements Renderable {
 	private ArrayList<Collidable> listOfCollidables;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectible> allCollectibles;
+	private ArrayList<Projectile> projectiles;
 	private ArrayList<WorldObject> worldObjects;
 	private int id;
 	private BufferedImage bi;
@@ -42,6 +44,7 @@ public class Level extends GameObject implements Renderable {
 		l = new Location(0, 0);
 		enemies = new ArrayList<Enemy>();
 		allCollectibles = new ArrayList<Collectible>();
+		projectiles = new ArrayList<Projectile>();
 		try {
 			bi = ImageIO.read(getClass().getResourceAsStream("/images/grass_cool.png"));
 		} catch (Exception e) {
@@ -57,12 +60,14 @@ public class Level extends GameObject implements Renderable {
 		allCollectibles = new ArrayList<Collectible>();
 		id = idNumber;
 		bi = b;
+		projectiles = new ArrayList<Projectile>();
 		pattern = new GroundPattern();
 		worldObjects = new ArrayList<WorldObject>();
 	}
 
 	public Level(int idNumber, ArrayList<Collidable> cs) {
 		listOfCollidables = cs;
+		projectiles = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		allCollectibles = new ArrayList<Collectible>();
 		id = idNumber;
@@ -77,6 +82,7 @@ public class Level extends GameObject implements Renderable {
 
 	public Level(int idNumber, BufferedImage b, ArrayList<Collidable> cs) {
 		listOfCollidables = cs;
+		projectiles = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		allCollectibles = new ArrayList<Collectible>();
 		id = idNumber;
@@ -87,6 +93,12 @@ public class Level extends GameObject implements Renderable {
 
 	public int getId() {
 		return id;
+	}
+
+
+	public ArrayList<Projectile> getProjectiles()
+	{
+		return projectiles;
 	}
 
 	public ArrayList<Collidable> getListOfCollidables() {
@@ -122,7 +134,15 @@ public class Level extends GameObject implements Renderable {
 		return enemies;
 	}
 	
+	public void addProjectile(Projectile o)
+	{
+		this.projectiles.add(o);
+	}
 	
+	public void removeProjectile(Projectile o)
+	{
+		this.projectiles.remove(o);
+	}
 	
 	public ArrayList<WorldObject> getWorldObjects()
 	{
@@ -191,11 +211,22 @@ public class Level extends GameObject implements Renderable {
 		renderEnemies(g, x, y);
 		renderWorldObjects(g,x,y);
 		renderCollectibles(g, x, y);
+		renderProjectiles(g,x,y);
 	}
 
 	private void renderCollectibles(Graphics g, int xo, int yo) {
 		Camera c = Game.getCurrentGame().getCamera();
 		for (Collectible r : getAllCollectibles()) {
+			if (r.getBounds().intersects(c.getViewBounds())) {
+				int[] xy = Camera.calculateOffset(r.getLocation());
+				r.render(g, xy[0], xy[1]);
+			}
+		}
+	}
+	
+	private void renderProjectiles(Graphics g, int xo, int yo) {
+		Camera c = Game.getCurrentGame().getCamera();
+		for (Projectile r : projectiles) {
 			if (r.getBounds().intersects(c.getViewBounds())) {
 				int[] xy = Camera.calculateOffset(r.getLocation());
 				r.render(g, xy[0], xy[1]);
@@ -264,6 +295,15 @@ public class Level extends GameObject implements Renderable {
 		tickWObjs();
 		// tickCollides();
 		tickCollects();
+		tickProjectiles();
+	}
+	
+	private void tickProjectiles()
+	{
+		for (Projectile p : getProjectiles())
+		{
+			p.tick();
+		}
 	}
 
 	private void tickEnemies() {

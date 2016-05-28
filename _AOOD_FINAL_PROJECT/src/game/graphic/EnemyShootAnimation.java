@@ -5,18 +5,19 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import game.entity.LivingEntity;
+import game.entity.Projectile;
 import game.world.Location;
 
 public class EnemyShootAnimation extends Animation{
 	
-	private projectile p;
+	private Projectile p;
 	private int x, y, distance;
 	private double d;
 	private static final int WIDTH = 50, HEIGHT = 10;
 	
-	public EnemyShootAnimation(projectile p) {
+	public EnemyShootAnimation(Projectile p) {
 		super(50);
-		this.p = livingEntity;
+		this.p = p;
 		distance = 250;
 	}
 
@@ -35,7 +36,7 @@ public class EnemyShootAnimation extends Animation{
 
 	@Override
 	public Rectangle getBounds() {
-		return p.getAttackBounds();
+		return p.getBounds();
 	}
 
 	@Override

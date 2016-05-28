@@ -19,14 +19,19 @@ public class Ticker {
 	 */
 	
 	private Game g;
-	private LinkedList<Renderable> rendrs;
-	private LinkedList<GameObject> objs;
+	private LinkedList<Renderable> rendrs,toRender;
+	private LinkedList<GameObject> objs,toObj;
+	private boolean objsUsed,rendersUsed;
 	
 	public Ticker(Game g)
 	{
 		this.g = g;
 		objs = new LinkedList<GameObject>();
 		rendrs = new LinkedList<Renderable>();
+		toObj = new LinkedList<GameObject>();
+		toRender = new LinkedList<Renderable>();
+		objsUsed = false;
+		rendersUsed = false;
 	}
 	
 	/*
@@ -35,6 +40,7 @@ public class Ticker {
 	public void tick()
 	{
 		ArrayList<Task> toRemove = new ArrayList<Task>();
+		objsUsed = true;
 		for (GameObject go : objs)
 		{
 			go.tick();
@@ -50,8 +56,33 @@ public class Ticker {
 		{
 			objs.remove(t);
 		}
-		
+		objsUsed = false;
+		if(toObj.size()>0)
+			transferToObj();
 	}
+	
+	private void transferToObj()
+	{
+		if(objsUsed)
+			return;
+		for (GameObject go : toObj)
+		{
+			objs.add(go);
+		}
+		toObj.clear();
+	}
+	
+	private void transferToRendr()
+	{
+		if(rendersUsed)
+			return;
+		for (Renderable go : toRender)
+		{
+			rendrs.add(go);
+		}
+		toRender.clear();
+	}
+	
 	
 	/*
 	 * Circling through objects to find ones that can render
@@ -62,6 +93,7 @@ public class Ticker {
 	public void render(Graphics g, Camera c)
 	{
 		this.g.getLevel().render(g,0,0);
+		objsUsed = true;
 		for (GameObject go : objs)
 		{
 			if (go instanceof Renderable)
@@ -74,11 +106,18 @@ public class Ticker {
 				}
 			}
 		}
+		objsUsed = false;
+		if(toObj.size()>0)
+			transferToObj();
+		rendersUsed = true;
 		for (Renderable r : rendrs)
 		{
 			int[] xy = Camera.calculateOffset(r.getLocation());
 			r.render(g, xy[0], xy[1]);
 		}
+		rendersUsed = false;
+		if(toRender.size()>0)
+			transferToRendr();
 		//drawPlayerAttackBound(g,c);
 	}
 	
@@ -93,11 +132,17 @@ public class Ticker {
 	
 	public void addObject(GameObject o)
 	{
-		this.objs.add(o);
+		if(!objsUsed)
+			this.objs.add(o);
+		else
+			this.toObj.add(o);
 	}
 	
 	public void addRenderable(Renderable r)
 	{
-		this.rendrs.add(r);
+		if(!rendersUsed)
+			this.rendrs.add(r);
+		else
+			this.toRender.add(r);
 	}
 }
