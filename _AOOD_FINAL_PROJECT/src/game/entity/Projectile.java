@@ -65,7 +65,7 @@ public class Projectile extends Entity {
 		{
 			if(owner != p)
 			{
-				p.wasHit(damage);
+				p.wasHit(damage, owner);
 				final Projectile bye = this;
 				Game.getCurrentGame().addTask(new Task(0)
 						{

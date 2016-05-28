@@ -28,7 +28,7 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 		this.e = e;
 		this.interval = interval;
 		currentTick = 0;
-		this.addAnimation(new CircleAnimation(-1, this, (int)this.getBounds().getWidth()+20, 3));
+		this.addAnimation(new CircleAnimation(-1, this, (int)this.getBounds().getWidth()+20, 1));
 	}
 	
 	public EnemyType getEnemyType()

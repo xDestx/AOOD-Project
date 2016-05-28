@@ -20,7 +20,7 @@ public class Stick extends Enemy{
 	private int cooldownTicksDefault;
 	
 	public Stick(Location l, int health, int strength){
-		super(l,  health,  strength);
+		super(l,  health,  strength, 12);
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
 		m = new Zombie(this);
 		cooldownTicksDefault = 100;
@@ -29,7 +29,7 @@ public class Stick extends Enemy{
 	
 	public Stick()
 	{
-		super(new Location(0,0),100,100);
+		super(new Location(0,0),100,100, 12);
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
 		cooldownTicksDefault = 100;
 		cooldownTicks = cooldownTicksDefault;
@@ -58,7 +58,7 @@ public class Stick extends Enemy{
 		{
 			if(Game.getCurrentGame().getPlayer().getBounds().intersects(getAttackBounds()))
 			{
-				Game.getCurrentGame().getPlayer().wasHit(strength);
+				Game.getCurrentGame().getPlayer().wasHit(strength, this);
 			}
 			addAnimation(new PlayerHitAnimation(this));
 			cooldownTicks = 0;

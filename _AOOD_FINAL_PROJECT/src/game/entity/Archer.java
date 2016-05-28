@@ -19,7 +19,7 @@ public class Archer extends Enemy {
 	
 	public Archer(Location l, int health, int strength)
 	{
-		super(l, health, strength);
+		super(l, health, strength, 10);
 		m = new Shooter(this);
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
 		setAttackBounds(new Rectangle((int)(getLocation().getX() - (LivingEntity.WIDTH * 2.5)), ((int)(getLocation().getY() - (LivingEntity.HEIGHT * 2.5))), (int)LivingEntity.WIDTH * 4, (int)LivingEntity.HEIGHT * 4));
@@ -29,7 +29,7 @@ public class Archer extends Enemy {
 	
 	public Archer()
 	{
-		super(new Location(0,0), 100, 10);
+		super(new Location(0,0), 100, 10, 100);
 		m = new Shooter(this);
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
 		setAttackBounds(new Rectangle((int)(getLocation().getX() - (LivingEntity.WIDTH * 2.5)), ((int)(getLocation().getY() - (LivingEntity.HEIGHT * 2.5))), (int)LivingEntity.WIDTH * 4, (int)LivingEntity.HEIGHT * 4));

@@ -13,6 +13,7 @@ public class Player extends LivingEntity {
 	
 	private boolean vertMod,horizMod,deathSchedule;
 	private int xp;
+	private int lastLevel;
 	//Check if horizontal / vertical keys are being held.
 	public static int getMaxLevel()
 	{
@@ -23,6 +24,7 @@ public class Player extends LivingEntity {
 		super(l);
 		this.health = health;
 		deathSchedule = false;
+		lastLevel = 0;
 		this.maxHealth = health;
 		xp = 0;
 	}
@@ -35,11 +37,19 @@ public class Player extends LivingEntity {
 	public void setXP(int xp)
 	{
 		this.xp=xp;
+		lastLevel = getLevel();
 	}
 	
 	public void addXP(int xp)
 	{
 		this.xp+=xp;
+		if(getLevel() > lastLevel)
+		{
+			//Level up!
+			this.setHealth(this.getMaxHealth());
+			lastLevel = getLevel();
+			System.out.println("Level up: " + getLevel() + "!");
+		}
 	}
 	
 	public int getLevel()
@@ -80,7 +90,7 @@ public class Player extends LivingEntity {
 	{
 		for (Enemy e : Game.getCurrentGame().getEnemies()){
 			if (this.getAttackBounds().intersects(e.getBounds())){
-				e.wasHit(10);
+				e.wasHit(10, this);
 			}
 		}
 		addAnimation(new PlayerHitAnimation(this));
@@ -115,6 +125,36 @@ public class Player extends LivingEntity {
 			});
 		}
 	}
+	
+	public int getXPForLevel(int i)
+	{
+		return (i*100 + ((i-1) * 10));
+	}
+	
+	private void drawXPBarAndLevel(Graphics g, int xo, int yo)
+	{
+		Color gold = new Color(237,202,0);
+		int length = (int)(getBounds().getWidth()*.6);
+		int height = (int)(getBounds().getHeight()*.1);
+		int x = xo - (int)(.5 * length) + (int)(getBounds().getWidth()/2);
+		int y = yo + (int)(.66 * getBounds().getHeight());
+		g.setColor(Color.cyan);
+		g.drawRect(x-1, y-1, length+1, height+1);
+		g.setColor(Color.white);
+		g.fillRect(x, y, length, height);
+		g.setColor(gold);
+		double per = (double)getXP()/(double)getXPForLevel(getLevel()+1);
+		g.fillRect(x, y, (int)(length*per), height);
+		x+=(int)(.5*length)-10;
+		y+=height;
+		g.setColor(Color.red);
+		g.drawString(""+(int)(per*100)+"%", x, y);
+		//Bar ^^ Level vv
+		g.setColor(gold);
+		y = yo + (int)(.95 * getBounds().getHeight());
+		x = xo + (int)(getBounds().getWidth()/2) - 5;
+		g.drawString(""+getLevel(), x, y);
+	}
 
 	@Override
 	public void render(Graphics g, int xo, int yo) {
@@ -123,6 +163,7 @@ public class Player extends LivingEntity {
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
 		renderAnimations(g,xo,yo);
 		drawHealthBar(g,xo,yo);
+		drawXPBarAndLevel(g,xo,yo);
 		g.setColor(c);
 	}
 

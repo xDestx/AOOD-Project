@@ -21,7 +21,7 @@ public class Shooter implements Mind{
 	{
 		if(e.isDead())
 		{
-			deadThoughts();
+			//deadThoughts();
 			return;
 		}
 		movementThought();
@@ -50,6 +50,8 @@ public class Shooter implements Mind{
 					Game.getCurrentGame().getLevel().removeEnemy(e);
 				}
 			});
+			if(e.getLastDamagingEntity().equals(Game.getCurrentGame().getPlayer()))
+				((Player)e.getLastDamagingEntity()).addXP(e.getKillXP());
 			removedSelf = true;
 		}
 	}

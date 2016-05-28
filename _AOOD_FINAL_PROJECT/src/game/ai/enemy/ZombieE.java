@@ -25,7 +25,7 @@ public class ZombieE implements Mind {
 		//Tries to go around walls
 		if(e.isDead())
 		{
-			deadThoughts();
+			//deadThoughts();
 			return;
 		}
 		movementThought();
@@ -45,6 +45,8 @@ public class ZombieE implements Mind {
 					Game.getCurrentGame().getLevel().removeEnemy(e);
 				}
 			});
+			if(e.getLastDamagingEntity().equals(Game.getCurrentGame().getPlayer()))
+				((Player)e.getLastDamagingEntity()).addXP(e.getKillXP());
 			removedSelf = true;
 		}
 	}

@@ -22,7 +22,7 @@ public class Zombie implements Mind {
 		// Zombie just goes straight for player
 		if(e.isDead())
 		{
-			deadThoughts();
+		//	deadThoughts();
 			return;
 		}
 		movementThought();
@@ -42,6 +42,8 @@ public class Zombie implements Mind {
 					Game.getCurrentGame().getLevel().removeEnemy(e);
 				}
 			});
+			if(e.getLastDamagingEntity().equals(Game.getCurrentGame().getPlayer()))
+				((Player)e.getLastDamagingEntity()).addXP(e.getKillXP());
 			removedSelf = true;
 		}
 	}

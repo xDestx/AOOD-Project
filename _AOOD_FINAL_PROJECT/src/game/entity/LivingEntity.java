@@ -18,6 +18,7 @@ public abstract class LivingEntity extends Entity {
 	protected int health,maxHealth;
 	protected ArrayList<Animation> animations,toAnimations;
 	protected boolean toAnimationsUsed;
+	protected Entity lastDamager;
 	
 	
 	protected Rectangle hitBounds;
@@ -29,6 +30,7 @@ public abstract class LivingEntity extends Entity {
 	public LivingEntity(Location l) {
 		super(l);
 		this.health = 100;
+		lastDamager = null;
 		this.maxHealth = 100;
 		velocity = new Vector(0, 0);
 		animations = new ArrayList<Animation>();
@@ -176,10 +178,16 @@ public abstract class LivingEntity extends Entity {
 	
 	public abstract void attack();
 	
-	public void wasHit(int damage) {
+	public void wasHit(int damage, Entity damager) {
 		health-= damage;
+		this.lastDamager = damager;
 		if(health < 0)
 			health = 0;
+	}
+	
+	public Entity getLastDamagingEntity()
+	{
+		return this.lastDamager;
 	}
 	
 	public boolean isDead()

@@ -7,6 +7,7 @@ import game.Game;
 import game.ai.Mind;
 import game.ai.enemy.Shooter;
 import game.ai.enemy.Zombie;
+import game.util.Task;
 import game.world.Collidable;
 import game.world.Location;
 import game.world.Vector;
@@ -19,18 +20,26 @@ public abstract class Enemy extends LivingEntity{
 
 	protected int health, strength, maxHealth;
 	protected int enemyid;
+	protected int xp;
+	protected boolean removedSelf;
 	public static final int MAX_HP = 4000, MAX_STRENGTH = 500;
 	
-	public Enemy(Location l, int health, int strength)
+	public Enemy(Location l, int health, int strength, int xp)
 	{
 		super(l);
+		removedSelf = false;
 		this.health = health;
 		this.maxHealth = health;
+		this.xp = xp;
 		this.strength = strength;
 		this.setAttackBounds(new Rectangle((int)getLocation().getX() - 100,(int) getLocation().getY() - 100, 200, 200));
 		velocity = new Vector(0,0);
 	}
 
+	public int getKillXP()
+	{
+		return this.xp;
+	}
 	
 	public int getEnemyID()
 	{
@@ -74,6 +83,32 @@ public abstract class Enemy extends LivingEntity{
 	public void tick() {
 		super.tick();
 		movement();
+		checkDead();
+	}
+	
+	private void checkDead()
+	{
+		if(!isDead())
+			return;
+		getVelocity().set(0);
+		if(!removedSelf)
+		{
+			final Enemy deadenemy = this;
+			Game.getCurrentGame().addObject(new Task(200) {
+				@Override
+				public void run()
+				{
+					Game.getCurrentGame().getLevel().removeEnemy(deadenemy);
+				}
+			});
+			if(getLastDamagingEntity() != null && getLastDamagingEntity().equals(Game.getCurrentGame().getPlayer()))
+			{
+				((Player)getLastDamagingEntity()).addXP(getKillXP());
+				//System.out.println("damn, " + getKillXP() + " xp! " + Game.getCurrentGame().getPlayer().getXP());
+			}
+			removedSelf = true;
+			
+		}
 	}
 
 
