@@ -8,7 +8,7 @@ import game.util.Task;
 
 public class Shooter implements Mind{
 	
-	private Enemy e;
+	protected Enemy e;
 	private boolean removedSelf;
 	
 	public Shooter(Enemy e)
@@ -28,7 +28,7 @@ public class Shooter implements Mind{
 		attackingThought();
 	}
 	
-	private void attackingThought()
+	protected void attackingThought()
 	{
 		Player p = Game.getCurrentGame().getPlayer();
 		

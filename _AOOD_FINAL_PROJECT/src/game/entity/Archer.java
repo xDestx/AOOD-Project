@@ -13,9 +13,9 @@ import game.world.Vector;
 public class Archer extends Enemy {
 	
 	protected Mind m;
-	private int cooldownTicks;
+	protected int cooldownTicks;
 	//for attacking
-	private int cooldownTicksDefault;
+	protected int cooldownTicksDefault;
 	
 	public Archer(Location l, int health, int strength)
 	{

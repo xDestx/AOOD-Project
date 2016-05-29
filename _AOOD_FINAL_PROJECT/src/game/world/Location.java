@@ -6,7 +6,11 @@ import java.io.Serializable;
 public class Location implements Serializable
 {
 
-    private double x,y;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -204080932133431405L;
+	private double x,y;
     
     public Location(double x, double y)
     {
@@ -44,6 +48,14 @@ public class Location implements Serializable
     {
     	this.x = l.getX();
     	this.y = l.getY();
+    }
+    
+    public int distance(Location l)
+    {
+    	int x1 = (int)Math.pow(l.getX()-getX(), 2);
+    	int y1 = (int)Math.pow(l.getY()-getY(), 2);
+    	int d = (int)Math.sqrt(x1+y1);
+    	return d;
     }
     
     public Point toPoint()
