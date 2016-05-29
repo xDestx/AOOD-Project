@@ -38,22 +38,22 @@ public class CKeyListener extends KeyAdapter {
 	
 	private void keyPressedWorld(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_D && !g.getPlayer().getHoriz())
+		if(e.getKeyCode() == KeyEvent.VK_D)
 		{
 			g.getPlayer().getVelocity().setX(10);
 			g.getPlayer().setHoriz(true);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_A && !g.getPlayer().getHoriz())
+		if(e.getKeyCode() == KeyEvent.VK_A)
 		{
 			g.getPlayer().getVelocity().setX(-10);
 			g.getPlayer().setHoriz(true);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_W && !g.getPlayer().getVert())
+		if(e.getKeyCode() == KeyEvent.VK_W)
 		{
 			g.getPlayer().getVelocity().setY(-10);
 			g.getPlayer().setVert(true);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_S && !g.getPlayer().getVert())
+		if(e.getKeyCode() == KeyEvent.VK_S)
 		{
 			g.getPlayer().getVelocity().setY(10);
 			g.getPlayer().setVert(true);
@@ -66,29 +66,30 @@ public class CKeyListener extends KeyAdapter {
 		
 		if(e.getKeyCode() == KeyEvent.VK_E)
 		{
-			g.getPlayer().attack();
+			//g.getPlayer().attack();
+			//replaced with mouse click
 		}
 		
 	}
 	
 	private void keyReleasedWorld(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_D && g.getPlayer().getHoriz())
+		if(e.getKeyCode() == KeyEvent.VK_D && g.getPlayer().getVelocity().getX() != -10)
 		{
 			g.getPlayer().getVelocity().setX(0);
 			g.getPlayer().setHoriz(false);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_A && g.getPlayer().getHoriz())
+		if(e.getKeyCode() == KeyEvent.VK_A && g.getPlayer().getVelocity().getX() != 10)
 		{
 			g.getPlayer().getVelocity().setX(0);
 			g.getPlayer().setHoriz(false);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_W && g.getPlayer().getVert())
+		if(e.getKeyCode() == KeyEvent.VK_W && g.getPlayer().getVelocity().getY() != 10)
 		{
 			g.getPlayer().getVelocity().setY(0);
 			g.getPlayer().setVert(false);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_S && g.getPlayer().getVert())
+		if(e.getKeyCode() == KeyEvent.VK_S && g.getPlayer().getVelocity().getY() != -10)
 		{
 			g.getPlayer().getVelocity().setY(0);
 			g.getPlayer().setVert(false);

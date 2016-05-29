@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import game.Game;
 import game.graphic.PlayerHitAnimation;
+import game.inventory.Inventory;
 import game.util.Task;
 import game.world.Location;
 
@@ -14,12 +15,15 @@ public class Player extends LivingEntity {
 	private boolean vertMod,horizMod,deathSchedule;
 	private int xp, strength;
 	private int lastLevel;
+	private Inventory inventory;
 	public static final int MAX_LEVEL = 20, MAX_HEALTH = 5000, MAX_STRENGTH = 550;
 	//Check if horizontal / vertical keys are being held.
 	
 	public Player(Location l, int health) {
 		super(l);
+		
 		this.health = health;
+		inventory = new Inventory();
 		strength = 10;
 		deathSchedule = false;
 		lastLevel = 0;
@@ -37,7 +41,6 @@ public class Player extends LivingEntity {
 		this.xp=xp;
 		lastLevel = getLevel();
 	}
-	
 	
 	
 	public void addXP(int xp)
@@ -183,6 +186,10 @@ public class Player extends LivingEntity {
 		drawHealthBar(g,xo,yo);
 		drawXPBarAndLevel(g,xo,yo);
 		g.setColor(c);
+	}
+
+	public Inventory getInventory() {
+		return inventory;
 	}
 
 

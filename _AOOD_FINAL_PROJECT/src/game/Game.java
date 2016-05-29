@@ -10,6 +10,7 @@ import game.entity.Enemy;
 import game.entity.Player;
 import game.entity.Stick;
 import game.listener.CKeyListener;
+import game.listener.CMouseListener;
 import game.util.Task;
 import game.world.Collidable;
 import game.world.Level;
@@ -55,6 +56,9 @@ public class Game {
 		gs = GameState.WORLD;
 		LevelBuilder.init();
 		currentLevel = LevelBuilder.getLevel(0);
+		CMouseListener mouseList = new CMouseListener(this);
+		gf.getCanvas().addMouseListener(mouseList);
+		gf.getCanvas().addMouseMotionListener(mouseList);
 		gf.getCanvas().addKeyListener(new CKeyListener(this));
 	}
 	
