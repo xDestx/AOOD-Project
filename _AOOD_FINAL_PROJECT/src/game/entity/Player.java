@@ -38,6 +38,8 @@ public class Player extends LivingEntity {
 		lastLevel = getLevel();
 	}
 	
+	
+	
 	public void addXP(int xp)
 	{
 		this.xp+=xp;

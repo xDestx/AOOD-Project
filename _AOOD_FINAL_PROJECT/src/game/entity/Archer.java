@@ -44,9 +44,9 @@ public class Archer extends Enemy {
 			if(Game.getCurrentGame().getPlayer().getBounds().intersects(getAttackBounds()))
 			{
 				//Game.getCurrentGame().getPlayer().wasHit(strength);
-				Location l = Game.getCurrentGame().getPlayer().getLocation();
-				double lx = l.getX()-getLocation().getX();
-				double ly = l.getY()-getLocation().getY();
+				Location l = Game.getCurrentGame().getPlayer().getCenterLocation();
+				double lx = l.getX()-getCenterLocation().getX();
+				double ly = l.getY()-getCenterLocation().getY();
 				double hypo = Math.sqrt(Math.pow(lx, 2)+Math.pow(ly, 2));
 			//	double d = Math.acos(Math.abs(l.getX()-getLocation().getX())/hypo);
 				double xp = lx/hypo;
@@ -58,7 +58,7 @@ public class Archer extends Enemy {
 				double yv = yp * 10;
 				//Total V (Hypotenuse) = 10
 				Vector v = new Vector(xv,yv);
-				Game.getCurrentGame().getLevel().addProjectile(new Projectile(new Location(getLocation()), v, this, strength));//Total speed of 10 p/t (pixels/tick)
+				Game.getCurrentGame().getLevel().addProjectile(new Projectile(new Location(getCenterLocation()), v, this, strength));//Total speed of 10 p/t (pixels/tick)
 			}
 			//addAnimation(new PlayerHitAnimation(this));
 			cooldownTicks = 0;

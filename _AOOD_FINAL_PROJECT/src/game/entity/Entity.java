@@ -24,6 +24,11 @@ public abstract class Entity extends GameObject implements Renderable
 		this.l = l;
 	}
 	
+	public Location getCenterLocation()
+	{
+		return new Location(getBounds().getCenterX(),getBounds().getCenterY());
+	}
+	
     public abstract void render(Graphics g, int xo, int yo);
     
     public Rectangle getBounds()
