@@ -60,7 +60,7 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 		{
 			return;
 		}
-		double per = ((double)Game.getCurrentGame().getPlayer().getLevel() / (double)Player.getMaxLevel());
+		double per = ((double)Game.getCurrentGame().getPlayer().getLevel() / (double)Player.MAX_LEVEL);
 		System.out.println(per * 100);
 		enemy.setMaxHealth((int)(per * (Enemy.MAX_HP)));
 		enemy.setHealth(enemy.getMaxHealth());

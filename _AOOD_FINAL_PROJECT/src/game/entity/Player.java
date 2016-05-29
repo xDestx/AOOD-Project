@@ -12,17 +12,15 @@ public class Player extends LivingEntity {
 	
 	
 	private boolean vertMod,horizMod,deathSchedule;
-	private int xp;
+	private int xp, strength;
 	private int lastLevel;
+	public static final int MAX_LEVEL = 20, MAX_HEALTH = 5000, MAX_STRENGTH = 550;
 	//Check if horizontal / vertical keys are being held.
-	public static int getMaxLevel()
-	{
-		return 20;
-	}
 	
 	public Player(Location l, int health) {
 		super(l);
 		this.health = health;
+		strength = 10;
 		deathSchedule = false;
 		lastLevel = 0;
 		this.maxHealth = health;
@@ -46,15 +44,33 @@ public class Player extends LivingEntity {
 		if(getLevel() > lastLevel)
 		{
 			//Level up!
-			this.setHealth(this.getMaxHealth());
+		//	this.setHealth(this.getMaxHealth());
 			lastLevel = getLevel();
+			setStats(lastLevel);
 			System.out.println("Level up: " + getLevel() + "!");
 		}
 	}
 	
+	private void setStats(int level)
+	{
+		this.setMaxHealth((int)((double)MAX_HEALTH * (double)((double)level / (double)MAX_LEVEL)));
+		this.setHealth(this.getMaxHealth());
+		this.setStrength((int)((double)MAX_STRENGTH * ((double)level / (double)MAX_LEVEL)));
+	}
+	
+	public int getStrength()
+	{
+		return this.strength;
+	}
+	
+	public void setStrength(int str)
+	{
+		this.strength = str;
+	}
+	
 	public int getLevel()
 	{
-		for (int i = Player.getMaxLevel(); i >= 1; i--)
+		for (int i = Player.MAX_LEVEL; i >= 1; i--)
 		{
 			if(getXP() / (i*100 + ((i-1) * 10)) >= 1)
 			{
@@ -90,7 +106,7 @@ public class Player extends LivingEntity {
 	{
 		for (Enemy e : Game.getCurrentGame().getEnemies()){
 			if (this.getAttackBounds().intersects(e.getBounds())){
-				e.wasHit(10, this);
+				e.wasHit(strength, this);
 			}
 		}
 		addAnimation(new PlayerHitAnimation(this));
