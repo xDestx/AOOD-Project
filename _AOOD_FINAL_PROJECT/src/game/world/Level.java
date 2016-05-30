@@ -8,9 +8,9 @@ import game.GFrame;
 import game.Game;
 import game.GameObject;
 import game.Renderable;
-import game.entity.Collectible;
-import game.entity.Enemy;
-import game.entity.Projectile;
+import game.entity.enemy.Enemy;
+import game.entity.neutral.Collectible;
+import game.entity.neutral.Projectile;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

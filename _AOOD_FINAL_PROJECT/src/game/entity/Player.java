@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Game;
+import game.entity.enemy.Enemy;
 import game.graphic.PlayerHitAnimation;
 import game.inventory.Inventory;
 import game.util.Task;

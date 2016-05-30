@@ -1,4 +1,4 @@
-package game.entity;
+package game.entity.enemy;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import game.Game;
 import game.ai.Mind;
 import game.ai.enemy.Shooter;
+import game.entity.LivingEntity;
+import game.entity.neutral.Projectile;
 import game.graphic.PlayerHitAnimation;
 import game.world.Location;
 import game.world.Vector;

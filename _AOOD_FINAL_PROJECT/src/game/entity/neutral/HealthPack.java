@@ -1,4 +1,4 @@
-package game.entity;
+package game.entity.neutral;
 
 import java.awt.Color;
 import java.awt.Graphics;

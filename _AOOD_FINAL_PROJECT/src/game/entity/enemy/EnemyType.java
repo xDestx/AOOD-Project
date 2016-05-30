@@ -1,4 +1,4 @@
-package game.entity;
+package game.entity.enemy;
 
 public enum EnemyType {
 

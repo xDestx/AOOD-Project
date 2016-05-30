@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import game.entity.Enemy;
 import game.entity.Player;
-import game.entity.Stick;
+import game.entity.enemy.Enemy;
+import game.entity.enemy.Stick;
 import game.listener.CKeyListener;
 import game.listener.CMouseListener;
 import game.util.Task;

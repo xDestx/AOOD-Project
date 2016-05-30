@@ -1,4 +1,4 @@
-package game.entity;
+package game.entity.enemy;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,6 +7,8 @@ import game.Game;
 import game.ai.Mind;
 import game.ai.enemy.Shooter;
 import game.ai.enemy.Zombie;
+import game.entity.LivingEntity;
+import game.entity.Player;
 import game.util.Task;
 import game.world.Collidable;
 import game.world.Location;

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import game.entity.LivingEntity;
-import game.entity.Projectile;
+import game.entity.neutral.Projectile;
 import game.world.Location;
 
 public class EnemyShootAnimation extends Animation{

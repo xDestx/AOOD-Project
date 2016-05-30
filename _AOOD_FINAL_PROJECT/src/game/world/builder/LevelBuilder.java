@@ -2,14 +2,14 @@ package game.world.builder;
 
 import java.util.ArrayList;
 
-import game.entity.Archer;
 import game.Game;
-import game.entity.Collectible;
-import game.entity.Enemy;
-import game.entity.HealthPack;
-import game.entity.SmartArcher;
-import game.entity.EnemyType;
-import game.entity.Stick;
+import game.entity.enemy.Archer;
+import game.entity.enemy.Enemy;
+import game.entity.enemy.EnemyType;
+import game.entity.enemy.SmartArcher;
+import game.entity.enemy.Stick;
+import game.entity.neutral.Collectible;
+import game.entity.neutral.HealthPack;
 import game.world.Collidable;
 import game.world.Level;
 import game.world.Location;

@@ -7,9 +7,9 @@ import java.awt.Rectangle;
 import game.Game;
 import game.GameObject;
 import game.Renderable;
-import game.entity.Enemy;
-import game.entity.EnemyType;
 import game.entity.Player;
+import game.entity.enemy.Enemy;
+import game.entity.enemy.EnemyType;
 import game.graphic.CircleAnimation;
 
 public class EnemySpawn extends WorldObject implements Spawner, Renderable, Collidable {

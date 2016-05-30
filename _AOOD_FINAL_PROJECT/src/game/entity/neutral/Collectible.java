@@ -1,8 +1,9 @@
-package game.entity;
+package game.entity.neutral;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import game.entity.Entity;
 import game.world.Location;
 
 public abstract class Collectible extends Entity{

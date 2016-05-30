@@ -1,6 +1,7 @@
-package game.entity;
+package game.entity.enemy;
 
 import game.Game;
+import game.entity.neutral.Projectile;
 import game.world.Location;
 import game.world.Vector;
 

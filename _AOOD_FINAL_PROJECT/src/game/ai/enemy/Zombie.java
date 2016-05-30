@@ -2,8 +2,8 @@ package game.ai.enemy;
 
 import game.Game;
 import game.ai.Mind;
-import game.entity.Enemy;
 import game.entity.Player;
+import game.entity.enemy.Enemy;
 import game.util.Task;
 
 public class Zombie implements Mind {
