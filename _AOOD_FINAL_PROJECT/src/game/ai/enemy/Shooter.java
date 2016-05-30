@@ -64,16 +64,16 @@ public class Shooter implements Mind{
 		double xdist = x - e.getBounds().getCenterX();
 		double ydist = y - e.getBounds().getCenterY();
 		int vel = 2;
-		if (xdist > 240) {
+		if (xdist > 300) {
 			e.getVelocity().setX(vel);
-		} else if (xdist < -240) {
+		} else if (xdist < -300) {
 			e.getVelocity().setX(vel * -1);
 		} else {
 			e.getVelocity().setX(0);
 		}
-		if (ydist > 240) {
+		if (ydist > 300) {
 			e.getVelocity().setY(vel);
-		} else if (ydist < -240) {
+		} else if (ydist < -300) {
 			e.getVelocity().setY(vel * -1);
 		} else {
 			e.getVelocity().setY(0);
