@@ -24,6 +24,12 @@ public class Location implements Serializable
     	this.y = l.getY();
     }
     
+    public Location(Point p)
+    {
+    	this.x = p.getX();
+    	this.y = p.getY();
+    }
+    
     public double getX()
     {
         return this.x;

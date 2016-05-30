@@ -5,10 +5,12 @@ import java.awt.Graphics;
 
 import game.Game;
 import game.entity.enemy.Enemy;
+import game.entity.neutral.Projectile;
 import game.graphic.PlayerHitAnimation;
 import game.inventory.Inventory;
 import game.util.Task;
 import game.world.Location;
+import game.world.Vector;
 
 public class Player extends LivingEntity {
 	
@@ -16,6 +18,8 @@ public class Player extends LivingEntity {
 	private boolean vertMod,horizMod,deathSchedule;
 	private int xp, strength;
 	private int lastLevel;
+	private int attackStyle;
+	public static final int ATTACK_RANGED = 1, ATTACK_MELEE = 0;
 	private Inventory inventory;
 	public static final int MAX_LEVEL = 20, MAX_HEALTH = 5000, MAX_STRENGTH = 550;
 	//Check if horizontal / vertical keys are being held.
@@ -26,6 +30,7 @@ public class Player extends LivingEntity {
 		this.health = health;
 		inventory = new Inventory();
 		strength = 10;
+		attackStyle = Player.ATTACK_RANGED;
 		deathSchedule = false;
 		lastLevel = 0;
 		this.maxHealth = health;
@@ -106,13 +111,23 @@ public class Player extends LivingEntity {
 		return this.horizMod;
 	}
 
+	public int getAttackStyle()
+	{
+		return this.attackStyle;
+	}
 
+	public void attack(double angle)
+	{
+		Vector v = new Vector(angle, 10);
+		launchProjectile(v,strength);
+	}
+	
 	@Override
 	public void attack()
 	{
 		for (Enemy e : Game.getCurrentGame().getEnemies()){
 			if (this.getAttackBounds().intersects(e.getBounds())){
-				e.wasHit(strength, this);
+				e.wasHit((int)(strength*1.25), this);
 			}
 		}
 		addAnimation(new PlayerHitAnimation(this));

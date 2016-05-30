@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import game.Game;
+import game.entity.neutral.Projectile;
 import game.graphic.Animation;
 import game.graphic.PlayerHitAnimation;
 import game.util.Task;
@@ -183,6 +184,11 @@ public abstract class LivingEntity extends Entity {
 		this.lastDamager = damager;
 		if(health < 0)
 			health = 0;
+	}
+	
+	public void launchProjectile(Vector v, int dmg)
+	{
+		Game.getCurrentGame().getLevel().addProjectile(new Projectile(new Location(getCenterLocation()), v, this, dmg));
 	}
 	
 	public Entity getLastDamagingEntity()

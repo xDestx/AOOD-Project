@@ -8,6 +8,12 @@ public class Vector {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Vector(double radians, int speed)
+	{
+		this.x = speed * Math.sin(radians);
+		this.y = speed * Math.cos(radians);
+	}
 
 	public void setX(double x) {
 		this.x = x;

@@ -27,7 +27,8 @@ public class Level extends GameObject implements Renderable {
 	 * Idea: Procedural Generation to generate worlds using a seed
 	 */
 	
-	
+	//Collidables please stay unchanged
+	private boolean enemiesUsed, collectiblesUsed,projectilesUsed,worldObjectsUsed;
 	private ArrayList<Collidable> listOfCollidables;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectible> allCollectibles;
