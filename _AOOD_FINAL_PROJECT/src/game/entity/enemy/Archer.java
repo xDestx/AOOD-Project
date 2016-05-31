@@ -71,6 +71,9 @@ public class Archer extends Enemy {
 		}
 	}
 	
+	public int getCoolDownTicks(){
+		return cooldownTicks;
+	}
 	
 	public void tick()
 	{

@@ -53,7 +53,11 @@ public class LevelBuilder {
 		cc.add(new Wall(790,770, new Location(2250,-50)));
 		Level level = new Level(0, cc);
 		
+<<<<<<< HEAD
+		level.addEnemy(new SmartArcher());
+=======
 		//level.addEnemy(new Archer(new Location(2000,1100), 100, 10));
+>>>>>>> refs/remotes/origin/master
 		//level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
 		//level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
 		level.addCollectible(new HealthPack(new Location(1800,1300), 10));
