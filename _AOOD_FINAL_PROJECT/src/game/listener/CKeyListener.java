@@ -75,14 +75,11 @@ public class CKeyListener extends KeyAdapter {
 		if (e.getKeyCode() == KeyEvent.VK_1)
 		{
 			g.getPlayer().setAttackStyle(Player.ATTACK_MELEE);
-			g.getPlayer().disableRangedAnimation();
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_2)
 		{
 			g.getPlayer().setAttackStyle(Player.ATTACK_RANGED);
-			g.getPlayer().enableRangedAnimation();
-			
 		}
 		
 	}

@@ -36,8 +36,8 @@ public class CMouseListener extends MouseAdapter {
 				Location l = new Location(e.getPoint());
 				l.setX(l.getX()+g.getCamera().getLocation().getX());
 				l.setY(l.getY()+g.getCamera().getLocation().getY());
-				l.setX(l.getX()-g.getPlayer().getLocation().getX());
-				l.setY(l.getY()-g.getPlayer().getLocation().getY());
+				l.setX(l.getX()-g.getPlayer().getCenterLocation().getX());
+				l.setY(l.getY()-g.getPlayer().getCenterLocation().getY());
 				double radians = Math.atan(l.getX()/l.getY());
 				if(l.getY() < 0)
 					radians+=Math.PI;

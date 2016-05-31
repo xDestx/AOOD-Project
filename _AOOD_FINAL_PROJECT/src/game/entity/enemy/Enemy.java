@@ -141,6 +141,9 @@ public abstract class Enemy extends LivingEntity{
 		} else if (e == EnemyType.ARCHER)
 		{
 			return new Archer();
+		} else if (e == EnemyType.SMART_ARCHER)
+		{
+			return new SmartArcher();
 		}
 		return null;
 	}  

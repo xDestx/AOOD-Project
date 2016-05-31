@@ -55,7 +55,7 @@ public class Player extends LivingEntity {
 	{
 		if (rangedAnimation == null)
 		{
-			rangedAnimation = new CircleAnimation(-1, this, getBounds().getWidth()*1.25, getLevel(), Color.BLUE, 12, 1);
+			rangedAnimation = new CircleAnimation(-1, this, getBounds().getWidth()*1.25, getLevel(), Color.BLUE, 12, this.level*2);
 			this.addAnimation(rangedAnimation);
 		}
 	}
@@ -72,6 +72,10 @@ public class Player extends LivingEntity {
 	public void setAttackStyle(int style)
 	{
 		this.attackStyle = style;
+		if(style == Player.ATTACK_RANGED)
+			enableRangedAnimation();
+		else
+			disableRangedAnimation();
 	}
 	
 	public void addXP(int xp)
@@ -91,6 +95,8 @@ public class Player extends LivingEntity {
 			System.out.println("Level up: " + getLevel() + "!");
 		}
 	}
+	
+	
 	
 	private void setStats(int level)
 	{

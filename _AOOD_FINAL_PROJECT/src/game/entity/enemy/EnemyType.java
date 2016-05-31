@@ -2,6 +2,6 @@ package game.entity.enemy;
 
 public enum EnemyType {
 
-	ARCHER,STICK;
+	ARCHER,STICK,SMART_ARCHER;
 	
 }
