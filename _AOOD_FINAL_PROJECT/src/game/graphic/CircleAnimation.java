@@ -86,7 +86,7 @@ public class CircleAnimation extends Animation {
 		if (!infinite)
 			per = ((double) getFrame() / (double) getTotalFrames());
 		else
-			per = (((double)getFrame()%100)/(double)(revPerSec*Game.TICK));
+			per = (((double)getFrame()%(revPerSec*Game.TICK))/(double)(revPerSec*Game.TICK));
 		d = Math.toRadians(per * 360);
 		for (int i = 0; i < points.length; i++)
 		{
