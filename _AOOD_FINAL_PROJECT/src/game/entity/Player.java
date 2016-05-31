@@ -48,6 +48,10 @@ public class Player extends LivingEntity {
 		lastLevel = getLevel();
 	}
 	
+	public void setAttackStyle(int style)
+	{
+		this.attackStyle = style;
+	}
 	
 	public void addXP(int xp)
 	{

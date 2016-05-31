@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 import game.Game;
 import game.GameState;
+import game.entity.Player;
 
 public class CKeyListener extends KeyAdapter {
 
@@ -68,6 +69,16 @@ public class CKeyListener extends KeyAdapter {
 		{
 			//g.getPlayer().attack();
 			//replaced with mouse click
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_1)
+		{
+			g.getPlayer().setAttackStyle(Player.ATTACK_MELEE);
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_2)
+		{
+			g.getPlayer().setAttackStyle(Player.ATTACK_RANGED);
 		}
 		
 	}
