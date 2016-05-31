@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import game.Game;
 import game.entity.enemy.Enemy;
 import game.entity.neutral.Projectile;
+import game.graphic.CircleAnimation;
 import game.graphic.PlayerHitAnimation;
 import game.inventory.Inventory;
 import game.util.Task;
@@ -17,6 +18,7 @@ public class Player extends LivingEntity {
 	
 	private boolean vertMod,horizMod,deathSchedule;
 	private int xp, strength;
+	private CircleAnimation rangedAnimation;
 	private int lastLevel;
 	private int attackStyle;
 	public static final int ATTACK_RANGED = 1, ATTACK_MELEE = 0;
@@ -30,7 +32,8 @@ public class Player extends LivingEntity {
 		this.health = health;
 		inventory = new Inventory();
 		strength = 10;
-		attackStyle = Player.ATTACK_RANGED;
+		attackStyle = Player.ATTACK_MELEE;
+		rangedAnimation = null;
 		deathSchedule = false;
 		lastLevel = 0;
 		this.maxHealth = health;
@@ -48,6 +51,24 @@ public class Player extends LivingEntity {
 		lastLevel = getLevel();
 	}
 	
+	public void enableRangedAnimation()
+	{
+		if (rangedAnimation == null)
+		{
+			rangedAnimation = new CircleAnimation(-1, this, getBounds().getWidth()*1.25, getLevel(), Color.BLUE, 12, 1);
+			this.addAnimation(rangedAnimation);
+		}
+	}
+	
+	public void disableRangedAnimation()
+	{
+		if (rangedAnimation != null)
+		{
+			animations.remove(rangedAnimation);
+			rangedAnimation = null;
+		}
+	}
+	
 	public void setAttackStyle(int style)
 	{
 		this.attackStyle = style;
@@ -62,6 +83,11 @@ public class Player extends LivingEntity {
 		//	this.setHealth(this.getMaxHealth());
 			lastLevel = getLevel();
 			setStats(lastLevel);
+			if(getAttackStyle() == Player.ATTACK_RANGED)
+			{
+				disableRangedAnimation();
+				enableRangedAnimation();
+			}
 			System.out.println("Level up: " + getLevel() + "!");
 		}
 	}

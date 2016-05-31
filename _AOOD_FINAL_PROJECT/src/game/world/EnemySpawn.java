@@ -16,19 +16,22 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 
 	
 	private EnemyType e;
+	private int level;
 	private int interval;
-	private int currentTick;
+	private int currentTick,radius;
 	
 	public static int LENGTH = 50;
 	
-	public EnemySpawn(Location l, int interval, EnemyType e)
+	public EnemySpawn(Location l, int interval, EnemyType e, int radius, int level)
 	{
 		bounds = new Rectangle((int)l.getX(),(int)l.getY(),EnemySpawn.LENGTH,EnemySpawn.LENGTH);
 		this.l = l;
+		this.level = level;
+		this.radius = radius;
 		this.e = e;
 		this.interval = interval;
 		currentTick = 0;
-		this.addAnimation(new CircleAnimation(-1, this, (int)this.getBounds().getWidth()+20, 1));
+		this.addAnimation(new CircleAnimation(-1, this, radius, level, Color.ORANGE, 24, 4));
 	}
 	
 	public EnemyType getEnemyType()
@@ -60,11 +63,18 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 		{
 			return;
 		}
-		double per = ((double)Game.getCurrentGame().getPlayer().getLevel() / (double)Player.MAX_LEVEL);
-		System.out.println(per * 100);
-		enemy.setMaxHealth((int)(per * (Enemy.MAX_HP)));
-		enemy.setHealth(enemy.getMaxHealth());
-		enemy.setStrength((int)(per * (Enemy.MAX_STRENGTH)));
+		if(Game.getCurrentGame().getPlayer().getLocation().distance(getLocation()) > radius)
+		{
+			//System.out.println("Whoops!");
+			return;
+		}
+		//double per = (level / (double)Player.MAX_LEVEL);
+		//System.out.println(per * 100);
+		//enemy.setMaxHealth((int)(per * (Enemy.MAX_HP)));
+		//enemy.setHealth(enemy.getMaxHealth());
+		//enemy.setStrength((int)(per * (Enemy.MAX_STRENGTH)));
+		enemy.setLevel(level);
+		//System.out.println(enemy.getHealth() + "  " + enemy.getLevel());
 		int signx = (int)(Math.random()*2) == 0 ? -1:1;
 		int signy = (int)(Math.random()*2) == 0 ? -1:1;
 		int xoff = (int)(Math.random()*100) * signx;
@@ -72,7 +82,7 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 		xoff+=100 * signx;
 		yoff+=100 * signy;
 		enemy.setLocation(new Location(getLocation().getX()+xoff, getLocation().getY()+yoff));
-		System.out.println(enemy.getHealth());
+		//System.out.println(enemy.getHealth());
 		Game.getCurrentGame().getLevel().addEnemy(enemy);
 	}
 

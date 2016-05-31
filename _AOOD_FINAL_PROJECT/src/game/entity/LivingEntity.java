@@ -20,7 +20,7 @@ public abstract class LivingEntity extends Entity {
 	protected ArrayList<Animation> animations,toAnimations;
 	protected boolean toAnimationsUsed;
 	protected Entity lastDamager;
-	
+	protected int level;
 	
 	protected Rectangle hitBounds;
 
@@ -39,6 +39,17 @@ public abstract class LivingEntity extends Entity {
 		toAnimationsUsed = false;
 		setBounds(new Rectangle((int)getLocation().getX(), (int)getLocation().getY(),LivingEntity.WIDTH,LivingEntity.HEIGHT));
 		hitBounds = new Rectangle((int)getLocation().getX()-(int)(LivingEntity.WIDTH/4), (int)getLocation().getY()-LivingEntity.HEIGHT/4,(int)(LivingEntity.WIDTH*2),(int)(LivingEntity.HEIGHT*2));
+		level = 1;
+	}
+	
+	public int getLevel()
+	{
+		return this.level;
+	}
+	
+	public void setLevel(int l)
+	{
+		this.level=l;
 	}
 
 	@Override
