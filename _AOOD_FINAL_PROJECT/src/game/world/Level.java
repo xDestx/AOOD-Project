@@ -34,6 +34,10 @@ public class Level extends GameObject implements Renderable {
 	private ArrayList<Collectible> allCollectibles;
 	private ArrayList<Projectile> projectiles;
 	private ArrayList<WorldObject> worldObjects;
+	private ArrayList<Enemy> toE;
+	private ArrayList<Collectible> toC;
+	private ArrayList<Projectile> toP;
+	private ArrayList<WorldObject> toW;
 	private int id;
 	private BufferedImage bi;
 	private GroundPattern pattern;
@@ -43,6 +47,14 @@ public class Level extends GameObject implements Renderable {
 		listOfCollidables = new ArrayList<Collidable>();
 		id = idNumber;
 		l = new Location(0, 0);
+		toE = new ArrayList<Enemy>();
+		toP = new ArrayList<Projectile>();
+		toW = new ArrayList<WorldObject>();
+		toC = new ArrayList<Collectible>();
+		enemiesUsed = false;
+		collectiblesUsed = false;
+		projectilesUsed = false;
+		worldObjectsUsed = false;
 		enemies = new ArrayList<Enemy>();
 		allCollectibles = new ArrayList<Collectible>();
 		projectiles = new ArrayList<Projectile>();
@@ -59,6 +71,14 @@ public class Level extends GameObject implements Renderable {
 		listOfCollidables = new ArrayList<Collidable>();
 		enemies = new ArrayList<Enemy>();
 		allCollectibles = new ArrayList<Collectible>();
+		enemiesUsed = false;
+		toE = new ArrayList<Enemy>();
+		toP = new ArrayList<Projectile>();
+		toW = new ArrayList<WorldObject>();
+		toC = new ArrayList<Collectible>();
+		collectiblesUsed = false;
+		projectilesUsed = false;
+		worldObjectsUsed = false;
 		id = idNumber;
 		bi = b;
 		projectiles = new ArrayList<Projectile>();
@@ -71,7 +91,15 @@ public class Level extends GameObject implements Renderable {
 		projectiles = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		allCollectibles = new ArrayList<Collectible>();
+		toE = new ArrayList<Enemy>();
+		toP = new ArrayList<Projectile>();
+		toW = new ArrayList<WorldObject>();
+		toC = new ArrayList<Collectible>();
 		id = idNumber;
+		enemiesUsed = false;
+		collectiblesUsed = false;
+		projectilesUsed = false;
+		worldObjectsUsed = false;
 		try {
 			bi = ImageIO.read(getClass().getResourceAsStream("/images/grass_cool.png"));
 		} catch (Exception e) {
@@ -85,6 +113,14 @@ public class Level extends GameObject implements Renderable {
 		listOfCollidables = cs;
 		projectiles = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
+		enemiesUsed = false;
+		toE = new ArrayList<Enemy>();
+		toP = new ArrayList<Projectile>();
+		toW = new ArrayList<WorldObject>();
+		toC = new ArrayList<Collectible>();
+		collectiblesUsed = false;
+		projectilesUsed = false;
+		worldObjectsUsed = false;
 		allCollectibles = new ArrayList<Collectible>();
 		id = idNumber;
 		bi = b;
@@ -105,6 +141,7 @@ public class Level extends GameObject implements Renderable {
 	public ArrayList<Collidable> getListOfCollidables() {
 		ArrayList<Collidable> newList = new ArrayList<Collidable>();
 		newList.addAll(listOfCollidables);
+		enemiesUsed = true;
 		for(Enemy e : enemies)
 		{
 			if (e instanceof Collidable)
@@ -112,7 +149,9 @@ public class Level extends GameObject implements Renderable {
 				newList.add((Collidable)e);
 			}
 		}
+		enemiesUsed = false;
 		
+		collectiblesUsed = true;
 		for(Collectible e : allCollectibles)
 		{
 			if (e instanceof Collidable)
@@ -120,7 +159,9 @@ public class Level extends GameObject implements Renderable {
 				newList.add((Collidable)e);
 			}
 		}
+		collectiblesUsed = false;
 		
+		worldObjectsUsed = true;
 		for(WorldObject e : worldObjects)
 		{
 			if (e instanceof Collidable)
@@ -128,6 +169,8 @@ public class Level extends GameObject implements Renderable {
 				newList.add((Collidable)e);
 			}
 		}
+		worldObjectsUsed = false;
+		
 		return newList;
 	}
 
@@ -137,7 +180,10 @@ public class Level extends GameObject implements Renderable {
 	
 	public void addProjectile(Projectile o)
 	{
-		this.projectiles.add(o);
+		if(projectilesUsed)
+			toP.add(o);
+		else
+			this.projectiles.add(o);
 	}
 	
 	public void removeProjectile(Projectile o)
@@ -155,16 +201,25 @@ public class Level extends GameObject implements Renderable {
 	}
 
 	public void addEnemy(Enemy e) {
-		enemies.add(e);
+		if(enemiesUsed)
+			toE.add(e);
+		else
+			enemies.add(e);
 	}
 	
 	public void addWorldObject(WorldObject o)
 	{
-		this.worldObjects.add(o);
+		if(worldObjectsUsed)
+			toW.add(o);
+		else
+			this.worldObjects.add(o);
 	}
 
 	public void addCollectible(Collectible c) {
-		allCollectibles.add(c);
+		if(collectiblesUsed)
+			toC.add(c);
+		else
+			allCollectibles.add(c);
 	}
 
 	@Override
@@ -208,11 +263,20 @@ public class Level extends GameObject implements Renderable {
 		}
 
 		// Draw WorldObjects
+		
 		renderCollides(g, x, y);
+		enemiesUsed = true;
 		renderEnemies(g, x, y);
+		enemiesUsed = false;
+		worldObjectsUsed = true;
 		renderWorldObjects(g,x,y);
+		worldObjectsUsed = false;
+		collectiblesUsed = true;
 		renderCollectibles(g, x, y);
+		collectiblesUsed = false;
+		projectilesUsed = true;
 		renderProjectiles(g,x,y);
+		projectilesUsed = false;
 	}
 
 	private void renderCollectibles(Graphics g, int xo, int yo) {
@@ -294,6 +358,7 @@ public class Level extends GameObject implements Renderable {
 	public void tick() {
 		tickEnemies();
 		tickWObjs();
+		
 		// tickCollides();
 		tickCollects();
 		tickProjectiles();
@@ -301,28 +366,56 @@ public class Level extends GameObject implements Renderable {
 	
 	private void tickProjectiles()
 	{
+		projectilesUsed = true;
 		for (Projectile p : getProjectiles())
 		{
 			p.tick();
 		}
+		projectilesUsed = false;
+		for(Projectile p : toP)
+		{
+			getProjectiles().add(p);
+		}
+		toP.clear();
 	}
 
 	private void tickEnemies() {
+		enemiesUsed = true;
 		for (Enemy go : getEnemies()) {
 			go.tick();
 		}
+		enemiesUsed = false;
+		for (Enemy e : toE)
+		{
+			getEnemies().add(e);
+		}
+		toE.clear();
 	}
 	
 	private void tickWObjs() {
+		worldObjectsUsed = true;
 		for (WorldObject go : getWorldObjects()) {
 			go.tick();
 		}
+		worldObjectsUsed = false;
+		for(WorldObject wo : toW)
+		{
+			getWorldObjects().add(wo);
+		}
+		toW.clear();
 	}
 
 	private void tickCollects() {
+		collectiblesUsed = true;
 		for (Collectible go : getAllCollectibles()) {
 			go.tick();
 		}
+		collectiblesUsed = false;
+		for(Collectible c : toC)
+		{
+			getAllCollectibles().add(c);
+		}
+		toC.clear();
 	}
 
 }
