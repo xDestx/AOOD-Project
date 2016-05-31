@@ -120,7 +120,7 @@ public abstract class Enemy extends LivingEntity{
 			return new Stick();
 		} else if (e == EnemyType.ARCHER)
 		{
-			return new SmartArcher();
+			return new Archer();
 		}
 		return null;
 	}  
