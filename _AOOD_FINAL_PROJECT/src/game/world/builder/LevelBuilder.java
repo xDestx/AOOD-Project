@@ -22,11 +22,7 @@ public class LevelBuilder {
 	
 	private static ArrayList<Level>levels;
 	
-	
-	public static void main(String[] args)
-	{
-		LevelBuilderGUI a = new LevelBuilderGUI();
-	}
+
 	
 	
 	public static void init()

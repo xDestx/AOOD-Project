@@ -16,6 +16,7 @@ public class Projectile extends Entity {
 
 	private Vector velocity;
 	private Entity owner;
+	private int tickLife;
 	private int damage;
 	/*
 	 * No collision Why? Lazy.
@@ -26,6 +27,7 @@ public class Projectile extends Entity {
 		this.owner = owner;
 		this.damage = damage;
 		this.velocity = v;
+		tickLife = 0;
 		setBounds(new Rectangle((int) l.getX(), (int) l.getY(), 20, 20));
 		/*
 		 * Default life of 5 seconds
@@ -87,6 +89,17 @@ public class Projectile extends Entity {
 					return;
 				}
 			}
+		}
+		tickLife++;
+		if(tickLife > 4 * Game.TICK)
+		{
+			final Projectile bye = this;
+			Game.getCurrentGame().addTask(new Task(0) {
+				@Override
+				public void run() {
+					Game.getCurrentGame().getLevel().removeProjectile(bye);
+				}
+			});
 		}
 	}
 
