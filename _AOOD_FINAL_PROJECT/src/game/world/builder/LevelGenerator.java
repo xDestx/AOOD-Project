@@ -1,6 +1,7 @@
 package game.world.builder;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import game.world.Level;
 import game.world.Location;
@@ -45,10 +46,11 @@ public class LevelGenerator {
 		 * To do: Everything
 		 */
 		Level finalLevel = new Level(seed);
-		LevelGenerator.generateDungeons(finalLevel, seed);
-		LevelGenerator.generateNature(finalLevel, seed);
-		LevelGenerator.generatePassiveMobs(finalLevel, seed);
-		LevelGenerator.correctErrors(finalLevel, seed);
+		Random r = new Random(seed);
+		LevelGenerator.generateDungeons(finalLevel, r);
+		LevelGenerator.generateNature(finalLevel, r);
+		LevelGenerator.generatePassiveMobs(finalLevel, r);
+		LevelGenerator.correctErrors(finalLevel, r);
 		
 		return finalLevel;
 	}
@@ -63,16 +65,9 @@ public class LevelGenerator {
 	 */
 	
 	
-	private static void generateDungeons(Level l, int seed)
+	private static void generateDungeons(Level l, Random r)
 	{
-		int numOfDungeons = (seed%(int)(seed/(10000000)))/2;
-		if (numOfDungeons < 5)
-		{
-			numOfDungeons = 5;
-		} else if (numOfDungeons > 25)
-		{
-			numOfDungeons = 25;
-		}
+		int numOfDungeons = r.nextInt(20) + 5;
 		final int MIN_SIZE = 1800;
 		final int MAX_SIZE = 1800*4;
 		int remainingArea = (int) (Level.HEIGHT * Level.WIDTH * 0.5);
@@ -82,7 +77,7 @@ public class LevelGenerator {
 		
 		for (int i = 0; i < numOfDungeons; i++)
 		{
-			Dungeon d = generateDungeon(seed,remainingArea,MAX_SIZE,MIN_SIZE);
+			Dungeon d = generateDungeon(r,remainingArea,MAX_SIZE,MIN_SIZE);
 			if (d != null)
 			{
 				dungeons.add(d);
@@ -95,20 +90,28 @@ public class LevelGenerator {
 	}
 	
 	
-	private static Dungeon generateDungeon(int seed, int remainingArea, int MAX_SIZE, int MIN_SIZE)
+	private static Dungeon generateDungeon(Random r, int remainingArea, int MAX_SIZE, int MIN_SIZE)
 	{
 		int x_location;
 		int y_location;
-		double length = (seed%(seed/256));
-		length/=(seed*.000001);
-		length = (remainingArea - MIN_SIZE) * length;
-		length+=MIN_SIZE;
+		double length;
+		int c = 0;
+		do
+		{
+			length = r.nextInt(MAX_SIZE-MIN_SIZE) + MIN_SIZE;
+			c++;
+			if(c == 50)
+			{
+				return null;
+			}
+		} while(length > remainingArea);
 		length = Math.sqrt(length);
-//		x__location = 
-		//Dungeon d = new Dungeon(new Location(x,y), (int)length,(int)length);		
+		x_location = r.nextInt(Level.WIDTH-10)+10;
+		y_location = r.nextInt((int)(Level.HEIGHT-10-Math.sqrt(MAX_SIZE)))+10;
+		Dungeon d = new Dungeon(new Location(x_location,y_location), (int)length, (int)length);
 		
 		
-		return null;
+		return d;
 	}
 
 	
@@ -117,17 +120,17 @@ public class LevelGenerator {
 	
 	
 	
-	private static void generateNature(Level l, int seed)
+	private static void generateNature(Level l, Random r)
 	{
 				
 	}
 	
-	private static void generatePassiveMobs(Level l, int seed)
+	private static void generatePassiveMobs(Level l, Random r)
 	{
 		
 	}
 	
-	private static void correctErrors(Level l, int seed)
+	private static void correctErrors(Level l, Random r)
 	{
 		
 	}

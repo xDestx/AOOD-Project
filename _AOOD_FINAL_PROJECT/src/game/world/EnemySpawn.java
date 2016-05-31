@@ -17,18 +17,19 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 	
 	private EnemyType e;
 	private int interval;
-	private int currentTick;
+	private int currentTick,radius;
 	
 	public static int LENGTH = 50;
 	
-	public EnemySpawn(Location l, int interval, EnemyType e)
+	public EnemySpawn(Location l, int interval, EnemyType e, int radius)
 	{
 		bounds = new Rectangle((int)l.getX(),(int)l.getY(),EnemySpawn.LENGTH,EnemySpawn.LENGTH);
 		this.l = l;
+		this.radius = radius;
 		this.e = e;
 		this.interval = interval;
 		currentTick = 0;
-		this.addAnimation(new CircleAnimation(-1, this, (int)this.getBounds().getWidth()+20, 1));
+		this.addAnimation(new CircleAnimation(-1, this, radius, 1));
 	}
 	
 	public EnemyType getEnemyType()
@@ -58,6 +59,11 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 		Enemy enemy = Enemy.create(e);
 		if (enemy == null)
 		{
+			return;
+		}
+		if(Game.getCurrentGame().getPlayer().getLocation().distance(getLocation()) > radius)
+		{
+			//System.out.println("Whoops!");
 			return;
 		}
 		double per = ((double)Game.getCurrentGame().getPlayer().getLevel() / (double)Player.MAX_LEVEL);
