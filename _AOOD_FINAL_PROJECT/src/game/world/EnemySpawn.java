@@ -68,11 +68,13 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 			//System.out.println("Whoops!");
 			return;
 		}
-		double per = (level / (double)Player.MAX_LEVEL);
+		//double per = (level / (double)Player.MAX_LEVEL);
 		//System.out.println(per * 100);
-		enemy.setMaxHealth((int)(per * (Enemy.MAX_HP)));
-		enemy.setHealth(enemy.getMaxHealth());
-		enemy.setStrength((int)(per * (Enemy.MAX_STRENGTH)));
+		//enemy.setMaxHealth((int)(per * (Enemy.MAX_HP)));
+		//enemy.setHealth(enemy.getMaxHealth());
+		//enemy.setStrength((int)(per * (Enemy.MAX_STRENGTH)));
+		enemy.setLevel(level);
+		//System.out.println(enemy.getHealth() + "  " + enemy.getLevel());
 		int signx = (int)(Math.random()*2) == 0 ? -1:1;
 		int signy = (int)(Math.random()*2) == 0 ? -1:1;
 		int xoff = (int)(Math.random()*100) * signx;

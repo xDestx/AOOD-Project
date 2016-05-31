@@ -20,7 +20,7 @@ import java.util.LinkedList;
 
 public abstract class Enemy extends LivingEntity{
 
-	protected int health, strength, maxHealth;
+	protected int strength;
 	protected int enemyid;
 	protected int xp;
 	protected boolean removedSelf;
@@ -36,6 +36,24 @@ public abstract class Enemy extends LivingEntity{
 		this.strength = strength;
 		this.setAttackBounds(new Rectangle((int)getLocation().getX() - 100,(int) getLocation().getY() - 100, 200, 200));
 		velocity = new Vector(0,0);
+	}
+	
+	public Enemy(Location l, int level, int xp)
+	{
+		super(l);
+		setLevel(level);
+		removedSelf = false;
+		this.xp = xp;
+		this.setAttackBounds(new Rectangle((int)getLocation().getX() - 100,(int) getLocation().getY() - 100, 200, 200));
+		velocity = new Vector(0,0);
+	}
+	
+	public void setLevel(int l)
+	{
+		super.setLevel(l);
+		this.health = (int)((double)MAX_HP *  ((double)level/(double)Player.MAX_LEVEL));
+		this.maxHealth = health;
+		this.strength = (int)((double)MAX_STRENGTH *  ((double)level/(double)Player.MAX_LEVEL));
 	}
 
 	public int getKillXP()
@@ -62,6 +80,8 @@ public abstract class Enemy extends LivingEntity{
 		else
 			g.setColor(Color.blue);
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
+		g.setColor(Color.GREEN);
+		g.drawString(getLevel()+"",xo+(int)(getBounds().getWidth()/2)-(5), yo+(int)(getBounds().getHeight()/2)+20);
 		super.render(g, xo, yo);
 		g.setColor(c);
     }
