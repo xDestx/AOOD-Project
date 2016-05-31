@@ -55,7 +55,7 @@ public class Player extends LivingEntity {
 	{
 		if (rangedAnimation == null)
 		{
-			rangedAnimation = new CircleAnimation(-1, this, getBounds().getWidth()*1.25, getLevel(), Color.BLUE, 12);
+			rangedAnimation = new CircleAnimation(-1, this, getBounds().getWidth()*1.25, getLevel(), Color.BLUE, 12, 1);
 			this.addAnimation(rangedAnimation);
 		}
 	}

@@ -96,7 +96,7 @@ public abstract class Enemy extends LivingEntity{
 		if(!removedSelf)
 		{
 			final Enemy deadenemy = this;
-			Game.getCurrentGame().addObject(new Task(200) {
+			Game.getCurrentGame().addObject(new Task(2*Game.TICK) {
 				@Override
 				public void run()
 				{

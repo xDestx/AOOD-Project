@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import game.Game;
 import game.entity.Entity;
 import game.entity.LivingEntity;
 import game.world.Location;
@@ -14,10 +15,11 @@ public class CircleAnimation extends Animation {
 	private double d,r;
 	private Color c;
 	boolean infinite;
+	private double revPerSec;
 	private int circleSize;
 	private Location[] points;
 	
-	public CircleAnimation(int maxFrames, Entity e, double radius, int circles) {
+	public CircleAnimation(int maxFrames, Entity e, double radius, int circles, double revPerSec) {
 		super(maxFrames);
 		this.e = e;
 		this.r = radius;
@@ -30,9 +32,10 @@ public class CircleAnimation extends Animation {
 		if(maxFrames == -1)
 			infinite = true;
 		c = Color.RED;
+		this.revPerSec = revPerSec;
 	}
 	
-	public CircleAnimation(int maxFrames, Entity e, double radius, int circles, Color c, int circleSize) {
+	public CircleAnimation(int maxFrames, Entity e, double radius, int circles, Color c, int circleSize, double revPerSec) {
 		super(maxFrames);
 		this.e = e;
 		this.r = radius;
@@ -45,6 +48,7 @@ public class CircleAnimation extends Animation {
 		if(maxFrames == -1)
 			infinite = true;
 		this.c = c;
+		this.revPerSec = revPerSec;
 	}
 
 	@Override
@@ -82,7 +86,7 @@ public class CircleAnimation extends Animation {
 		if (!infinite)
 			per = ((double) getFrame() / (double) getTotalFrames());
 		else
-			per = (((double)getFrame()%100)/(double)100);
+			per = (((double)getFrame()%100)/(double)(revPerSec*Game.TICK));
 		d = Math.toRadians(per * 360);
 		for (int i = 0; i < points.length; i++)
 		{
