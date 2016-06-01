@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import game.graphic.ImageLoader;
+
 public class Item {
 
 	private BufferedImage icon;
@@ -11,7 +13,7 @@ public class Item {
 	public Item()
 	{
 		try {
-			icon = ImageIO.read(getClass().getResourceAsStream("/images/grass_cool.png"));
+			icon = ImageLoader.getImage("flashysuit.png");
 		} catch (Exception e) {
 			icon = null;
 		}
