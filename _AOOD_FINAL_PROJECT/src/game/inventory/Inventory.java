@@ -18,8 +18,13 @@ public class Inventory {
 		items = new Item[20];
 		for(int i = 0; i < 20; i++)
 		{
-			items[i] = null;
+			items[i] = new Item();
 		}
+	}
+	
+	public void setOpen(boolean o)
+	{
+		this.isOpen = o;
 	}
 	
 	public boolean isOpen()
@@ -49,9 +54,21 @@ public class Inventory {
 			g.drawLine(20, (int)yo, GFrame.WIDTH-20, (int)yo);
 		}
 		//items
+		
+		/*
+		 * x x x x x
+		 * x x x x x
+		 * x x x x x
+		 * x x x x x
+		 */
 		for (int i = 0; i < 20; i++)
 		{
 			//Do things here!
+			int xo = 20;
+			int yo = 20;
+			int col = i%5; //0 1 2 3 4
+			int row = i/5; //0 1 2 3
+			g.drawImage(items[i].getIcon(),(int)(xo+(row * (GFrame.WIDTH-40)/5.0)),(int)(yo+(col * (GFrame.HEIGHT-40)/4.0)), (int)((GFrame.WIDTH-40)/5.0),(int)((GFrame.HEIGHT-40)/4.0),null );
 		}
 	}
 

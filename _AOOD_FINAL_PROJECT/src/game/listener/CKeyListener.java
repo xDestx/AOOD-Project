@@ -68,8 +68,7 @@ public class CKeyListener extends KeyAdapter {
 		
 		if(e.getKeyCode() == KeyEvent.VK_E)
 		{
-			//g.getPlayer().attack();
-			//replaced with mouse click
+			g.getPlayer().getInventory().setOpen(!g.getPlayer().getInventory().isOpen());
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_1)
