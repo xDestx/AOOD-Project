@@ -1,15 +1,15 @@
 package game.inventory;
 
 import java.awt.Graphics;
+
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
 
 import game.entity.neutral.Collectible;
 import game.graphic.ImageLoader;
 import game.world.Location;
 
-public class Item {
+public abstract class Item {
 
 	private BufferedImage icon;
 	private String name;
@@ -18,7 +18,7 @@ public class Item {
 	{
 		this.name = name;
 		try {
-			icon = ImageLoader.getImage("flashysuit.png");
+			icon = ImageLoader.getImage(path);
 		} catch (Exception e) {
 			icon = null;
 		}
