@@ -47,6 +47,9 @@ public class CMouseListener extends MouseAdapter {
 			{
 				g.getPlayer().attack();
 			}
+		} else
+		{
+			g.getPlayer().getInventory().mouseClicked(e);
 		}
 	}
 	

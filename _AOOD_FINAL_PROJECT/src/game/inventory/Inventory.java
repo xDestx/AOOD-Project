@@ -2,7 +2,9 @@ package game.inventory;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -17,15 +19,26 @@ public class Inventory {
 	private boolean isOpen;
 	private ArrayList<Item> items;
 	private BufferedImage itemsImage;
-
+	private boolean modifiable;
 	public Inventory() {
 		isOpen = false;
+		modifiable = true;
 		items = new ArrayList<Item>();
 		for (int i = 0; i < 20; i++)
-			items.add(i, new Item());
+			items.add(i, new Item(null));
 		drawItemsImage();
 		removeItem(13);
 		removeItem(4);
+	}
+	
+	public void setModifiable(boolean b)
+	{
+		this.modifiable = b;
+	}
+	
+	public boolean getModifiable()
+	{
+		return this.modifiable;
 	}
 	
 	private void drawItemsImage()
@@ -62,18 +75,42 @@ public class Inventory {
 		drawItemsImage();
 	}
 	
-	public void removeItem(Item i)
+	public Item removeItem(Item i)
 	{
 		int size1 = items.size();
 		items.remove(i);
 		if(size1 != items.size())
-			drawItemsImage();	
+		{
+			drawItemsImage();
+		}
+		return i;
 	}
 
-	public void removeItem(int pos)
+	public Item removeItem(int pos)
 	{
+		Item i = items.get(pos);
 		items.set(pos, null);
 		drawItemsImage();
+		return i;
+	}
+	
+	public void mouseClicked(MouseEvent e)
+	{
+		if(e.getButton() == MouseEvent.BUTTON3)
+		{
+			//Assuming this is right click?
+			if(!getModifiable())
+				return;
+			Point p = e.getPoint();
+			int col = (int) ((p.getX()-20)/((GFrame.WIDTH - 40) / 5.0));
+			int row = (int) ((p.getY()-5)/((GFrame.HEIGHT-40) / 4.0));
+			if (col > 4 || row > 3)
+				return;
+			int v = row*5 + col;
+			//Gonna place randomly on ground somehow
+			Item adiosAmigo = removeItem(v);
+		}
+		
 	}
 	
 	/*
