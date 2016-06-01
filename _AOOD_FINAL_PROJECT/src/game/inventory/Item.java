@@ -9,13 +9,14 @@ import game.entity.neutral.Collectible;
 import game.graphic.ImageLoader;
 import game.world.Location;
 
-public class Item extends Collectible {
+public class Item {
 
 	private BufferedImage icon;
+	private String name;
 	
-	public Item(Location l)
+	public Item(String name, String path)
 	{
-		super(l);
+		this.name = name;
 		try {
 			icon = ImageLoader.getImage("flashysuit.png");
 		} catch (Exception e) {
@@ -28,25 +29,10 @@ public class Item extends Collectible {
 	{
 		return this.icon;
 	}
-
-
-	@Override
-	public void effect() {
-		//Pick up effect (add to inventory)
-	}
-
-
-	@Override
-	public void render(Graphics g, int xo, int yo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void tick() {
-		// TODO Auto-generated method stub
-		
-	}
 	
+	public String toString()
+	{
+		return name;
+	}
+
 }

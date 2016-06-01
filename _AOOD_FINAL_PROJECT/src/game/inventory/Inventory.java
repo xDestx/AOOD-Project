@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import game.GFrame;
 import game.Game;
 import game.Renderable;
+import game.entity.neutral.ItemEntity;
 import game.util.Task;
 import game.world.Location;
 
@@ -25,7 +26,7 @@ public class Inventory {
 		modifiable = true;
 		items = new ArrayList<Item>();
 		for (int i = 0; i < 20; i++)
-			items.add(i, new Item(null));
+			items.add(i, null);
 		drawItemsImage();
 		removeItem(13);
 		removeItem(4);
@@ -67,11 +68,16 @@ public class Inventory {
 		return isOpen;
 	}
 	
-	public void addItem(Item i)
+	public void addItem(Item item)
 	{
-		if(items.size() > 20)
-			return;
-		items.add(i);
+		for (int i = 0; i < 20; i++)
+		{
+			if(items.get(i) == null)
+			{
+				items.add(i, item);
+				break;
+			}
+		}
 		drawItemsImage();
 	}
 	
@@ -94,6 +100,7 @@ public class Inventory {
 		return i;
 	}
 	
+	
 	public void mouseClicked(MouseEvent e)
 	{
 		if(e.getButton() == MouseEvent.BUTTON3)
@@ -109,8 +116,17 @@ public class Inventory {
 			int v = row*5 + col;
 			//Gonna place randomly on ground somehow
 			Item adiosAmigo = removeItem(v);
+			dropItem(adiosAmigo);
 		}
 		
+	}
+	
+	private void dropItem(Item i)
+	{
+		if (i == null)
+			return;
+		ItemEntity ie = new ItemEntity(new Location(Game.getCurrentGame().getPlayer().getLocation()), i, 3*Game.TICK);
+		Game.getCurrentGame().getLevel().addCollectible(ie);
 	}
 	
 	/*

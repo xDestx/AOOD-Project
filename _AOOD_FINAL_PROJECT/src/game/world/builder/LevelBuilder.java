@@ -10,6 +10,8 @@ import game.entity.enemy.SmartArcher;
 import game.entity.enemy.Stick;
 import game.entity.neutral.Collectible;
 import game.entity.neutral.HealthPack;
+import game.entity.neutral.ItemEntity;
+import game.inventory.Item;
 import game.world.Collidable;
 import game.world.Level;
 import game.world.Location;
@@ -52,8 +54,8 @@ public class LevelBuilder {
 
 		//level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
 		//level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
-		level.addCollectible(new HealthPack(new Location(1800,1300), 10));
-		level.addWorldObject(new EnemySpawn(new Location(1500,1100), 5*Game.TICK, EnemyType.SMART_ARCHER, 400,  2));
+		level.addCollectible(new ItemEntity(new Location(1800,1300), new Item("AA","aaa")));
+		level.addWorldObject(new EnemySpawn(new Location(1500,1100), 5*Game.TICK, EnemyType.SMART_ARCHER, 400,  1));
 
 		levels.add(level);
 	}
