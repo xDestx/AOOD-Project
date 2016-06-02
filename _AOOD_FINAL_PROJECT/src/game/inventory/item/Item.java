@@ -60,5 +60,19 @@ public abstract class Item {
 	{
 		return name;
 	}
+	
+	
+	public static Item createRandomItem()
+	{
+		Class<?>[] items = {SoulStone.class};
+		int i = (int)(Math.random()*items.length);
+		try {
+			return (Item)items[i].newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

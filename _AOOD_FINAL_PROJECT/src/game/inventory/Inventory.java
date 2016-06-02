@@ -50,6 +50,11 @@ public class Inventory {
 		return this.modifiable;
 	}
 	
+	public boolean isFull()
+	{
+		return this.getItems().size() >= 20;
+	}
+	
 	private void drawItemsImage()
 	{
 		itemsImage = new BufferedImage(GFrame.WIDTH-40, GFrame.HEIGHT-40, BufferedImage.TYPE_INT_RGB);
@@ -133,6 +138,13 @@ public class Inventory {
 	
 	public ArrayList<Item> getItems()
 	{
+		ArrayList<Item> items = new ArrayList<Item>();
+		for(Item i : this.items)
+		{
+			if(i.getName().equals(""))
+				continue;
+			items.add(i);
+		}
 		return items;
 	}
 	
