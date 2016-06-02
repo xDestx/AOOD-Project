@@ -38,7 +38,7 @@ public class Player extends LivingEntity {
 		attackStyle = Player.ATTACK_MELEE;
 		rangedAnimation = null;
 		deathSchedule = false;
-		lastLevel = 0;
+		lastLevel = 10;
 		this.maxHealth = health;
 		xp = 0;
 	}
@@ -246,6 +246,7 @@ public class Player extends LivingEntity {
 		renderBonus(g);
 		g.setColor(c);
 	}
+<<<<<<< HEAD
 	
 	private void renderBonus(Graphics g)
 	{
@@ -297,5 +298,7 @@ public class Player extends LivingEntity {
 
 
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 }
