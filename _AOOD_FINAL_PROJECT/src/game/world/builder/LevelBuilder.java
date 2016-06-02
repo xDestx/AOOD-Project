@@ -50,7 +50,8 @@ public class LevelBuilder {
 		//level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
 		//level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
 		level.addCollectible(new ItemEntity(new Location(1800,1300), new SoulStone()));
-		level.addWorldObject(new EnemySpawn(new Location(1500,1100), 5*Game.TICK, EnemyType.SMART_ARCHER, 400,  1));
+		EnemyType[] types = {EnemyType.SMART_ARCHER,EnemyType.ARCHER,EnemyType.STICK};
+		level.addWorldObject(new EnemySpawn(new Location(1500,1100), 3*Game.TICK, types , 400,  1));
 
 		levels.add(level);
 	}

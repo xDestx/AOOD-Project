@@ -15,14 +15,14 @@ import game.graphic.CircleAnimation;
 public class EnemySpawn extends WorldObject implements Spawner, Renderable, Collidable {
 
 	
-	private EnemyType e;
+	private EnemyType[] e;
 	private int level;
 	private int interval;
 	private int currentTick,radius;
 	
 	public static int LENGTH = 50;
 	
-	public EnemySpawn(Location l, int interval, EnemyType e, int radius, int level)
+	public EnemySpawn(Location l, int interval, EnemyType[] e, int radius, int level)
 	{
 		bounds = new Rectangle((int)l.getX(),(int)l.getY(),EnemySpawn.LENGTH,EnemySpawn.LENGTH);
 		this.l = l;
@@ -34,12 +34,12 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 		this.addAnimation(new CircleAnimation(-1, this, radius, level, Color.ORANGE, 24, 4));
 	}
 	
-	public EnemyType getEnemyType()
+	public EnemyType[] getEnemyTypes()
 	{
 		return this.e;
 	}
 	
-	public void setEnemyType(EnemyType e)
+	public void setEnemyTypes(EnemyType[] e)
 	{
 		this.e = e;
 	}
@@ -58,7 +58,8 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 
 	@Override
 	public void spawn() {
-		Enemy enemy = Enemy.create(e);
+		int x = (int)(Math.random() * e.length);
+		Enemy enemy = Enemy.create(e[x]);
 		if (enemy == null)
 		{
 			return;
