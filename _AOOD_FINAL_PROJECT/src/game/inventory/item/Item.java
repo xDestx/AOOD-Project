@@ -1,4 +1,4 @@
-package game.inventory;
+package game.inventory.item;
 
 import java.awt.Graphics;
 

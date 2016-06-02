@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import game.Game;
-import game.inventory.Item;
+import game.inventory.item.Item;
 import game.util.Task;
 import game.world.Location;
 

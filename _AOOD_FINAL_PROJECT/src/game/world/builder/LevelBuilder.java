@@ -11,7 +11,7 @@ import game.entity.enemy.Stick;
 import game.entity.neutral.Collectible;
 import game.entity.neutral.HealthPack;
 import game.entity.neutral.ItemEntity;
-import game.inventory.Item;
+import game.inventory.item.Item;
 import game.world.Collidable;
 import game.world.Level;
 import game.world.Location;

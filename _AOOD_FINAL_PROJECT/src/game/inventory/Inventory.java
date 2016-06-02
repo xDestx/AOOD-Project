@@ -12,6 +12,7 @@ import game.GFrame;
 import game.Game;
 import game.Renderable;
 import game.entity.neutral.ItemEntity;
+import game.inventory.item.Item;
 import game.util.Task;
 import game.world.Location;
 
