@@ -133,6 +133,13 @@ public class Inventory {
 	
 	public ArrayList<Item> getItems()
 	{
+		ArrayList<Item> items = new ArrayList<Item>();
+		for(Item i : this.items)
+		{
+			if(i.getName().equals(""))
+				continue;
+			items.add(i);
+		}
 		return items;
 	}
 	

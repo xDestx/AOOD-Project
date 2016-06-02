@@ -2,21 +2,17 @@ package game.entity.enemy;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
-import game.Game;
-import game.ai.Mind;
-import game.ai.enemy.Shooter;
-import game.ai.enemy.Zombie;
-import game.entity.LivingEntity;
-import game.entity.Player;
-import game.util.Task;
-import game.world.Collidable;
-import game.world.Location;
-import game.world.Vector;
-
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.LinkedList;
+
+import game.Game;
+import game.entity.LivingEntity;
+import game.entity.Player;
+import game.entity.neutral.ItemEntity;
+import game.inventory.item.Item;
+import game.util.Task;
+import game.world.Location;
+import game.world.Vector;
 
 public abstract class Enemy extends LivingEntity{
 
@@ -128,8 +124,21 @@ public abstract class Enemy extends LivingEntity{
 				//System.out.println("damn, " + getKillXP() + " xp! " + Game.getCurrentGame().getPlayer().getXP());
 			}
 			removedSelf = true;
-			
+			doDrop();
 		}
+	}
+	
+	protected void doDrop()
+	{
+		ArrayList<Item> items = inventory.getItems();
+		Item extra = Item.createRandomItem();
+		if(extra != null)
+			items.add(Item.createRandomItem());
+		for (Item i : items)
+		{
+			Game.getCurrentGame().getLevel().addCollectible(new ItemEntity(new Location(getCenterLocation()),i,1*Game.TICK));
+		}
+		
 	}
 
 
