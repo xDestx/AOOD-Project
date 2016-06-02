@@ -63,7 +63,7 @@ public class Archer extends Enemy {
 				double yv = yp * 10;
 				//Total V (Hypotenuse) = 10
 				Vector v = new Vector(xv,yv);
-				launchProjectile(v,strength);
+				launchProjectile(v,getStrength());
 				//Game.getCurrentGame().getLevel().addProjectile(new Projectile(new Location(getCenterLocation()), v, this, strength));//Total speed of 10 p/t (pixels/tick)
 			}
 			//addAnimation(new PlayerHitAnimation(this));

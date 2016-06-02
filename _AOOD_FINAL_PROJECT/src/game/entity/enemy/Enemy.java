@@ -20,7 +20,6 @@ import java.util.LinkedList;
 
 public abstract class Enemy extends LivingEntity{
 
-	protected int strength;
 	protected int enemyid;
 	protected int xp;
 	protected boolean removedSelf;
@@ -52,7 +51,7 @@ public abstract class Enemy extends LivingEntity{
 	{
 		super.setLevel(l);
 		this.health = (int)((double)MAX_HP *  ((double)level/(double)Player.MAX_LEVEL));
-		this.maxHealth = health;
+		this.maxHealth = (int)health;
 		this.strength = (int)((double)MAX_STRENGTH *  ((double)level/(double)Player.MAX_LEVEL));
 	}
 

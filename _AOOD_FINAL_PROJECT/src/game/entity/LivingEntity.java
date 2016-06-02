@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import game.Game;
 import game.entity.neutral.Projectile;
 import game.graphic.Animation;
-import game.graphic.PlayerHitAnimation;
+import game.inventory.Inventory;
+import game.inventory.item.Item;
 import game.util.Task;
 import game.world.Collidable;
 import game.world.Location;
@@ -16,11 +17,14 @@ import game.world.Vector;
 
 public abstract class LivingEntity extends Entity {
 
-	protected int health,maxHealth;
+	protected int maxHealth,strength;
+	protected double health;
 	protected ArrayList<Animation> animations,toAnimations;
 	protected boolean toAnimationsUsed;
 	protected Entity lastDamager;
 	protected int level;
+	protected Inventory inventory;
+	protected double bonusHp, bonusRegen, bonusStr;
 	
 	protected Rectangle hitBounds;
 
@@ -31,6 +35,10 @@ public abstract class LivingEntity extends Entity {
 	public LivingEntity(Location l) {
 		super(l);
 		this.health = 100;
+		bonusHp = 0;
+		bonusRegen = 0;
+		inventory = new Inventory(this);
+		bonusStr = 0;
 		lastDamager = null;
 		this.maxHealth = 100;
 		velocity = new Vector(0, 0);
@@ -42,9 +50,52 @@ public abstract class LivingEntity extends Entity {
 		level = 1;
 	}
 	
+	
+	public Inventory getInventory()
+	{
+		return this.inventory;
+	}
+	
 	public int getLevel()
 	{
 		return this.level;
+	}
+	
+	public int getMaxHealth()
+	{
+		return (int)(this.maxHealth+this.bonusHp);
+	}
+	
+	public void setStrength(int str)
+	{
+		this.strength = str;
+	}
+	
+	public int getStrength()
+	{
+		return (int)(this.strength+this.bonusStr);
+	}
+	
+	public void inventoryUpdated()
+	{
+		updateItemEffects();
+	}
+	
+	protected void updateItemEffects()
+	{
+		bonusHp = 0;
+		bonusRegen = 0;
+		bonusStr = 0;
+		if(inventory == null)
+			return;
+		if(inventory.getItems() == null)
+			return;
+		for(Item e : inventory.getItems())
+		{
+			bonusHp+= e.getHealthBoost();
+			bonusRegen+= e.getRegenBoost();
+			bonusStr+= e.getStrengthBoost();
+		}
 	}
 	
 	public void setLevel(int l)
@@ -61,6 +112,15 @@ public abstract class LivingEntity extends Entity {
 	@Override
 	public void tick() {
 		animationTick();
+		bonusEffects();
+	}
+	
+	protected void bonusEffects()
+	{
+		//Only regen right now
+		this.health+=bonusRegen;
+		if(health >= getMaxHealth())
+			health = getMaxHealth();
 	}
 	
 	public void addAnimation(final Animation a)
@@ -103,13 +163,9 @@ public abstract class LivingEntity extends Entity {
 	
 	public int getHealth()
 	{
-		return this.health;
+		return (int)this.health;
 	}
 	
-	public int getMaxHealth()
-	{
-		return this.maxHealth;
-	}
 	
 	public void setHealth(int h)
 	{
@@ -139,7 +195,7 @@ public abstract class LivingEntity extends Entity {
 		g.setColor(Color.red);
 		g.fillRect(x, y, width, height);
 		g.setColor(Color.green);
-		g.fillRect(x, y, (int)(width*((double)health/(double)maxHealth)), height);
+		g.fillRect(x, y, (int)(width*((double)health/(double)getMaxHealth())), height);
 	}
 	
 	protected void movement()

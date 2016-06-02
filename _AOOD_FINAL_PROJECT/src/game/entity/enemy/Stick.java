@@ -58,7 +58,7 @@ public class Stick extends Enemy{
 		{
 			if(Game.getCurrentGame().getPlayer().getBounds().intersects(getAttackBounds()))
 			{
-				Game.getCurrentGame().getPlayer().wasHit(strength, this);
+				Game.getCurrentGame().getPlayer().wasHit(getStrength(), this);
 			}
 			addAnimation(new PlayerHitAnimation(this));
 			cooldownTicks = 0;

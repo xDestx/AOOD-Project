@@ -9,6 +9,7 @@ import game.entity.neutral.Projectile;
 import game.graphic.CircleAnimation;
 import game.graphic.PlayerHitAnimation;
 import game.inventory.Inventory;
+import game.inventory.item.Item;
 import game.util.Task;
 import game.world.Location;
 import game.world.Vector;
@@ -17,20 +18,20 @@ public class Player extends LivingEntity {
 	
 	
 	private boolean vertMod,horizMod,deathSchedule;
-	private int xp, strength;
+	private int xp;
 	private CircleAnimation rangedAnimation;
 	private int lastLevel;
 	private int attackStyle;
 	public static final int ATTACK_RANGED = 1, ATTACK_MELEE = 0;
-	private Inventory inventory;
 	public static final int MAX_LEVEL = 20, MAX_HEALTH = 5000, MAX_STRENGTH = 550;
 	//Check if horizontal / vertical keys are being held.
 	
 	public Player(Location l, int health) {
 		super(l);
-		
+		bonusRegen = 0;
+		bonusHp = 0;
+		bonusStr = 0;
 		this.health = health;
-		inventory = new Inventory();
 		strength = 10;
 		attackStyle = Player.ATTACK_MELEE;
 		rangedAnimation = null;
@@ -105,15 +106,6 @@ public class Player extends LivingEntity {
 		this.setStrength((int)((double)MAX_STRENGTH * ((double)level / (double)MAX_LEVEL)));
 	}
 	
-	public int getStrength()
-	{
-		return this.strength;
-	}
-	
-	public void setStrength(int str)
-	{
-		this.strength = str;
-	}
 	
 	public int getLevel()
 	{
@@ -155,7 +147,7 @@ public class Player extends LivingEntity {
 	public void attack(double angle)
 	{
 		Vector v = new Vector(angle, 10);
-		launchProjectile(v,strength);
+		launchProjectile(v,(int)(getStrength()*.45));
 	}
 	
 	@Override
@@ -163,11 +155,12 @@ public class Player extends LivingEntity {
 	{
 		for (Enemy e : Game.getCurrentGame().getEnemies()){
 			if (this.getAttackBounds().intersects(e.getBounds())){
-				e.wasHit((int)(strength*1.25), this);
+				e.wasHit((int)(getStrength()), this);
 			}
 		}
 		addAnimation(new PlayerHitAnimation(this));
 	}
+	
 	
 	@Override
 	public void tick() {
@@ -239,10 +232,6 @@ public class Player extends LivingEntity {
 		drawXPBarAndLevel(g,xo,yo);
 		getInventory().render(g);
 		g.setColor(c);
-	}
-
-	public Inventory getInventory() {
-		return inventory;
 	}
 
 
