@@ -47,10 +47,12 @@ public class Game {
 		Game.game = g;
 	}
 	
-	public void playGame(Game game){
-		this.game = game;
+	public static void playNewGame()
+	{
+		game = new Game();
 		game.play();
 	}
+	
 	
 	public Game() {
 		playing = false;
@@ -69,6 +71,7 @@ public class Game {
 		gf.getCanvas().addMouseListener(mouseList);
 		gf.getCanvas().addMouseMotionListener(mouseList);
 		gf.getCanvas().addKeyListener(new CKeyListener(this));
+		
 	}
 	
 	public Camera getCamera()

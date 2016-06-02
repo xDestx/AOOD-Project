@@ -7,24 +7,30 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MainMenu extends JFrame{
+public class MainMenu extends JFrame {
 	private static final int WIDTH = 300, HEIGHT = 400;
 	private static JPanel panel;
 	private static JButton playGame;
 	private static Game game;
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		MainMenu mm = new MainMenu();
 	}
-	public MainMenu(){
+
+	public MainMenu() {
 		super();
 		panel = new JPanel();
 		playGame = new JButton("Play");
 		playGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				game = new Game();
-				game.playGame(game);
+				Thread t = new Thread() {
+					@Override
+					public void run() {
+						Game.playNewGame();
+					}
+				};
+				t.start();
 			}
 		});
 		this.setSize(WIDTH, HEIGHT);
@@ -33,5 +39,5 @@ public class MainMenu extends JFrame{
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 }
