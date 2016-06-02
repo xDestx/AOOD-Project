@@ -237,6 +237,7 @@ public class Player extends LivingEntity {
 		renderAnimations(g,xo,yo);
 		drawHealthBar(g,xo,yo);
 		drawXPBarAndLevel(g,xo,yo);
+		getInventory().render(g);
 		g.setColor(c);
 	}
 

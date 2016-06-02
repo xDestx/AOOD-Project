@@ -15,13 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import game.Camera;
+import game.GFrame;
 import game.world.Location;
 
 public class LevelBuilderGUI extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5429456408453891258L;
 	private Stack<Rectangle> history;
 	private JPanel p;
@@ -52,6 +50,7 @@ public class LevelBuilderGUI extends JFrame {
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponents(g);
+				
 				Graphics2D g2 = (Graphics2D)g;
 				for (Rectangle r : history)
 				{
