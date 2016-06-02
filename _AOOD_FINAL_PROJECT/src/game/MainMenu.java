@@ -31,6 +31,7 @@ public class MainMenu extends JFrame {
 					}
 				};
 				t.start();
+				setVisible(false);
 			}
 		});
 		this.setSize(WIDTH, HEIGHT);
