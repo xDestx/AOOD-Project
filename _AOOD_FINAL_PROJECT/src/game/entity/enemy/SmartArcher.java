@@ -42,7 +42,7 @@ public class SmartArcher extends Archer {
 				double predictyv = predictyp * 10;
 				Vector v = new Vector(xv + predictxv,yv + predictyv);
 				//Vector v = new Vector(xv, yv);
-				launchProjectile(v,strength);
+				launchProjectile(v,getStrength());
 			}
 			//addAnimation(new PlayerHitAnimation(this));
 			cooldownTicks = 0;

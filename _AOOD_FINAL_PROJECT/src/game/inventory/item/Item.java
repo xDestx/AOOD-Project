@@ -46,6 +46,10 @@ public abstract class Item {
 		return this.rB;
 	}
 	
+	public String getName()
+	{
+		return this.name;
+	}
 	
 	public BufferedImage getIcon()
 	{

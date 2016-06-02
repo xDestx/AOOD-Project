@@ -3,17 +3,16 @@ package game.inventory;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import game.GFrame;
 import game.Game;
-import game.Renderable;
+import game.entity.LivingEntity;
 import game.entity.neutral.ItemEntity;
+import game.inventory.item.EmptyItem;
 import game.inventory.item.Item;
-import game.util.Task;
 import game.world.Location;
 
 public class Inventory {
@@ -22,15 +21,23 @@ public class Inventory {
 	private ArrayList<Item> items;
 	private BufferedImage itemsImage;
 	private boolean modifiable;
-	public Inventory() {
+	private LivingEntity owner;
+	
+	public Inventory(LivingEntity owner) {
 		isOpen = false;
+		this.owner = owner;
 		modifiable = true;
 		items = new ArrayList<Item>();
 		for (int i = 0; i < 20; i++)
-			items.add(i, null);
+			items.add(i, new EmptyItem());
 		drawItemsImage();
 		removeItem(13);
 		removeItem(4);
+	}
+	
+	private void notifyChanged()
+	{
+		owner.inventoryUpdated();
 	}
 	
 	public void setModifiable(boolean b)
@@ -52,8 +59,6 @@ public class Inventory {
 			int yo = 0;
 			int col = i % 5; // 0 1 2 3 4
 			int row = i / 5; // 0 1 2 3
-			if(items.get(i) == null)
-				continue;
 			itemsImage.getGraphics().drawImage(items.get(i).getIcon(), (int) (xo + (col * (GFrame.WIDTH - 40) / 5.0)),
 					(int) (yo + (row * (GFrame.HEIGHT - 40) / 4.0)), (int) ((GFrame.WIDTH - 40) / 5.0),
 					(int) ((GFrame.HEIGHT - 40) / 4.0), null);
@@ -63,6 +68,7 @@ public class Inventory {
 
 	public void setOpen(boolean o) {
 		this.isOpen = o;
+		notifyChanged();
 	}
 
 	public boolean isOpen() {
@@ -73,13 +79,14 @@ public class Inventory {
 	{
 		for (int i = 0; i < 20; i++)
 		{
-			if(items.get(i) == null)
+			if(items.get(i).getName().equals(""))
 			{
 				items.add(i, item);
 				break;
 			}
 		}
 		drawItemsImage();
+		notifyChanged();
 	}
 	
 	public Item removeItem(Item i)
@@ -90,14 +97,16 @@ public class Inventory {
 		{
 			drawItemsImage();
 		}
+		notifyChanged();
 		return i;
 	}
 
 	public Item removeItem(int pos)
 	{
 		Item i = items.get(pos);
-		items.set(pos, null);
+		items.set(pos, new EmptyItem());
 		drawItemsImage();
+		notifyChanged();
 		return i;
 	}
 	
@@ -122,12 +131,18 @@ public class Inventory {
 		
 	}
 	
-	private void dropItem(Item i)
+	public ArrayList<Item> getItems()
 	{
-		if (i == null)
+		return items;
+	}
+	
+ 	private void dropItem(Item i)
+	{
+		if (i.getName().equals(""))
 			return;
 		ItemEntity ie = new ItemEntity(new Location(Game.getCurrentGame().getPlayer().getLocation()), i, 3*Game.TICK);
 		Game.getCurrentGame().getLevel().addCollectible(ie);
+		notifyChanged();
 	}
 	
 	/*
