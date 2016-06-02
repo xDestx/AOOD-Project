@@ -246,8 +246,7 @@ public class Player extends LivingEntity {
 		renderBonus(g);
 		g.setColor(c);
 	}
-<<<<<<< HEAD
-	
+
 	private void renderBonus(Graphics g)
 	{
 		if(!bonusShown)
@@ -294,11 +293,5 @@ public class Player extends LivingEntity {
 		g.drawString("+" + (int)(bonusRegen*Game.TICK) + "rgn", (int)(barStart*1.25), (y+(5*barYStart))+25);
 		
 	}
-
-
-
-
-=======
->>>>>>> refs/remotes/origin/master
 
 }
