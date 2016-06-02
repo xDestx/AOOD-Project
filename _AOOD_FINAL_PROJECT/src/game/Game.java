@@ -42,7 +42,16 @@ public class Game {
 		return game;
 	}
 	
-
+	public static void setCurrentGame(Game g)
+	{
+		Game.game = g;
+	}
+	
+	public void playGame(Game game){
+		this.game = game;
+		game.play();
+	}
+	
 	public Game() {
 		playing = false;
 		gf = new GFrame(this);

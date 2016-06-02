@@ -24,7 +24,7 @@ public class MainMenu extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				game = new Game();
-				game.play();
+				game.playGame(game);
 			}
 		});
 		this.setSize(WIDTH, HEIGHT);
