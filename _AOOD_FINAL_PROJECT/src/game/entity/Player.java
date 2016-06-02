@@ -3,6 +3,7 @@ package game.entity;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import game.GFrame;
 import game.Game;
 import game.entity.enemy.Enemy;
 import game.entity.neutral.Projectile;
@@ -17,7 +18,7 @@ import game.world.Vector;
 public class Player extends LivingEntity {
 	
 	
-	private boolean vertMod,horizMod,deathSchedule;
+	private boolean vertMod,horizMod,deathSchedule,bonusShown;
 	private int xp;
 	private CircleAnimation rangedAnimation;
 	private int lastLevel;
@@ -30,6 +31,7 @@ public class Player extends LivingEntity {
 		super(l);
 		bonusRegen = 0;
 		bonusHp = 0;
+		bonusShown = false;
 		bonusStr = 0;
 		this.health = health;
 		strength = 10;
@@ -44,6 +46,16 @@ public class Player extends LivingEntity {
 	public int getXP()
 	{
 		return this.xp;
+	}
+	
+	public void setBonusShown(boolean b)
+	{
+		this.bonusShown = b;
+	}
+	
+	public boolean getBonusShown()
+	{
+		return this.bonusShown;
 	}
 	
 	public void setXP(int xp)
@@ -231,7 +243,55 @@ public class Player extends LivingEntity {
 		drawHealthBar(g,xo,yo);
 		drawXPBarAndLevel(g,xo,yo);
 		getInventory().render(g);
+		renderBonus(g);
 		g.setColor(c);
+	}
+	
+	private void renderBonus(Graphics g)
+	{
+		if(!bonusShown)
+			return;
+		int bonusWidth = 500;
+		int bonusHeight = 325;
+		Color str = Color.ORANGE;
+		Color hp = Color.RED;
+		Color rg = Color.PINK;
+		int x = (int)((GFrame.WIDTH/2)-(bonusWidth/2));
+		int y = (int)((GFrame.HEIGHT/2)-(bonusHeight/2));
+		g.setColor(Color.black);
+		g.fillRect(x, y, bonusWidth, bonusHeight-30);
+		
+		//Health v Bonus Health
+		int barWidth = 300;
+		int barStart = x+(bonusWidth/2)-barWidth/2;
+		int barYStart = bonusHeight/8;
+		
+		g.setColor(Color.GREEN);
+		g.fillRect(barStart, (y+(1*barYStart)), barWidth, 50);
+		double per = ((double)maxHealth/(double)getMaxHealth());
+		int amt = (int)(barWidth * per);
+		g.setColor(hp);
+		g.fillRect(barStart, (y+(1*barYStart)), amt, 50);
+		
+		g.setColor(Color.black);
+		g.drawString("+"+(getMaxHealth()-maxHealth) + "hp", (int)(barStart*1.25), (y+(1*barYStart))+25);
+		
+		g.setColor(Color.green);
+		g.fillRect(barStart, (y+(3*barYStart)), barWidth, 50);
+		per = ((double)strength/(double)getStrength());
+		amt = (int)(barWidth * per);
+		g.setColor(str);
+		g.fillRect(barStart, (y+(3*barYStart)), amt, 50);
+		
+		g.setColor(Color.black);
+		g.drawString("+"+(getStrength()-strength) + "str", (int)(barStart*1.25), (y+(3*barYStart))+25);
+		
+		g.setColor(rg);
+		g.fillRect(barStart, (y+(5*barYStart)), barWidth, 50);
+		
+		g.setColor(Color.black);
+		g.drawString("+" + (int)(bonusRegen*Game.TICK) + "rgn", (int)(barStart*1.25), (y+(5*barYStart))+25);
+		
 	}
 
 

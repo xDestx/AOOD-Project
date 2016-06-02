@@ -71,6 +71,11 @@ public class CKeyListener extends KeyAdapter {
 			g.getPlayer().getInventory().setOpen(!g.getPlayer().getInventory().isOpen());
 		}
 		
+		if(e.getKeyCode() == KeyEvent.VK_B)
+		{
+			g.getPlayer().setBonusShown(!g.getPlayer().getBonusShown());
+		}
+		
 		if (e.getKeyCode() == KeyEvent.VK_1)
 		{
 			g.getPlayer().setAttackStyle(Player.ATTACK_MELEE);
