@@ -16,6 +16,8 @@ public abstract class Item {
 	 * Regen shall be measured in heal / t
 	 * rB = 5;
 	 * every 1/t h
+	 * 
+	 * 5 / Game.TICK = tps
 	 */
 	
 	public Item(String name, String path, int strBoost, int healthBoost, double regenBoost)

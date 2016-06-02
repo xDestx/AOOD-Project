@@ -132,6 +132,11 @@ public class Level extends GameObject implements Renderable {
 		return id;
 	}
 
+	public void addCollidable(Collidable c)
+	{
+		this.listOfCollidables.add(c);
+	}
+	
 
 	public ArrayList<Projectile> getProjectiles()
 	{

@@ -12,6 +12,7 @@ import game.world.EnemySpawn;
 import game.world.Level;
 import game.world.Location;
 import game.world.Wall;
+import game.world.dungeon.Dungeon;
 
 public class LevelBuilder {
 
@@ -27,9 +28,20 @@ public class LevelBuilder {
 		levels = new ArrayList<Level>();
 		//Build all levels
 		createLevelOne();
+		createLevelTwo();
 	}
 	
 	private static void createLevelOne()
+	{
+		ArrayList<Collidable> cc = new ArrayList<Collidable>();
+		Level level = new Level(0, cc);
+		Dungeon d = Dungeon.createDungeon();
+		d.addToLevel(level);
+		levels.add(level);
+	}
+	
+	
+	private static void createLevelTwo()
 	{
 
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
@@ -43,13 +55,12 @@ public class LevelBuilder {
 		cc.add(new Wall(800,660, new Location(2250,720)));
 		cc.add(new Wall(790,420, new Location(2250,1375)));
 		cc.add(new Wall(790,770, new Location(2250,-50)));
-		Level level = new Level(0, cc);
+		Level level = new Level(1, cc);
 		
 		level.addEnemy(new SmartArcher());
 
 		//level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
 		//level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
-		level.addCollectible(new ItemEntity(new Location(1800,1300), new SoulStone()));
 		EnemyType[] types = {EnemyType.SMART_ARCHER,EnemyType.ARCHER,EnemyType.STICK};
 		level.addWorldObject(new EnemySpawn(new Location(1500,1100), 3*Game.TICK, types , 400,  1));
 

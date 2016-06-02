@@ -1,5 +1,9 @@
 package game.world;
 
+import java.awt.Rectangle;
+
+import game.Renderable;
+
 public abstract class EnclosedArea {
 
 	protected final int width,height;
@@ -11,6 +15,11 @@ public abstract class EnclosedArea {
 		this.width = width;
 		this.height = height;
 		this.l = l;
+	}
+	
+	public Rectangle getBounds()
+	{
+		return new Rectangle((int)l.getX(),(int)l.getY(),getWidth(),getHeight());
 	}
 	
 	public Location getLocation()
