@@ -2,12 +2,14 @@ package game.world.builder;
 
 import java.util.ArrayList;
 
+import game.Game;
 import game.entity.enemy.Chest;
 import game.entity.enemy.EnemyType;
 import game.entity.enemy.SmartArcher;
 import game.inventory.item.Item;
 import game.inventory.item.SoulStone;
 import game.world.Collidable;
+import game.world.EnemySpawn;
 import game.world.Level;
 import game.world.Location;
 import game.world.Wall;
@@ -62,7 +64,7 @@ public class LevelBuilder {
 		//level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
 		level.addEnemy(new Chest(new Location(1800,1300), items));
 		EnemyType[] types = {EnemyType.SMART_ARCHER,EnemyType.ARCHER,EnemyType.STICK};
-		//level.addWorldObject(new EnemySpawn(new Location(1500,1100), 3*Game.TICK, types , 400,  1));
+		level.addWorldObject(new EnemySpawn(new Location(1500,1100), 3*Game.TICK, types , 400,  1));
 
 		levels.add(level);
 	}

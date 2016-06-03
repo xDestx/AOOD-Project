@@ -176,7 +176,6 @@ public class Player extends LivingEntity {
 	
 	@Override
 	public void tick() {
-		super.tick();
 		movement();
 		if (this.isDead() && !deathSchedule){
 			deathSchedule=true;
@@ -184,8 +183,6 @@ public class Player extends LivingEntity {
 				@Override
 				public void run()
 				{
-					if(isDead())
-					{
 						try {
 							Thread.sleep(1000);
 							System.exit(0);
@@ -193,15 +190,11 @@ public class Player extends LivingEntity {
 						{
 						
 						}
-					} else
-					{
-						System.out.println("this lucky ass");
-						//Lucky ass
-						deathSchedule=false;
-					}
+					
 				}
 			});
 		}
+		super.tick();
 	}
 	
 	public int getXPForLevel(int i)
