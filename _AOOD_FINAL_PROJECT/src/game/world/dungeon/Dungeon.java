@@ -12,6 +12,30 @@ public class Dungeon extends EnclosedArea {
 
 	private ArrayList<Collidable> walls;
 	
+	/*
+	 * What is a dungeon?
+	 * 
+	 * A dungeon is an enclosed area with many rooms, including _Loot_ rooms, _Enemy_ rooms, _Empty_ rooms, and _Boss_ rooms.
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	
 	public Dungeon(Location l, int width, int height) {
 		super(l, width, height);
 		walls = new ArrayList<Collidable>();
