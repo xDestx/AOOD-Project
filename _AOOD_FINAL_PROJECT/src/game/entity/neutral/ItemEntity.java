@@ -28,6 +28,7 @@ public class ItemEntity extends Collectible {
 	public ItemEntity(Location l, Item i, int coolTicks) {
 		super(l);
 		this.i = i;
+		despawnTicks = 2 * 60 * Game.TICK;
 		pickUp = true;
 		this.coolTicks = coolTicks;
 		setBounds(new Rectangle((int)l.getX(),(int)l.getY(),50,50));

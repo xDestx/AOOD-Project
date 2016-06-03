@@ -2,13 +2,12 @@ package game.world.builder;
 
 import java.util.ArrayList;
 
-import game.Game;
+import game.entity.enemy.Chest;
 import game.entity.enemy.EnemyType;
 import game.entity.enemy.SmartArcher;
-import game.entity.neutral.ItemEntity;
+import game.inventory.item.Item;
 import game.inventory.item.SoulStone;
 import game.world.Collidable;
-import game.world.EnemySpawn;
 import game.world.Level;
 import game.world.Location;
 import game.world.Wall;
@@ -34,7 +33,7 @@ public class LevelBuilder {
 	private static void createLevelOne()
 	{
 		ArrayList<Collidable> cc = new ArrayList<Collidable>();
-		Level level = new Level(0, cc);
+		Level level = new Level(1, cc);
 		Dungeon d = Dungeon.createDungeon();
 		d.addToLevel(level);
 		levels.add(level);
@@ -55,14 +54,15 @@ public class LevelBuilder {
 		cc.add(new Wall(800,660, new Location(2250,720)));
 		cc.add(new Wall(790,420, new Location(2250,1375)));
 		cc.add(new Wall(790,770, new Location(2250,-50)));
-		Level level = new Level(1, cc);
+		Level level = new Level(0, cc);
 		
 		level.addEnemy(new SmartArcher());
-
+		ArrayList<Item> items = new ArrayList<Item>();
+		items.add(new SoulStone());items.add(new SoulStone());items.add(new SoulStone());items.add(new SoulStone());
 		//level.addEnemy(new Stick(new Location(1900,1200), 100, 10));
-		//level.addEnemy(new Stick(new Location(1800,1300), 100, 10));
+		level.addEnemy(new Chest(new Location(1800,1300), items));
 		EnemyType[] types = {EnemyType.SMART_ARCHER,EnemyType.ARCHER,EnemyType.STICK};
-		level.addWorldObject(new EnemySpawn(new Location(1500,1100), 3*Game.TICK, types , 400,  1));
+		//level.addWorldObject(new EnemySpawn(new Location(1500,1100), 3*Game.TICK, types , 400,  1));
 
 		levels.add(level);
 	}

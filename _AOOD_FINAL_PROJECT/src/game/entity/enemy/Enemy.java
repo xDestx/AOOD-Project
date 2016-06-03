@@ -70,16 +70,26 @@ public abstract class Enemy extends LivingEntity{
 	public void render(Graphics g, int xo, int yo)
     {
 		Color c = g.getColor();
+		drawBody(g,xo,yo);
+		drawLevelString(g,xo,yo);
+		super.render(g, xo, yo);
+		g.setColor(c);
+    }
+	
+	protected void drawLevelString(Graphics g, int xo, int yo)
+	{
+		g.setColor(Color.GREEN);
+		g.drawString(getLevel()+"",xo+(int)(getBounds().getWidth()/2)-(5), yo+(int)(getBounds().getHeight()/2)+20);
+	}
+	
+	protected void drawBody(Graphics g, int xo, int yo)
+	{
 		if(!isDead())
 			g.setColor(Color.black);
 		else
 			g.setColor(Color.blue);
 		g.fillRect(xo, yo, WIDTH, HEIGHT);
-		g.setColor(Color.GREEN);
-		g.drawString(getLevel()+"",xo+(int)(getBounds().getWidth()/2)-(5), yo+(int)(getBounds().getHeight()/2)+20);
-		super.render(g, xo, yo);
-		g.setColor(c);
-    }
+	}
 	
 	public void setStrength(int s)
 	{

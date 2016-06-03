@@ -31,8 +31,25 @@ public class Inventory {
 		for (int i = 0; i < 20; i++)
 			items.add(i, new EmptyItem());
 		drawItemsImage();
-		removeItem(13);
-		removeItem(4);
+	}
+	
+	public Inventory(LivingEntity owner, ArrayList<Item> items)
+	{
+		this.owner = owner;
+		this.isOpen = false;
+		this.modifiable = false;
+		ArrayList<Item> temp = new ArrayList<Item>();
+		for(int i = 0; i < 20; i++)
+		{
+			Item item = (i > items.size()-1) ? null:items.get(i);
+			if (item == null)
+					temp.add(new EmptyItem());
+			else
+				temp.add(items.get(i));
+		}
+		items = temp;
+		this.items = items;
+		drawItemsImage();
 	}
 	
 	private void notifyChanged()
