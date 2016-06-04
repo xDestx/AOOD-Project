@@ -63,7 +63,8 @@ public abstract class LivingEntity extends Entity {
 	
 	public int getMaxHealth()
 	{
-		return (int)(this.maxHealth+this.bonusHp);
+		int v = (int)(this.maxHealth+this.bonusHp);
+		return (v > 0) ? v:1;
 	}
 	
 	public void setStrength(int str)
@@ -73,7 +74,8 @@ public abstract class LivingEntity extends Entity {
 	
 	public int getStrength()
 	{
-		return (int)(this.strength+this.bonusStr);
+		int v = (int)(this.strength+this.bonusStr);
+		return (v > 0) ? v : 1;
 	}
 	
 	public void inventoryUpdated()
