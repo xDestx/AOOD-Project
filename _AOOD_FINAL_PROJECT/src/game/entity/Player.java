@@ -267,7 +267,7 @@ public class Player extends LivingEntity {
 		g.fillRect(barStart, (y+(1*barYStart)), amt, 50);
 		
 		g.setColor(Color.black);
-		g.drawString("+"+(getMaxHealth()-maxHealth) + "hp", (int)(barStart*1.25), (y+(1*barYStart))+25);
+		g.drawString("+"+(getMaxHealth()-maxHealth) + "hp  [" + getMaxHealth() + "HP]", (int)(barStart*1.25), (y+(1*barYStart))+25);
 		
 		g.setColor(Color.green);
 		g.fillRect(barStart, (y+(3*barYStart)), barWidth, 50);
@@ -277,7 +277,7 @@ public class Player extends LivingEntity {
 		g.fillRect(barStart, (y+(3*barYStart)), amt, 50);
 		
 		g.setColor(Color.black);
-		g.drawString("+"+(getStrength()-strength) + "str", (int)(barStart*1.25), (y+(3*barYStart))+25);
+		g.drawString("+"+(getStrength()-strength) + "str  [" + getStrength() + "STR]", (int)(barStart*1.25), (y+(3*barYStart))+25);
 		
 		g.setColor(rg);
 		g.fillRect(barStart, (y+(5*barYStart)), barWidth, 50);
