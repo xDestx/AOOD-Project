@@ -3,14 +3,14 @@ package game.world;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import game.Game;
-import game.GameObject;
 import game.Renderable;
-import game.entity.Player;
 import game.entity.enemy.Enemy;
 import game.entity.enemy.EnemyType;
 import game.graphic.CircleAnimation;
+import game.graphic.ImageLoader;
 
 public class EnemySpawn extends WorldObject implements Spawner, Renderable, Collidable {
 
@@ -19,6 +19,7 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 	private int level;
 	private int interval;
 	private int currentTick,radius;
+	private BufferedImage spawnerImage;
 	
 	public static int LENGTH = 50;
 	
@@ -27,6 +28,13 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 		bounds = new Rectangle((int)l.getX(),(int)l.getY(),EnemySpawn.LENGTH,EnemySpawn.LENGTH);
 		this.l = l;
 		this.level = level;
+		try {
+			spawnerImage = ImageLoader.getImage("enemySpawn.png");
+		} catch (Exception ex)
+		{
+			spawnerImage = null;
+			ex.printStackTrace();
+		}
 		this.radius = radius;
 		this.e = e;
 		this.interval = interval;
@@ -48,8 +56,13 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 	public void render(Graphics g, int xo, int yo) {
 		super.render(g, xo, yo);
 		Color lastColor = g.getColor();
-		g.setColor(Color.GRAY);
-		g.fillRect(xo,yo, (int)getBounds().getWidth(), (int)getBounds().getHeight());
+		if(spawnerImage == null)
+		{
+			g.setColor(Color.GRAY);
+			g.fillRect(xo,yo, (int)getBounds().getWidth(), (int)getBounds().getHeight());
+		} else {
+			g.drawImage(spawnerImage, xo, yo, (int)getBounds().getWidth(), (int)getBounds().getHeight(), null);
+		}
 		g.setColor(lastColor);
 	}
 
