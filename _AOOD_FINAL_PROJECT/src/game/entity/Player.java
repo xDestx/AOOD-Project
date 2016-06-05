@@ -1,6 +1,7 @@
 package game.entity;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import game.GFrame;
@@ -267,6 +268,7 @@ public class Player extends LivingEntity {
 			return;
 		int bonusWidth = 500;
 		int bonusHeight = 325;
+		g.setFont(new Font("Arial",Font.PLAIN, 12));
 		Color str = Color.ORANGE;
 		Color hp = Color.RED;
 		Color rg = Color.PINK;
@@ -285,7 +287,7 @@ public class Player extends LivingEntity {
 		double per = ((double)maxHealth/(double)getMaxHealth());
 		int amt = (int)(barWidth * per);
 		g.setColor(hp);
-		g.fillRect(barStart, (y+(1*barYStart)), amt, 50);
+		g.fillRect(barStart, (y+(1*barYStart)), (amt <= barWidth) ? amt : barWidth, 50);
 		
 		g.setColor(Color.black);
 		g.drawString("+"+(getMaxHealth()-maxHealth) + "hp  [" + getMaxHealth() + "HP]", (int)(barStart*1.25), (y+(1*barYStart))+25);
@@ -295,7 +297,7 @@ public class Player extends LivingEntity {
 		per = ((double)strength/(double)getStrength());
 		amt = (int)(barWidth * per);
 		g.setColor(str);
-		g.fillRect(barStart, (y+(3*barYStart)), amt, 50);
+		g.fillRect(barStart, (y+(3*barYStart)), (amt <= barWidth) ? amt : barWidth, 50);
 		
 		g.setColor(Color.black);
 		g.drawString("+"+(getStrength()-strength) + "str  [" + getStrength() + "STR]", (int)(barStart*1.25), (y+(3*barYStart))+25);
