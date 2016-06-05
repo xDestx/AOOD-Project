@@ -123,7 +123,7 @@ public class Player extends LivingEntity {
 	
 	
 	public int getLevel()
-	{
+	{ 
 		for (int i = Player.MAX_LEVEL; i >= 1; i--)
 		{
 			//System.out.println(getXP() + "  " + getXPForLevel(i));
@@ -204,7 +204,7 @@ public class Player extends LivingEntity {
 	
 	public int getXPForLevel(int i)
 	{
-		if (i <= 0)
+		if (i <= 1)
 			return 0;
 		int amt = Player.LEVEL_XP;
 		for (int k = 0; k < i-1; k++)
@@ -231,7 +231,7 @@ public class Player extends LivingEntity {
 		/*
 		 * Figure this shit out jesus
 		 */
-		double top = (double)(getXP() - getXPForLevel(getLevel()-1));
+		double top = (double)(getXP() - getXPForLevel(getLevel()));
 		double bottom =	(double)(getXPForLevel(getLevel()+1) - getXPForLevel(getLevel()));
 		System.out.println(top+ "  " + bottom);
 		double per = top/bottom;
