@@ -31,6 +31,7 @@ public abstract class Enemy extends LivingEntity{
 		this.strength = strength;
 		this.setAttackBounds(new Rectangle((int)getLocation().getX() - 100,(int) getLocation().getY() - 100, 200, 200));
 		velocity = new Vector(0,0);
+		this.level = -1;
 	}
 	
 	public Enemy(Location l, int level, int xp)
@@ -53,7 +54,10 @@ public abstract class Enemy extends LivingEntity{
 
 	public int getKillXP()
 	{
-		return this.xp;
+		if(level == -1)
+			return this.xp;
+		else
+			return this.xp + (5 * getLevel());
 	}
 	
 	public int getEnemyID()
