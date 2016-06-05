@@ -129,7 +129,6 @@ public class Game {
 			f++;
 			if (s >= 1000000000) {
 				System.out.println("Ticks: " + k + " | Fps: " + f);
-			//	System.out.println(getLevel().getEnemies().get(0).getLocation() + "   " + getPlayer().getLocation());
 				f = 0;
 				s = 0;
 				k = 0;

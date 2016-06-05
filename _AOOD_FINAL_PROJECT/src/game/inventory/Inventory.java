@@ -69,7 +69,13 @@ public class Inventory {
 	
 	public boolean isFull()
 	{
-		return this.getItems().size() >= 20;
+		int size = 0;
+		for(Item i : getItems())
+		{
+			if(!i.getName().equals(""))
+				size++;
+		}
+		return size >= 20;
 	}
 	
 	private void drawItemsImage()

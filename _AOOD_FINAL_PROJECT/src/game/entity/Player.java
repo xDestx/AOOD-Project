@@ -38,7 +38,7 @@ public class Player extends LivingEntity {
 		attackStyle = Player.ATTACK_MELEE;
 		rangedAnimation = null;
 		deathSchedule = false;
-		lastLevel = 10;
+		lastLevel = 1;
 		this.maxHealth = health;
 		xp = 0;
 	}
@@ -94,6 +94,7 @@ public class Player extends LivingEntity {
 	public void addXP(int xp)
 	{
 		this.xp+=xp;
+		System.out.println(xp + " !!");
 		if(getLevel() > lastLevel)
 		{
 			//Level up!
@@ -113,6 +114,7 @@ public class Player extends LivingEntity {
 	
 	private void setStats(int level)
 	{
+		System.out.println("Da ding!");
 		this.setMaxHealth((int)((double)MAX_HEALTH * (double)((double)level / (double)MAX_LEVEL)));
 		this.setHealth(this.getMaxHealth());
 		this.setStrength((int)((double)MAX_STRENGTH * ((double)level / (double)MAX_LEVEL)));
