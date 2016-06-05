@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 
+import game.Game;
 import game.graphic.ImageLoader;
 
 public abstract class Item {
@@ -51,7 +52,7 @@ public abstract class Item {
 		this.rB = regenBoost;
 		this.sB = strBoost;
 		this.rarity = rarity;
-		buffs = "+" + this.hB + "HP  +" + this.sB + "STR  +" + this.rB + "RGN";
+		buffs = "+" + this.hB + "HP  +" + this.sB + "STR  +" + (this.rB*Game.TICK) + "RGN";
 		biggest = (buffs.length() > name.length()) ? buffs:name;
 		biggest = (biggest.length() > lore.length()) ? biggest:lore;
 		
@@ -134,11 +135,11 @@ public abstract class Item {
 		 * Range 5 20>infinity
 		 */
 		Class<?>[] items;
-		Class<?>[] itemRange1 = {SoulStone.class, CursedKnife.class};
-		Class<?>[] itemRange2 = {SoulStone.class, CursedKnife.class};
-		Class<?>[] itemRange3 = {SoulStone.class, CursedKnife.class};
-		Class<?>[] itemRange4 = {SoulStone.class, CursedKnife.class};
-		Class<?>[] itemRange5 = {SoulStone.class, CursedKnife.class};
+		Class<?>[] itemRange1 = {SoulStone.class, CursedKnife.class, AdventurersSword.class};
+		Class<?>[] itemRange2 = {SoulStone.class, CursedKnife.class, RustedShears.class, AdventurersSword.class, ElvenBow.class};
+		Class<?>[] itemRange3 = {SoulStone.class, CursedKnife.class, RustedShears.class, PossessedSword.class, AdventurersSword.class, ElvenBow.class};
+		Class<?>[] itemRange4 = {SoulStone.class, CursedKnife.class, RustedShears.class, PossessedSword.class, ShadowScythe.class, AdventurersSword.class, ElvenBow.class};
+		Class<?>[] itemRange5 = {SoulStone.class, CursedKnife.class, RustedShears.class, PossessedSword.class, ShadowScythe.class, AdventurersSword.class, ElvenBow.class};
 		if(level < 5)
 		{
 			items = itemRange1;
@@ -167,7 +168,7 @@ public abstract class Item {
 	
 	public static Item createRandomItem()
 	{
-		Class<?>[] items = {SoulStone.class};
+		Class<?>[] items = {SoulStone.class, CursedKnife.class, RustedShears.class, PossessedSword.class, ShadowScythe.class};
 		int i = (int)(Math.random()*items.length);
 		try {
 			return (Item)items[i].newInstance();

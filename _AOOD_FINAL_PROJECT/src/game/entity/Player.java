@@ -10,6 +10,7 @@ import game.entity.enemy.Enemy;
 import game.graphic.CircleAnimation;
 import game.graphic.PlayerHitAnimation;
 import game.graphic.TextAnimation;
+import game.inventory.item.Item;
 import game.util.Task;
 import game.world.Location;
 import game.world.Vector;
@@ -30,7 +31,7 @@ public class Player extends LivingEntity {
 	
 	public Player(Location l, int health) {
 		super(l);
-		bonusRegen = 0;
+		bonusRegen = (0.5/Game.TICK);
 		bonusHp = 0;
 		bonusShown = false;
 		bonusStr = 0;
@@ -43,6 +44,24 @@ public class Player extends LivingEntity {
 		lastLevel = 1;
 		this.maxHealth = health;
 		xp = 0;
+	}
+	
+	@Override
+	protected void updateItemEffects()
+	{
+		bonusHp = 0;
+		bonusRegen = (0.5/Game.TICK);
+		bonusStr = 0;
+		if(inventory == null)
+			return;
+		if(inventory.getItems() == null)
+			return;
+		for(Item e : inventory.getItems())
+		{
+			bonusHp+= e.getHealthBoost();
+			bonusRegen+= e.getRegenBoost();
+			bonusStr+= e.getStrengthBoost();
+		}
 	}
 	
 	public int getXP()
@@ -96,7 +115,6 @@ public class Player extends LivingEntity {
 	public void addXP(int xp)
 	{
 		this.xp+=xp;
-		System.out.println(xp + " !!");
 		if(getLevel() > lastLevel)
 		{
 			//Level up!

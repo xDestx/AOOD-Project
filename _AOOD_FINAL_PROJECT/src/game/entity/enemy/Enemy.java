@@ -145,9 +145,12 @@ public abstract class Enemy extends LivingEntity{
 	protected void doDrop()
 	{
 		ArrayList<Item> items = inventory.getItems();
-		Item extra = Item.createRandomItem();
-		if(extra != null)
-			items.add(Item.createRandomItem());
+		if(Math.random() < .1)
+		{
+			Item extra = Item.createRandomItem(getLevel());
+			if(extra != null)
+				items.add(extra);
+		}
 		for (Item i : items)
 		{
 			Game.getCurrentGame().getLevel().addCollectible(new ItemEntity(new Location(getCenterLocation()),i,1*Game.TICK));
