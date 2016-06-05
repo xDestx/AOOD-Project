@@ -8,6 +8,7 @@ import game.GFrame;
 import game.Game;
 import game.GameObject;
 import game.Renderable;
+import game.Ticker;
 import game.entity.enemy.Enemy;
 import game.entity.neutral.Collectible;
 import game.entity.neutral.Projectile;
@@ -374,7 +375,8 @@ public class Level extends GameObject implements Renderable {
 		projectilesUsed = true;
 		for (Projectile p : getProjectiles())
 		{
-			p.tick();
+			if(p.getLocation().distance(Game.getCurrentGame().getPlayer().getLocation()) < Ticker.TICK_DIST)
+				p.tick();
 		}
 		projectilesUsed = false;
 		for(Projectile p : toP)
@@ -387,7 +389,8 @@ public class Level extends GameObject implements Renderable {
 	private void tickEnemies() {
 		enemiesUsed = true;
 		for (Enemy go : getEnemies()) {
-			go.tick();
+			if(go.getLocation().distance(Game.getCurrentGame().getPlayer().getLocation()) < Ticker.TICK_DIST)
+				go.tick();
 		}
 		enemiesUsed = false;
 		for (Enemy e : toE)
@@ -400,7 +403,8 @@ public class Level extends GameObject implements Renderable {
 	private void tickWObjs() {
 		worldObjectsUsed = true;
 		for (WorldObject go : getWorldObjects()) {
-			go.tick();
+			if(go.getLocation().distance(Game.getCurrentGame().getPlayer().getLocation()) < Ticker.TICK_DIST)
+				go.tick();
 		}
 		worldObjectsUsed = false;
 		for(WorldObject wo : toW)
@@ -413,7 +417,8 @@ public class Level extends GameObject implements Renderable {
 	private void tickCollects() {
 		collectiblesUsed = true;
 		for (Collectible go : getAllCollectibles()) {
-			go.tick();
+			if(go.getLocation().distance(Game.getCurrentGame().getPlayer().getLocation()) < Ticker.TICK_DIST)
+				go.tick();
 		}
 		collectiblesUsed = false;
 		for(Collectible c : toC)

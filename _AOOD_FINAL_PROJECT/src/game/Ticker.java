@@ -22,6 +22,7 @@ public class Ticker {
 	private LinkedList<Renderable> rendrs,toRender;
 	private LinkedList<GameObject> objs,toObj;
 	private boolean objsUsed,rendersUsed;
+	public static final int TICK_DIST = 4800;
 	
 	public Ticker(Game g)
 	{
