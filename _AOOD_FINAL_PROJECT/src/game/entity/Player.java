@@ -18,6 +18,7 @@ public class Player extends LivingEntity {
 	
 	private boolean vertMod,horizMod,deathSchedule,bonusShown;
 	private int xp;
+	private final static int LEVEL_XP = 100;
 	private CircleAnimation rangedAnimation;
 //	private TextAnimation textAnimation;
 	private int lastLevel;
@@ -98,7 +99,6 @@ public class Player extends LivingEntity {
 		if(getLevel() > lastLevel)
 		{
 			//Level up!
-		//	this.setHealth(this.getMaxHealth());
 			lastLevel = getLevel();
 			setStats(lastLevel);
 			if(getAttackStyle() == Player.ATTACK_RANGED)
@@ -126,9 +126,10 @@ public class Player extends LivingEntity {
 	{
 		for (int i = Player.MAX_LEVEL; i >= 1; i--)
 		{
-			if(getXP() / (i*100 + ((i-1) * 10)) >= 1)
+			System.out.println(getXP() + "  " + getXPForLevel(i));
+			if(getXP() >= getXPForLevel(i))
 			{
-				return i+1;
+				return i;
 			}
 		}
 		return 1;
@@ -203,8 +204,16 @@ public class Player extends LivingEntity {
 	
 	public int getXPForLevel(int i)
 	{
-		return (i*100 + ((i-1) * 10));
+		if (i <= 0)
+			return 0;
+		int amt = Player.LEVEL_XP;
+		for (int k = 0; k < i-1; k++)
+		{
+			amt+=(amt*1.25);
+		}
+		return amt;
 	}
+	
 	
 	private void drawXPBarAndLevel(Graphics g, int xo, int yo)
 	{
@@ -218,7 +227,15 @@ public class Player extends LivingEntity {
 		g.setColor(Color.white);
 		g.fillRect(x, y, length, height);
 		g.setColor(gold);
-		double per = (double)getXP()/(double)getXPForLevel(getLevel()+1);
+		
+		/*
+		 * Figure this shit out jesus
+		 */
+		double top = (double)(getXP() - getXPForLevel(getLevel()));
+		double bottom =	(double)(getXPForLevel(getLevel()+1) - getXPForLevel(getLevel()));
+		//System.out.println(getXP() + "  " + getXPForLevel(getLevel()+1));
+		double per = top/bottom;
+		
 		g.fillRect(x, y, (int)(length*per), height);
 		x+=(int)(.5*length)-10;
 		y+=height;
