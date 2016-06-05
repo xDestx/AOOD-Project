@@ -84,7 +84,7 @@ public class Dungeon extends EnclosedArea {
 		int width = 6000;
 		int height = 6000;
 		Dungeon d = new Dungeon(dungeonLocation,width,height);
-		EnemyRoom er = new EnemyRoom(new EnemyType[] {EnemyType.SMART_ARCHER, EnemyType.STICK, EnemyType.ARCHER}, new Location(dungeonLocation), 1500, 1000, Game.TICK * 10, 2);
+		EnemyRoom er = new EnemyRoom(new EnemyType[] {EnemyType.SMART_ARCHER, EnemyType.STICK, EnemyType.ARCHER}, new Location(dungeonLocation), 2500, 1500, Game.TICK * 2, 2);
 		er.setLocation(new Location(er.getLocation().getX()+1000,er.getLocation().getY()+1000));
 		d.addRoom(er);
 		return d;

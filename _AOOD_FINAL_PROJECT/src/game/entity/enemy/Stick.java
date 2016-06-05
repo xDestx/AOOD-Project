@@ -29,7 +29,7 @@ public class Stick extends Enemy{
 	
 	public Stick()
 	{
-		super(new Location(0,0),100,100, 122);
+		super(new Location(0,0),100,100, 12);
 		setBounds(new Rectangle((int)getLocation().getX(),(int) getLocation().getY(), 100, 100));
 		cooldownTicksDefault = 100;
 		cooldownTicks = cooldownTicksDefault;

@@ -6,11 +6,9 @@ import java.awt.Graphics;
 import game.GFrame;
 import game.Game;
 import game.entity.enemy.Enemy;
-import game.entity.neutral.Projectile;
 import game.graphic.CircleAnimation;
 import game.graphic.PlayerHitAnimation;
-import game.inventory.Inventory;
-import game.inventory.item.Item;
+import game.graphic.TextAnimation;
 import game.util.Task;
 import game.world.Location;
 import game.world.Vector;
@@ -21,6 +19,7 @@ public class Player extends LivingEntity {
 	private boolean vertMod,horizMod,deathSchedule,bonusShown;
 	private int xp;
 	private CircleAnimation rangedAnimation;
+//	private TextAnimation textAnimation;
 	private int lastLevel;
 	private int attackStyle;
 	public static final int ATTACK_RANGED = 1, ATTACK_MELEE = 0;
@@ -37,6 +36,7 @@ public class Player extends LivingEntity {
 		strength = 10;
 		attackStyle = Player.ATTACK_MELEE;
 		rangedAnimation = null;
+		//textAnimation = null;
 		deathSchedule = false;
 		lastLevel = 1;
 		this.maxHealth = health;
@@ -107,6 +107,7 @@ public class Player extends LivingEntity {
 				enableRangedAnimation();
 			}
 			System.out.println("Level up: " + getLevel() + "!");
+			this.addAnimation(new TextAnimation(3 * Game.TICK, "Level up (" + lastLevel + ")!"));
 		}
 	}
 	
@@ -181,7 +182,8 @@ public class Player extends LivingEntity {
 		movement();
 		if (this.isDead() && !deathSchedule){
 			deathSchedule=true;
-			Game.getCurrentGame().addTask(new Task(120) {
+			this.addAnimation(new TextAnimation(Game.TICK * 3, "Absolutely annihilated (you died)"));
+			Game.getCurrentGame().addTask(new Task(Game.TICK * 2) {
 				@Override
 				public void run()
 				{
