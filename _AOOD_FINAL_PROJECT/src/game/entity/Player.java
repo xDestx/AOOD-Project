@@ -126,7 +126,7 @@ public class Player extends LivingEntity {
 	{
 		for (int i = Player.MAX_LEVEL; i >= 1; i--)
 		{
-			System.out.println(getXP() + "  " + getXPForLevel(i));
+			//System.out.println(getXP() + "  " + getXPForLevel(i));
 			if(getXP() >= getXPForLevel(i))
 			{
 				return i;
@@ -231,9 +231,9 @@ public class Player extends LivingEntity {
 		/*
 		 * Figure this shit out jesus
 		 */
-		double top = (double)(getXP() - getXPForLevel(getLevel()));
+		double top = (double)(getXP() - getXPForLevel(getLevel()-1));
 		double bottom =	(double)(getXPForLevel(getLevel()+1) - getXPForLevel(getLevel()));
-		//System.out.println(getXP() + "  " + getXPForLevel(getLevel()+1));
+		System.out.println(top+ "  " + bottom);
 		double per = top/bottom;
 		
 		g.fillRect(x, y, (int)(length*per), height);
