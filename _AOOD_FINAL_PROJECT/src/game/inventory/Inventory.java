@@ -120,7 +120,7 @@ public class Inventory {
 		{
 			if(items.get(i).getName().equals(" "))
 			{
-				items.add(i, item);
+				items.set(i, item);
 				break;
 			}
 		}
@@ -130,12 +130,9 @@ public class Inventory {
 	
 	public Item removeItem(Item i)
 	{
-		int size1 = items.size();
-		items.remove(i);
-		if(size1 != items.size())
-		{
-			drawItemsImage();
-		}
+		int pos = items.indexOf(i);
+		items.set(pos, new EmptyItem());
+		drawItemsImage();
 		notifyChanged();
 		return i;
 	}

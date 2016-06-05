@@ -134,11 +134,11 @@ public abstract class Item {
 		 * Range 5 20>infinity
 		 */
 		Class<?>[] items;
-		Class<?>[] itemRange1 = {SoulStone.class};
-		Class<?>[] itemRange2 = {SoulStone.class};
-		Class<?>[] itemRange3 = {SoulStone.class};
-		Class<?>[] itemRange4 = {SoulStone.class};
-		Class<?>[] itemRange5 = {SoulStone.class};
+		Class<?>[] itemRange1 = {SoulStone.class, CursedKnife.class};
+		Class<?>[] itemRange2 = {SoulStone.class, CursedKnife.class};
+		Class<?>[] itemRange3 = {SoulStone.class, CursedKnife.class};
+		Class<?>[] itemRange4 = {SoulStone.class, CursedKnife.class};
+		Class<?>[] itemRange5 = {SoulStone.class, CursedKnife.class};
 		if(level < 5)
 		{
 			items = itemRange1;
