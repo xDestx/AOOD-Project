@@ -103,6 +103,10 @@ public class Ticker {
 				{
 					int[] xy = Camera.calculateOffset(r.getLocation());
 					r.render(g, xy[0], xy[1]);
+				} else if (r instanceof Player)
+				{
+					int[] xy = Camera.calculateOffset(r.getLocation());
+					r.render(g, xy[0], xy[1]);
 				}
 			}
 		}
