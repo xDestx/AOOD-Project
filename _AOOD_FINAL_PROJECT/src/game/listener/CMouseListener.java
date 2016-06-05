@@ -25,7 +25,23 @@ public class CMouseListener extends MouseAdapter {
 			mousePressedWorld(e);
 		}
 	}
-
+	
+	@Override
+	public void mouseMoved(MouseEvent e)
+	{
+		if(g.getState() == GameState.WORLD)
+		{
+			mouseMovedWorld(e);
+		}
+	}
+	
+	private void mouseMovedWorld(MouseEvent e)
+	{
+		if(g.getPlayer().getInventory().isOpen())
+		{
+			g.getPlayer().getInventory().mouseMoved(e);
+		}
+	}
 	
 	private void mousePressedWorld(MouseEvent e)
 	{

@@ -233,7 +233,7 @@ public class Player extends LivingEntity {
 		 */
 		double top = (double)(getXP() - getXPForLevel(getLevel()));
 		double bottom =	(double)(getXPForLevel(getLevel()+1) - getXPForLevel(getLevel()));
-		System.out.println(top+ "  " + bottom);
+		//System.out.println(top+ "  " + bottom);
 		double per = top/bottom;
 		
 		g.fillRect(x, y, (int)(length*per), height);

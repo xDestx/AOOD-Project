@@ -74,7 +74,9 @@ public class ItemEntity extends Collectible {
 		if(Game.getCurrentGame().getPlayer().getBounds().intersects(getBounds()))
 		{
 			if(pickUp && !Game.getCurrentGame().getPlayer().getInventory().isFull())
+			{
 				effect();
+			}
 		}
 	}
 	

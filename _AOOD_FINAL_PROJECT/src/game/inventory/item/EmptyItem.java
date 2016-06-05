@@ -4,7 +4,7 @@ public class EmptyItem extends Item {
 
 	public EmptyItem()
 	{
-		super("", "empty.png", 0, 0, 0);
+		super(" ", "empty.png", " ", 0, 0, 0, Item.COMMON);
 	}
 
 }

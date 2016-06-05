@@ -1,9 +1,13 @@
 package game.inventory;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -14,6 +18,7 @@ import game.entity.neutral.ItemEntity;
 import game.inventory.item.EmptyItem;
 import game.inventory.item.Item;
 import game.world.Location;
+import sun.org.mozilla.javascript.internal.ast.Name;
 
 public class Inventory {
 
@@ -22,16 +27,22 @@ public class Inventory {
 	private BufferedImage itemsImage;
 	private boolean modifiable;
 	private LivingEntity owner;
+	private Item drawInfoItem;
+	private Point drawInfoPoint;
 	
 	public Inventory(LivingEntity owner) {
 		isOpen = false;
 		this.owner = owner;
+		drawInfoItem = null;
 		modifiable = true;
+		drawInfoPoint = null;
 		items = new ArrayList<Item>();
 		for (int i = 0; i < 20; i++)
 			items.add(i, new EmptyItem());
 		drawItemsImage();
 	}
+	
+	
 	
 	public Inventory(LivingEntity owner, ArrayList<Item> items)
 	{
@@ -72,7 +83,7 @@ public class Inventory {
 		int size = 0;
 		for(Item i : getItems())
 		{
-			if(!i.getName().equals(""))
+			if(!i.getName().equals(" "))
 				size++;
 		}
 		return size >= 20;
@@ -107,7 +118,7 @@ public class Inventory {
 	{
 		for (int i = 0; i < 20; i++)
 		{
-			if(items.get(i).getName().equals(""))
+			if(items.get(i).getName().equals(" "))
 			{
 				items.add(i, item);
 				break;
@@ -159,12 +170,29 @@ public class Inventory {
 		
 	}
 	
+	public void mouseMoved(MouseEvent e)
+	{
+		Point p = e.getPoint();
+		int col = (int) ((p.getX()-20)/((GFrame.WIDTH - 40) / 5.0));
+		int row = (int) ((p.getY()-5)/((GFrame.HEIGHT-40) / 4.0));
+		if (col > 4 || row > 3)
+		{
+			drawInfoPoint = null;
+			drawInfoItem = null;
+			return;
+		}
+		int v = row*5 + col;
+		drawInfoPoint = p;
+		drawInfoItem = items.get(v);
+	}
+
+
 	public ArrayList<Item> getItems()
 	{
 		ArrayList<Item> items = new ArrayList<Item>();
 		for(Item i : this.items)
 		{
-			if(i.getName().equals(""))
+			if(i.getName().equals(" "))
 				continue;
 			items.add(i);
 		}
@@ -173,7 +201,7 @@ public class Inventory {
 	
  	private void dropItem(Item i)
 	{
-		if (i.getName().equals(""))
+		if (i.getName().equals(" "))
 			return;
 		ItemEntity ie = new ItemEntity(new Location(Game.getCurrentGame().getPlayer().getLocation()), i, 3*Game.TICK);
 		Game.getCurrentGame().getLevel().addCollectible(ie);
@@ -204,6 +232,70 @@ public class Inventory {
 			double yo = 10 + ((i + 1) * ((GFrame.HEIGHT - 40) / 4.0));
 			g.drawLine(20, (int) yo, GFrame.WIDTH - 20, (int) yo);
 		}
+		
+		
+		//Draw info box
+		
+		if(drawInfoPoint != null && drawInfoItem != null)
+		{
+			//Draw rect
+			//Item name
+			//Item lore
+			//Stats
+			Graphics2D g2 = (Graphics2D)g;
+			
+			Font itemFont = Item.getFont(drawInfoItem.getRarity());
+			Color itemColor = Item.getColor(drawInfoItem.getRarity());
+			g2.setFont(itemFont);
+			
+			int width = drawInfoItem.getInfoWidth();
+			int height = drawInfoItem.getInfoHeight();
+			int offset = drawInfoItem.getInfoOffset();
+			if(width == -1 || height == -1 || offset == -1)
+			{
+				String widthTxt = new String(drawInfoItem.getBiggest());
+				widthTxt+=" ";
+				
+				FontRenderContext frc = g2.getFontRenderContext();
+				
+				TextLayout widthTxtL = new TextLayout(widthTxt, itemFont, frc);
+				TextLayout nameTxt = new TextLayout("Name: " + drawInfoItem.getName(), itemFont, frc);
+				TextLayout loreTxt = new TextLayout(drawInfoItem.getLore(), itemFont, frc);
+				TextLayout buffsTxt = new TextLayout(drawInfoItem.getBuffString(), itemFont, frc);
+				
+				width = (int)widthTxtL.getBounds().getWidth();
+				height = (int)(nameTxt.getBounds().getHeight()+loreTxt.getBounds().getHeight()+buffsTxt.getBounds().getHeight());
+				offset = (int)(nameTxt.getBounds().getHeight() > loreTxt.getBounds().getHeight() ? nameTxt.getBounds().getHeight():loreTxt.getBounds().getHeight());
+				offset = (int)(nameTxt.getBounds().getHeight() > buffsTxt.getBounds().getHeight() ? nameTxt.getBounds().getHeight():buffsTxt.getBounds().getHeight());
+				
+				drawInfoItem.setInfoWidth(width);
+				drawInfoItem.setInfoHeight(height);
+				drawInfoItem.setInfoOffset(offset);
+
+				g.setColor(Color.lightGray);
+				g.fillRect((int)drawInfoPoint.getX()+10, (int)drawInfoPoint.getY()-3, (int)width+6, (int)height+5);
+				
+				g.setColor(itemColor);
+				g.drawString("Name: " + drawInfoItem.getName(), (int)drawInfoPoint.getX()+10, (int)(drawInfoPoint.getY()+drawInfoItem.getInfoOffset()));
+				g.drawString(drawInfoItem.getLore(), (int)drawInfoPoint.getX()+10, (int)(drawInfoPoint.getY()+(drawInfoItem.getInfoOffset()*2)+10));
+				g.drawString(drawInfoItem.getBuffString(), (int)drawInfoPoint.getX()+10, (int)(drawInfoPoint.getY()+(drawInfoItem.getInfoOffset()*3)+20));
+			} else {
+				g.setColor(Color.lightGray);
+				g.fillRect((int)drawInfoPoint.getX()+10, (int)drawInfoPoint.getY()-3, (int)width+6, (int)height+5);
+				
+				g.setColor(itemColor);
+				g.drawString("Name: " + drawInfoItem.getName(), (int)drawInfoPoint.getX()+10, (int)(drawInfoPoint.getY()+drawInfoItem.getInfoOffset()));
+				g.drawString(drawInfoItem.getLore(), (int)drawInfoPoint.getX()+10, (int)(drawInfoPoint.getY()+(drawInfoItem.getInfoOffset()*2)+10));
+				g.drawString(drawInfoItem.getBuffString(), (int)drawInfoPoint.getX()+10, (int)(drawInfoPoint.getY()+(drawInfoItem.getInfoOffset()*3)+20));
+				
+			}
+			
+			
+			
+			
+			
+		}
+		
 		g.setColor(last);
 	}
 
