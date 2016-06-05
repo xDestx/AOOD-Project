@@ -63,6 +63,46 @@ public abstract class Item {
 		return name;
 	}
 	
+	public static Item createRandomItem(int level)
+	{
+		/*
+		 * Range 1 0>4
+		 * Range 2 5>9
+		 * Range 3 9>14
+		 * Range 4 15>19
+		 * Range 5 20>infinity
+		 */
+		Class<?>[] items;
+		Class<?>[] itemRange1 = {SoulStone.class};
+		Class<?>[] itemRange2 = {SoulStone.class};
+		Class<?>[] itemRange3 = {SoulStone.class};
+		Class<?>[] itemRange4 = {SoulStone.class};
+		Class<?>[] itemRange5 = {SoulStone.class};
+		if(level < 5)
+		{
+			items = itemRange1;
+		} else if (level < 10)
+		{
+			items = itemRange2;
+		} else if (level < 15)
+		{
+			items = itemRange3;
+		} else if (level < 20)
+		{
+			items = itemRange4;
+		} else
+		{
+			items = itemRange5;
+		}
+		int i = (int)(Math.random()*items.length);
+		try {
+			return (Item)items[i].newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public static Item createRandomItem()
 	{

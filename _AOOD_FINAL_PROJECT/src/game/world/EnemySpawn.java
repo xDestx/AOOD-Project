@@ -23,6 +23,14 @@ public class EnemySpawn extends WorldObject implements Spawner, Renderable, Coll
 	
 	public static int LENGTH = 50;
 	
+	/**
+	 * 
+	 * @param l spawner loc
+	 * @param interval in ticks
+	 * @param e enemy spawn types
+	 * @param radius of spawn
+	 * @param level enemy level
+	 */
 	public EnemySpawn(Location l, int interval, EnemyType[] e, int radius, int level)
 	{
 		bounds = new Rectangle((int)l.getX(),(int)l.getY(),EnemySpawn.LENGTH,EnemySpawn.LENGTH);

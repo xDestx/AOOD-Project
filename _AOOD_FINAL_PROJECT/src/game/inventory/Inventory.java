@@ -201,4 +201,16 @@ public class Inventory {
 		g.setColor(last);
 	}
 
+	public static ArrayList<Item> getLootItems(int level) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		int amt = level;
+		
+		for (int i = 0; i < amt; i++)
+		{
+			items.add(Item.createRandomItem(level));
+		}
+		
+		return items;
+	}
+
 }

@@ -7,7 +7,7 @@ import game.Renderable;
 public abstract class EnclosedArea {
 
 	protected final int width,height;
-	protected final Location l;
+	protected Location l;
 	
 	
 	public EnclosedArea(Location l,int width, int height)

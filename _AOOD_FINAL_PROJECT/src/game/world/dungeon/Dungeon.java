@@ -2,15 +2,22 @@ package game.world.dungeon;
 
 import java.util.ArrayList;
 
+import game.Game;
+import game.entity.LivingEntity;
+import game.entity.enemy.Enemy;
+import game.entity.enemy.EnemyType;
 import game.world.Collidable;
 import game.world.EnclosedArea;
 import game.world.Level;
 import game.world.Location;
-import game.world.Wall;
+import game.world.WorldObject;
+import game.world.room.EnemyRoom;
+import game.world.room.Room;
 
 public class Dungeon extends EnclosedArea {
-
-	private ArrayList<Collidable> walls;
+	
+	private ArrayList<Room> rooms;
+	private Room mainRoom;
 	
 	/*
 	 * What is a dungeon?
@@ -38,22 +45,34 @@ public class Dungeon extends EnclosedArea {
 	
 	public Dungeon(Location l, int width, int height) {
 		super(l, width, height);
-		walls = new ArrayList<Collidable>();
+		rooms = new ArrayList<Room>();
+		this.mainRoom = new Room(l,width,height);
+		this.rooms.add(mainRoom);
+		//Main room is the enclosing room
 	}
 	
-	public void addColldiable(Collidable c)
+	public void addRoom(Room r)
 	{
-		c.getLocation().setX(c.getLocation().getX()+getLocation().getX());
-		c.getLocation().setY(c.getLocation().getY()+getLocation().getY());
-		c.getBounds().setLocation((int)(c.getLocation().getX()+getLocation().getX()),(int)(c.getLocation().getY()+getLocation().getY()));
-		walls.add(c);
+		this.rooms.add(r);
 	}
 	
 	public void addToLevel(Level l)
 	{
-		for (Collidable c : walls)
+		for (Room r : rooms)
 		{
-			l.addCollidable(c);
+			for (Collidable c : r.getCollidables())
+			{
+				l.addCollidable(c);
+			}
+			for(WorldObject o : r.getWorldObjects())
+			{
+				l.addWorldObject(o);
+			}
+			for (LivingEntity e : r.getEntities())
+			{
+				if((e instanceof Enemy))
+					l.addEnemy((Enemy)e);
+			}
 		}
 	}
 
@@ -65,13 +84,9 @@ public class Dungeon extends EnclosedArea {
 		int width = 6000;
 		int height = 6000;
 		Dungeon d = new Dungeon(dungeonLocation,width,height);
-		//When adding to a dungeon, you are adding relative to its location
-		/*LEFT WALL TO ENTERANCE*/d.addColldiable(new Wall(100, (height/2)-(200/2), new Location(dungeonLocation)));
-		/*LEFT WALL FROM ENTERANCE*/d.addColldiable(new Wall(100, (height/2)-(200/2), new Location(dungeonLocation.getX(),dungeonLocation.getY()+(height/2)+(200/2))));
-		/*TOP WALL*/d.addColldiable(new Wall(width,100,new Location(dungeonLocation)));
-		/*BOTTOM WALL*///d.addColldiable(new Wall(width,100,));
-		
-		
+		EnemyRoom er = new EnemyRoom(new EnemyType[] {EnemyType.SMART_ARCHER, EnemyType.STICK, EnemyType.ARCHER}, new Location(dungeonLocation), 1500, 1000, Game.TICK * 10, 2);
+		er.setLocation(new Location(er.getLocation().getX()+1000,er.getLocation().getY()+1000));
+		d.addRoom(er);
 		return d;
 	}
 

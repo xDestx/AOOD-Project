@@ -28,6 +28,7 @@ public class LevelBuilder {
 		init = true;
 		levels = new ArrayList<Level>();
 		//Build all levels
+		createTestLevel();
 		createLevelOne();
 		createLevelTwo();
 	}
@@ -41,6 +42,14 @@ public class LevelBuilder {
 		levels.add(level);
 	}
 	
+	private static void createTestLevel()
+	{
+		ArrayList<Collidable> cc = new ArrayList<Collidable>();
+		Level level = new Level(0, cc);
+		Dungeon d = Dungeon.createDungeon();
+		d.addToLevel(level);
+		levels.add(level);
+	}
 	
 	private static void createLevelTwo()
 	{
@@ -56,7 +65,7 @@ public class LevelBuilder {
 		cc.add(new Wall(800,660, new Location(2250,720)));
 		cc.add(new Wall(790,420, new Location(2250,1375)));
 		cc.add(new Wall(790,770, new Location(2250,-50)));
-		Level level = new Level(0, cc);
+		Level level = new Level(2, cc);
 		
 		level.addEnemy(new SmartArcher());
 		ArrayList<Item> items = new ArrayList<Item>();
