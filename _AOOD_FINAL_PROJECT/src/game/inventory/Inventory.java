@@ -91,7 +91,7 @@ public class Inventory {
 	
 	private void drawItemsImage()
 	{
-		itemsImage = new BufferedImage(GFrame.WIDTH-40, GFrame.HEIGHT-40, BufferedImage.TYPE_INT_RGB);
+		itemsImage = new BufferedImage(GFrame.WIDTH-40, GFrame.HEIGHT-40, BufferedImage.TYPE_INT_ARGB);
 		for (int i = 0; i < 20; i++) {
 			// Do things here!
 			int xo = 0;
