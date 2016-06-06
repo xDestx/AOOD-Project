@@ -7,6 +7,7 @@ import game.Camera;
 import game.Game;
 import game.GameState;
 import game.entity.Player;
+import game.util.SoundMaster;
 import game.world.Location;
 
 public class CMouseListener extends MouseAdapter {

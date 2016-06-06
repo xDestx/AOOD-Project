@@ -16,12 +16,12 @@ public class MainMenu extends JFrame {
 	private static Game game;
 
 	public static void main(String[] args) {
+		SoundMaster.init();
 		MainMenu mm = new MainMenu();
 	}
 
 	public MainMenu() {
 		super();
-		SoundMaster.init();
 		this.setTitle("Tales of Gorizia Launcher");
 		panel = new JPanel();
 		playGame = new JButton("Play");

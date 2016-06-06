@@ -7,6 +7,7 @@ import game.Game;
 import game.GameState;
 import game.entity.Player;
 import game.graphic.CircleAnimation;
+import game.util.SoundMaster;
 
 public class CKeyListener extends KeyAdapter {
 
@@ -78,7 +79,10 @@ public class CKeyListener extends KeyAdapter {
 		
 		if (e.getKeyCode() == KeyEvent.VK_1)
 		{
+			int currentAttack = g.getPlayer().getAttackStyle();
 			g.getPlayer().setAttackStyle(Player.ATTACK_MELEE);
+			if(currentAttack != Player.ATTACK_MELEE)
+				SoundMaster.playSound("to_melee.wav");
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_2)

@@ -32,11 +32,6 @@ public class Game {
 	//aaaa
 	private static Game game;
 	
-	public static void main(String[] args) {
-		game = new Game();
-		game.play();
-	}
-	
 	public static Game getCurrentGame()
 	{
 		return game;

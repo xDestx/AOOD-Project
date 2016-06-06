@@ -10,6 +10,7 @@ import game.entity.neutral.Projectile;
 import game.graphic.Animation;
 import game.inventory.Inventory;
 import game.inventory.item.Item;
+import game.util.SoundMaster;
 import game.util.Task;
 import game.world.Collidable;
 import game.world.Location;
@@ -258,6 +259,7 @@ public abstract class LivingEntity extends Entity {
 	public void launchProjectile(Vector v, int dmg)
 	{
 		Game.getCurrentGame().getLevel().addProjectile(new Projectile(new Location(getCenterLocation()), v, this, dmg));
+		SoundMaster.playSound("shoot_sound.wav");
 	}
 	
 	public Entity getLastDamagingEntity()
