@@ -24,7 +24,7 @@ public class EnemyRoom extends Room {
 		this.addWorldObject(es);
 		
 		
-		ArrayList<Item> coolInv = Inventory.getLootItems(20);
+		ArrayList<Item> coolInv = Inventory.getLootItems(level);
 		Location cl = new Location(esl);
 		cl.setX(esl.getX()+(width/4));;
 		Chest c = new Chest(new Location(cl), coolInv);

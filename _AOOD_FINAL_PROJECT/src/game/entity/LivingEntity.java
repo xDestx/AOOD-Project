@@ -272,6 +272,8 @@ public abstract class LivingEntity extends Entity {
 	
 	public void renderAnimations(Graphics g, int xo, int yo)
 	{
+		ArrayList<Animation> animations = new ArrayList<Animation>();
+		animations.addAll(this.animations);
 		for (Animation a : animations)
 		{
 			a.render(g, xo, yo);
