@@ -24,6 +24,7 @@ public class GFrame extends JFrame
     {
     	this.setSize(GFrame.WIDTH, GFrame.HEIGHT);
     	this.setResizable(false);
+    	this.setTitle("Tales of Gorizia");
     	this.g = g;
     	canvas = new Canvas();
     	im = new BufferedImage(GFrame.WIDTH,GFrame.HEIGHT,BufferedImage.TYPE_INT_RGB);

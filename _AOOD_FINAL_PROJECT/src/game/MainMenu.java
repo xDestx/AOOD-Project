@@ -19,6 +19,7 @@ public class MainMenu extends JFrame {
 
 	public MainMenu() {
 		super();
+		this.setTitle("Tales of Gorizia Launcher");
 		panel = new JPanel();
 		playGame = new JButton("Play");
 		playGame.addActionListener(new ActionListener() {
