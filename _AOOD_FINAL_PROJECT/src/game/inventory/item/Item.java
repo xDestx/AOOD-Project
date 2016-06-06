@@ -11,7 +11,7 @@ import game.graphic.ImageLoader;
 public abstract class Item {
 
 	private BufferedImage icon;
-	private static Class<?>[] allItems = {SoulStone.class, CursedKnife.class, RustedShears.class, PossessedSword.class, ShadowScythe.class, AdventurersSword.class, ElvenBow.class, HeroesAxe.class, HolyGlaive.class, SGlowingStone.class};
+	private static Class<?>[] allItems = {SoulStone.class, CursedKnife.class, RustedShears.class, PossessedSword.class, ShadowScythe.class, AdventurersSword.class, ElvenBow.class, HeroesAxe.class, HolyGlaive.class, SGlowingStone.class, EnchantedStick.class};
 	private static Font[] fonts = 
 			{
 				new Font("Arial",Font.PLAIN,14),
