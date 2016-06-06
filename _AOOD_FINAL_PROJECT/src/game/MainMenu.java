@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import game.util.SoundMaster;
+
 public class MainMenu extends JFrame {
 	private static final int WIDTH = 300, HEIGHT = 400;
 	private static JPanel panel;
@@ -19,6 +21,7 @@ public class MainMenu extends JFrame {
 
 	public MainMenu() {
 		super();
+		SoundMaster.init();
 		this.setTitle("Tales of Gorizia Launcher");
 		panel = new JPanel();
 		playGame = new JButton("Play");
