@@ -1,6 +1,7 @@
 package game.inventory;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,7 +19,6 @@ import game.entity.neutral.ItemEntity;
 import game.inventory.item.EmptyItem;
 import game.inventory.item.Item;
 import game.world.Location;
-import sun.org.mozilla.javascript.internal.ast.Name;
 
 public class Inventory {
 
