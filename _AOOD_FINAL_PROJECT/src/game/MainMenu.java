@@ -1,13 +1,14 @@
 package game;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import game.util.SoundMaster;
+//import game.util.SoundMaster;
 
 public class MainMenu extends JFrame {
 	private static final int WIDTH = 300, HEIGHT = 400;
@@ -16,7 +17,7 @@ public class MainMenu extends JFrame {
 	private static Game game;
 
 	public static void main(String[] args) {
-		SoundMaster.init();
+		//SoundMaster.init();
 		MainMenu mm = new MainMenu();
 	}
 

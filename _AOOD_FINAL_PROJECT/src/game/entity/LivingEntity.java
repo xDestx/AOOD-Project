@@ -1,6 +1,7 @@
 package game.entity;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import game.entity.neutral.Projectile;
 import game.graphic.Animation;
 import game.inventory.Inventory;
 import game.inventory.item.Item;
-import game.util.SoundMaster;
+//import game.util.SoundMaster;
 import game.util.Task;
 import game.world.Collidable;
 import game.world.Location;
@@ -252,6 +253,7 @@ public abstract class LivingEntity extends Entity {
 	public void wasHit(int damage, Entity damager) {
 		health-= damage;
 		this.lastDamager = damager;
+	//	SoundMaster.playSound("hurt_sound.wav");
 		if(health < 0)
 			health = 0;
 	}
@@ -259,7 +261,7 @@ public abstract class LivingEntity extends Entity {
 	public void launchProjectile(Vector v, int dmg)
 	{
 		Game.getCurrentGame().getLevel().addProjectile(new Projectile(new Location(getCenterLocation()), v, this, dmg));
-		SoundMaster.playSound("shoot_sound.wav");
+		//SoundMaster.playSound("shoot_sound.wav");
 	}
 	
 	public Entity getLastDamagingEntity()
